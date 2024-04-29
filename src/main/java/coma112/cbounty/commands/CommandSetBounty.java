@@ -2,9 +2,11 @@ package coma112.cbounty.commands;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.RewardType;
+import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.language.MessageKeys;
 import coma112.cbounty.subcommand.CommandInfo;
 import coma112.cbounty.subcommand.PluginCommand;
+import net.coma.ctoken.CToken;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -60,6 +62,26 @@ public class CommandSetBounty extends PluginCommand {
         if (reward <= 0) {
             player.sendMessage(MessageKeys.NO_NEGATIVE);
             return true;
+        }
+
+        switch (rewardType) {
+            case TOKEN -> {
+                if (CToken.getInstance().getDatabaseManager().getBalance(player) < reward) {
+                    player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN);
+                    return true;
+                }
+
+                if (CToken.getInstance().getDatabaseManager().getBalance(player) >= reward) CToken.getInstance().getDatabaseManager().takeFromBalance(player, reward);
+            }
+
+            case MONEY -> {
+                if (Vault.getEconomy().getBalance(player) < reward) {
+                    player.sendMessage(MessageKeys.NOT_ENOUGH_MONEY);
+                    return true;
+                }
+
+                if (Vault.getEconomy().getBalance(player) >= reward) Vault.getEconomy().depositPlayer(player, reward);
+            }
         }
 
         CBounty.getDatabaseManager().createBounty(player, target, rewardType, reward);

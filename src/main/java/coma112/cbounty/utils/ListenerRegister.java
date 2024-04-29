@@ -1,6 +1,8 @@
 package coma112.cbounty.utils;
 
 import coma112.cbounty.CBounty;
+import coma112.cbounty.listeners.BountyDeathListener;
+import coma112.cbounty.listeners.GlowingListener;
 import coma112.cbounty.menu.MenuListener;
 import org.bukkit.event.Listener;
 
@@ -24,6 +26,8 @@ public class ListenerRegister {
     private static Set<Class<? extends Listener>> getListenerClasses() {
         Set<Class<? extends Listener>> listenerClasses = new HashSet<>();
         listenerClasses.add(MenuListener.class);
+        listenerClasses.add(BountyDeathListener.class);
+        listenerClasses.add(GlowingListener.class);
         return listenerClasses;
     }
 }

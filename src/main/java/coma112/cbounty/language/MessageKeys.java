@@ -19,6 +19,11 @@ public class MessageKeys {
     public static String ALREADY_BOUNTY = PREFIX + getString("messages.already-bounty");
     public static String NO_NEGATIVE = PREFIX + getString("messages.no-negative");
     public static String SUCCESSFUL_SET = PREFIX + getString("messages.successful-set");
+    public static String BOUNTY_DEAD_EVERYONE = PREFIX + getString("messages.bounty-dead-everyone");
+    public static String BOUNTY_DEAD_TARGET = PREFIX + getString("messages.bounty-dead-target");
+    public static String BOUNTY_DEAD_KILLER = PREFIX + getString("messages.bounty-dead-killer");
+    public static String NOT_ENOUGH_TOKEN = PREFIX + getString("messages.not-enough-token");
+    public static String NOT_ENOUGH_MONEY = PREFIX + getString("messages.not-enough-money");
 
     private static String getString(@NotNull String path) {
         return MessageProcessor.process(CBounty.getInstance().getLanguage().getString(path));

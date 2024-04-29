@@ -6,6 +6,8 @@ import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.managers.Bounty;
 import lombok.Getter;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -58,7 +60,7 @@ public class MySQL extends AbstractDatabase {
     }
 
     public void createTable() {
-        String query = "CREATE TABLE IF NOT EXISTS bounty (ID INT AUTO_INCREMENT PRIMARY KEY, PLAYER VARCHAR(255) NOT NULL, TARGET VARCHAR(255) NOT NULL, REWARD_TYPE VARCHAR(255) NOT NULL, REWARD INT)";
+        String query = "CREATE TABLE IF NOT EXISTS bounty (ID INT AUTO_INCREMENT PRIMARY KEY, PLAYER VARCHAR(255) NOT NULL, TARGET VARCHAR(255) NOT NULL, REWARD_TYPE VARCHAR(255) NOT NULL, REWARD INT, BOUNTY_DATE DATETIME)";
 
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
             preparedStatement.execute();
@@ -69,7 +71,7 @@ public class MySQL extends AbstractDatabase {
 
     @Override
     public void createBounty(@NotNull Player player, @NotNull Player target, @NotNull RewardType rewardType, int reward) {
-        String query = "INSERT INTO bounty (PLAYER, TARGET, REWARD_TYPE, REWARD) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO bounty (PLAYER, TARGET, REWARD_TYPE, REWARD, BOUNTY_DATE) VALUES (?, ?, ?, ?, NOW())";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, player.getName());
@@ -107,24 +109,110 @@ public class MySQL extends AbstractDatabase {
     }
 
     @Override
-    public boolean isBounty(@NotNull Player player) {
-        String query = "SELECT * FROM bounty WHERE TARGET = ?";
+    public int getStreak(@NotNull OfflinePlayer player) {
+        String query = "SELECT MAX(BOUNTY_DATE) FROM bounty WHERE TARGET = ?";
+
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, player.getName());
-
             ResultSet resultSet = preparedStatement.executeQuery();
-            boolean isBounty;
-
             if (resultSet.next()) {
-                isBounty = resultSet.getBoolean("TARGET");
-                return isBounty;
+                java.util.Date lastBountyDate = resultSet.getTimestamp(1);
+                if (lastBountyDate != null) {
+                    long timeDifference = System.currentTimeMillis() - lastBountyDate.getTime();
+                    long daysDifference = TimeUnit.MILLISECONDS.toDays(timeDifference);
+                    return (int) daysDifference;
+                }
             }
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
 
-        return false;
+        return 0;
     }
+
+    @Override
+    public boolean isBounty(@NotNull Player player) {
+        String query = "SELECT TARGET FROM bounty WHERE TARGET = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, player.getName());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public int getReward(@NotNull Player player) {
+        String query = "SELECT REWARD FROM bounty WHERE TARGET = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, player.getName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            int reward;
+
+            if (resultSet.next()) {
+                reward = resultSet.getInt("REWARD");
+                return reward;
+            }
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public RewardType getRewardType(@NotNull Player player) {
+        String query = "SELECT REWARD_TYPE FROM bounty WHERE TARGET = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, player.getName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            RewardType rewardType;
+
+            if (resultSet.next()) {
+                rewardType = RewardType.valueOf(resultSet.getString("REWARD_TYPE"));
+                return rewardType;
+            }
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+
+        return RewardType.TOKEN;
+    }
+
+    @Override
+    public Player getSender(@NotNull Player player) {
+        String query = "SELECT PLAYER FROM bounty WHERE TARGET = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, player.getName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) return Bukkit.getPlayerExact(resultSet.getString("PLAYER"));
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+
+        return null;
+    }
+
+    @Override
+    public void removeBounty(@NotNull Player player) {
+        String query = "DELETE FROM bounty WHERE TARGET = ?";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                preparedStatement.setString(1, player.getName());
+                preparedStatement.executeUpdate();
+            }
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
 
     @Override
     public void reconnect(@NotNull ConfigurationSection section) {

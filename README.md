@@ -6,7 +6,9 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- I created half of the plugin
+- I created the whole plugin
+- I added a glow effect for the bounties
+- I added a streak manager.
 
 # Server Status ✅
 
@@ -14,8 +16,7 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # TODO ⭕
 
-- I need to do the listening thing.
-- I need to manage the rewarding when the bounty is killed.
+- Some fixes and everything is done!
 
 # Sources I used 🌐
 

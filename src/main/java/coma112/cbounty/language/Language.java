@@ -26,6 +26,11 @@ public class Language extends ConfigUtils {
         yml.addDefault("messages.already-bounty", "&cThe target is already bounty!");
         yml.addDefault("messages.no-negative", "&cThe number should be positive!");
         yml.addDefault("messages.successful-set", "&aYou have successfully set a bounty!");
+        yml.addDefault("messages.bounty-dead-everyone", "&a{name} is not a bounty anymore!");
+        yml.addDefault("messages.bounty-dead-target", "&aYou were a bounty but somebody killed you!");
+        yml.addDefault("messages.bounty-dead-killer", "&aYou have successfully killed a bounty!");
+        yml.addDefault("messages.not-enough-token", "&cYou don't have enough token!");
+        yml.addDefault("messages.not-enough-money", "&cYou don't have enough money!");
 
         yml.options().copyDefaults(true);
         save();

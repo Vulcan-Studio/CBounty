@@ -29,9 +29,9 @@ public class Config extends ConfigUtils {
                 "",
                 "&6Sender: &f{player}",
                 "&6Reward: &f{reward}",
-                "&6Reward Type: &f{reward_type}"
+                "&6Reward Type: &f{reward_type}",
+                "&6Streak: &f{streak}"
         ));
-
 
         yml.options().copyDefaults(true);
         save();

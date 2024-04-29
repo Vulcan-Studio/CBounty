@@ -8,13 +8,16 @@ import coma112.cbounty.language.MessageKeys;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.menu.PaginatedMenu;
 import coma112.cbounty.utils.MenuUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Objects;
 
 public class BountiesMenu extends PaginatedMenu {
     public BountiesMenu(MenuUtils menuUtils) {
@@ -81,18 +84,22 @@ public class BountiesMenu extends PaginatedMenu {
     }
 
     private static ItemStack createBountyItem(@NotNull Bounty bounty) {
+        OfflinePlayer player = Bukkit.getOfflinePlayer(bounty.target());
+
         ItemBuilder itemBuilder = IItemBuilder.create(Material.valueOf(ConfigKeys.BOUNTY_ITEM_MATERIAL))
                 .setName(ConfigKeys.BOUNTY_ITEM_NAME
                         .replace("{id}", String.valueOf(bounty.id()))
                         .replace("{target}", bounty.target()))
                 .setLocalizedName("");
 
-        for (String lore : ConfigKeys.CODE_ITEM_LORE) itemBuilder.addLore(lore
-                .replace("{reward_type}", bounty.reward_type().name())
-                .replace("{reward}", String.valueOf(bounty.reward()))
-                .replace("{player}", bounty.player()));
+        for (String lore : ConfigKeys.CODE_ITEM_LORE) {
+            itemBuilder.addLore(lore
+                    .replace("{streak}", String.valueOf(CBounty.getDatabaseManager().getStreak(player)))
+                    .replace("{reward_type}", bounty.reward_type().name())
+                    .replace("{reward}", String.valueOf(bounty.reward()))
+                    .replace("{player}", bounty.player()));
+        }
 
         return itemBuilder.finish();
     }
-
 }
