@@ -6,9 +6,8 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- I created the whole plugin
-- I added a glow effect for the bounties
-- I added a streak manager.
+- I added placeholders
+- I added a top system
 
 # Server Status ✅
 
@@ -16,7 +15,7 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # TODO ⭕
 
-- Some fixes and everything is done!
+- It's done for now. If I get any new idea I will probably make it happen.
 
 # Sources I used 🌐
 

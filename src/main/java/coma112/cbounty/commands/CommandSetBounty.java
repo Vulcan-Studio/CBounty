@@ -65,23 +65,8 @@ public class CommandSetBounty extends PluginCommand {
         }
 
         switch (rewardType) {
-            case TOKEN -> {
-                if (CToken.getInstance().getDatabaseManager().getBalance(player) < reward) {
-                    player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN);
-                    return true;
-                }
-
-                if (CToken.getInstance().getDatabaseManager().getBalance(player) >= reward) CToken.getInstance().getDatabaseManager().takeFromBalance(player, reward);
-            }
-
-            case MONEY -> {
-                if (Vault.getEconomy().getBalance(player) < reward) {
-                    player.sendMessage(MessageKeys.NOT_ENOUGH_MONEY);
-                    return true;
-                }
-
-                if (Vault.getEconomy().getBalance(player) >= reward) Vault.getEconomy().depositPlayer(player, reward);
-            }
+            case TOKEN -> CBounty.getInstance().getBountyManager().tryToSetBountyWithToken(player, reward);
+            case MONEY -> CBounty.getInstance().getBountyManager().tryToSetBountyWithVault(player, reward);
         }
 
         CBounty.getDatabaseManager().createBounty(player, target, rewardType, reward);

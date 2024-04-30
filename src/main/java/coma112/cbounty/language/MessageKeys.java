@@ -24,6 +24,11 @@ public class MessageKeys {
     public static String BOUNTY_DEAD_KILLER = PREFIX + getString("messages.bounty-dead-killer");
     public static String NOT_ENOUGH_TOKEN = PREFIX + getString("messages.not-enough-token");
     public static String NOT_ENOUGH_MONEY = PREFIX + getString("messages.not-enough-money");
+    public static String YES = getString("messages.yes");
+    public static String NO = getString("messages.no");
+    public static String MAX_TOP = getString("messages.maximum-top");
+    public static String TOP_HEADER = getString("messages.top.header");
+    public static String TOP_MESSAGE = getString("messages.top.message");
 
     private static String getString(@NotNull String path) {
         return MessageProcessor.process(CBounty.getInstance().getLanguage().getString(path));

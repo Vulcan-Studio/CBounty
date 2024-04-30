@@ -31,6 +31,11 @@ public class Language extends ConfigUtils {
         yml.addDefault("messages.bounty-dead-killer", "&aYou have successfully killed a bounty!");
         yml.addDefault("messages.not-enough-token", "&cYou don't have enough token!");
         yml.addDefault("messages.not-enough-money", "&cYou don't have enough money!");
+        yml.addDefault("messages.yes", "&aIgen");
+        yml.addDefault("messages.no", "&cNem");
+        yml.addDefault("messages.maximum-top", "&cCan't be bigger than {top}");
+        yml.addDefault("messages.top.header", "\n&6Top {value} Streaks:&f\n\n");
+        yml.addDefault("messages.top.message", "&f{place}. &6{name} &f- &7(&6{streak}&7)");
 
         yml.options().copyDefaults(true);
         save();

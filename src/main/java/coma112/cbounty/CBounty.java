@@ -4,7 +4,9 @@ import coma112.cbounty.config.Config;
 import coma112.cbounty.database.AbstractDatabase;
 import coma112.cbounty.database.MySQL;
 import coma112.cbounty.hooks.BountyEconomy;
+import coma112.cbounty.hooks.Placeholder;
 import coma112.cbounty.language.Language;
+import coma112.cbounty.managers.BountyManager;
 import coma112.cbounty.utils.CommandRegister;
 import coma112.cbounty.utils.ListenerRegister;
 import lombok.Getter;
@@ -18,6 +20,7 @@ public final class CBounty extends JavaPlugin {
     @Getter private static AbstractDatabase databaseManager;
     private static Language language;
     private static Config config;
+    private static BountyManager bountyManager;
 
     @Override
     public void onEnable() {
@@ -46,9 +49,15 @@ public final class CBounty extends JavaPlugin {
         return config;
     }
 
+    public BountyManager getBountyManager() {
+        return bountyManager;
+    }
+
     private void initializeComponents() {
         language = new Language();
         config = new Config();
+        bountyManager = new BountyManager();
+        new Placeholder().register();
     }
 
     private void registerListenersAndCommands() {

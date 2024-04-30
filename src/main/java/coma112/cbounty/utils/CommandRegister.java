@@ -4,6 +4,7 @@ import coma112.cbounty.CBounty;
 import coma112.cbounty.commands.CommandBountiesMenu;
 import coma112.cbounty.commands.CommandReload;
 import coma112.cbounty.commands.CommandSetBounty;
+import coma112.cbounty.commands.CommandTopStreak;
 import coma112.cbounty.subcommand.PluginCommand;
 import org.bukkit.Bukkit;
 
@@ -30,6 +31,7 @@ public class CommandRegister {
         commandClasses.add(CommandReload.class);
         commandClasses.add(CommandSetBounty.class);
         commandClasses.add(CommandBountiesMenu.class);
+        commandClasses.add(CommandTopStreak.class);
 
         return commandClasses;
     }

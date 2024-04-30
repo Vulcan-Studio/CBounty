@@ -27,11 +27,13 @@ public class Config extends ConfigUtils {
         yml.addDefault("bounty-item.name", "&c&l! &6{target} &8(&7{id}&8) &c&l!");
         yml.addDefault("bounty-item.lore", List.of(
                 "",
-                "&6Sender: &f{player}",
-                "&6Reward: &f{reward}",
-                "&6Reward Type: &f{reward_type}",
-                "&6Streak: &f{streak}"
+                "&6Sender: &f{player} &c⚡",
+                "&6Reward: &f{reward} &c⚡",
+                "&6Reward Type: &f{reward_type} &c⚡",
+                "&6Streak: &f{streak} &c🔥"
         ));
+
+        yml.addDefault("max-top", 15);
 
         yml.options().copyDefaults(true);
         save();

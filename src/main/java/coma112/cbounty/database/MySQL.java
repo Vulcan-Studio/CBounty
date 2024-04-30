@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.managers.Bounty;
+import coma112.cbounty.managers.Top;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -60,7 +61,7 @@ public class MySQL extends AbstractDatabase {
     }
 
     public void createTable() {
-        String query = "CREATE TABLE IF NOT EXISTS bounty (ID INT AUTO_INCREMENT PRIMARY KEY, PLAYER VARCHAR(255) NOT NULL, TARGET VARCHAR(255) NOT NULL, REWARD_TYPE VARCHAR(255) NOT NULL, REWARD INT, BOUNTY_DATE DATETIME)";
+        String query = "CREATE TABLE IF NOT EXISTS bounty (ID INT AUTO_INCREMENT PRIMARY KEY, PLAYER VARCHAR(255) NOT NULL, TARGET VARCHAR(255) NOT NULL, REWARD_TYPE VARCHAR(255) NOT NULL, REWARD INT, BOUNTY_DATE DATETIME, STREAK INT)";
 
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
             preparedStatement.execute();
@@ -110,18 +111,19 @@ public class MySQL extends AbstractDatabase {
 
     @Override
     public int getStreak(@NotNull OfflinePlayer player) {
-        String query = "SELECT MAX(BOUNTY_DATE) FROM bounty WHERE TARGET = ?";
+        String updateQuery = "UPDATE bounty SET STREAK = DATEDIFF(NOW(), (SELECT MAX(BOUNTY_DATE) FROM bounty WHERE TARGET = ?)) WHERE TARGET = ?";
+        String selectQuery = "SELECT STREAK FROM bounty WHERE TARGET = ?";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, player.getName());
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try (PreparedStatement updateStatement = connection.prepareStatement(updateQuery);
+             PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
+            updateStatement.setString(1, player.getName());
+            updateStatement.setString(2, player.getName());
+            updateStatement.executeUpdate();
+
+            selectStatement.setString(1, player.getName());
+            ResultSet resultSet = selectStatement.executeQuery();
             if (resultSet.next()) {
-                java.util.Date lastBountyDate = resultSet.getTimestamp(1);
-                if (lastBountyDate != null) {
-                    long timeDifference = System.currentTimeMillis() - lastBountyDate.getTime();
-                    long daysDifference = TimeUnit.MILLISECONDS.toDays(timeDifference);
-                    return (int) daysDifference;
-                }
+                return resultSet.getInt("STREAK");
             }
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
@@ -213,6 +215,69 @@ public class MySQL extends AbstractDatabase {
         }
     }
 
+    @Override
+    public List<Top> getTop(int number) {
+        List<Top> topStreaks = new ArrayList<>();
+        String query = "SELECT TARGET, STREAK FROM bounty ORDER BY STREAK DESC LIMIT ?";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                preparedStatement.setInt(1, number);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    OfflinePlayer player = Bukkit.getOfflinePlayer(resultSet.getString("TARGET"));
+                    int streak = resultSet.getInt("STREAK");
+
+                    topStreaks.add(new Top(player, streak));
+                }
+            }
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+
+        return topStreaks;
+    }
+
+    @Override
+    public String getTopStreakPlayer(int top) {
+        String playerName = null;
+        String query = "SELECT TARGET FROM bounty ORDER BY STREAK DESC LIMIT ?, 1";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                preparedStatement.setInt(1, top - 1);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) playerName = resultSet.getString("TARGET");
+            }
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+
+        return playerName;
+    }
+
+    @Override
+    public int getTopStreak(int top) {
+        String query = "SELECT STREAK FROM bounty ORDER BY STREAK DESC LIMIT ?, 1";
+
+        try {
+            try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
+                preparedStatement.setInt(1, top - 1);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                if (resultSet.next()) return resultSet.getInt("STREAK");
+            }
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+
+        return 0;
+    }
 
     @Override
     public void reconnect(@NotNull ConfigurationSection section) {

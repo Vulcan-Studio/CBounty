@@ -2,6 +2,7 @@ package coma112.cbounty.database;
 
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.managers.Bounty;
+import coma112.cbounty.managers.Top;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -25,6 +26,12 @@ public abstract class AbstractDatabase {
     public abstract Player getSender(@NotNull Player player);
 
     public abstract void removeBounty(@NotNull Player player);
+
+    public abstract List<Top> getTop(int number);
+
+    public abstract String getTopStreakPlayer(int top);
+
+    public abstract int getTopStreak(int top);
 
     public abstract void reconnect(@NotNull ConfigurationSection section);
 
