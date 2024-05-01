@@ -12,7 +12,8 @@ public enum ConfigKeys {
     MENU_TICK("menu.update-tick"),
     MENU_TITLE("menu.title"),
     YES("messages.yes"),
-    NO("messages.no");
+    NO("messages.no"),
+    DEPENDENCY_TOKENMANAGER("dependency.tokenmanager");
 
     private final String path;
 
@@ -26,5 +27,9 @@ public enum ConfigKeys {
 
     public int getInt() {
         return CBounty.getInstance().getConfiguration().getInt(path);
+    }
+
+    public boolean getBoolean() {
+        return CBounty.getInstance().getConfiguration().getBoolean(path);
     }
 }

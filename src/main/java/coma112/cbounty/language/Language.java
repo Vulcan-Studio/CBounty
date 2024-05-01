@@ -34,6 +34,8 @@ public class Language extends ConfigUtils {
         yml.addDefault("messages.top.header", "\n&6Top {value} Streaks:&f\n\n");
         yml.addDefault("messages.top.message", "&f{place}. &6{name} &f- &7(&6{streak}&7)");
         yml.addDefault("messages.max-bounty", "&6&lBOUNTY &8| &cYou can't set more bounty!");
+        yml.addDefault("messages.feature-disabled", "&6&lBOUNTY &8| &cThis feature is disabled at the moment!");
+        yml.addDefault("messages.feature-disabled-event", "&6&lBOUNTY &8| &cThis feature is disabled at the moment but I gave you the reward in money!");
 
         yml.options().copyDefaults(true);
         save();

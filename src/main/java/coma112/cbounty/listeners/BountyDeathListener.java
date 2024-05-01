@@ -19,7 +19,11 @@ public class BountyDeathListener implements Listener {
             if (CBounty.getDatabaseManager().isBounty(target)) {
                 if (killer.equals(CBounty.getDatabaseManager().getSender(target))) {
                     switch (CBounty.getDatabaseManager().getRewardType(target)) {
-                        case TOKEN -> CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
+                        case TOKEN -> {
+                             if (CBounty.getInstance().getToken().isEnabled()) CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
+                             Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
+                             killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
+                        }
                         case MONEY -> Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                     }
                 }

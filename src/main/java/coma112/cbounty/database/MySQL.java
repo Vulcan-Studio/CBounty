@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.RewardType;
+import coma112.cbounty.event.CreateBountyEvent;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.managers.Top;
 import lombok.Getter;
@@ -40,7 +41,7 @@ public class MySQL extends AbstractDatabase {
         int poolSize = section.getInt("poolsize");
         int maxLifetime = section.getInt("lifetime");
 
-        hikariConfig.setPoolName("AuctionPool");
+        hikariConfig.setPoolName("BountyPool");
         hikariConfig.setMaximumPoolSize(poolSize);
         hikariConfig.setMaxLifetime(maxLifetime * 1000L);
         hikariConfig.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + database);
@@ -82,6 +83,7 @@ public class MySQL extends AbstractDatabase {
             preparedStatement.setInt(4, reward);
 
             preparedStatement.executeUpdate();
+            CBounty.getInstance().getServer().getPluginManager().callEvent(new CreateBountyEvent(player, target, reward, rewardType));
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

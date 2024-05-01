@@ -1,20 +1,25 @@
 package coma112.cbounty.commands;
 
 import coma112.cbounty.CBounty;
+import coma112.cbounty.database.AbstractDatabase;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
+import coma112.cbounty.hooks.Token;
+import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.managers.Top;
 import coma112.cbounty.menu.menus.BountiesMenu;
 import coma112.cbounty.utils.MenuUtils;
+import me.realized.tokenmanager.api.TokenManager;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import revxrsal.commands.annotation.Command;
-import revxrsal.commands.annotation.Default;
 import revxrsal.commands.annotation.Subcommand;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @SuppressWarnings("deprecation")
 @Command({"bounty", "cbounty"})
@@ -72,13 +77,13 @@ public class CommandBounty {
     }
 
     @Subcommand("set")
-    public void set(CommandSender sender, Player target, RewardType rewardType, int reward) {
+    public void set(CommandSender sender, @NotNull Player target, RewardType rewardType, int reward) {
         if (!(sender instanceof Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;
         }
 
-        if (!Objects.requireNonNull(target).isOnline()) {
+        if (!target.isOnline()) {
             player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
             return;
         }
@@ -93,36 +98,43 @@ public class CommandBounty {
             return;
         }
 
-        try {
-            rewardType = RewardType.valueOf(String.valueOf(reward).toUpperCase());
-        } catch (IllegalArgumentException exception) {
-            player.sendMessage(MessageKeys.INVALID_REWARDTYPE.getMessage());
-            return;
-        }
-
-        try {
-            reward = Integer.parseInt(String.valueOf(reward));
-        } catch (NumberFormatException exception) {
-            player.sendMessage(MessageKeys.INVALID_NUMBER.getMessage());
-            return;
-        }
-
         if (reward <= 0) {
             player.sendMessage(MessageKeys.NO_NEGATIVE.getMessage());
             return;
         }
 
-        if (CBounty.getDatabaseManager().reachedMaximumBounty(player)) {
-            player.sendMessage(MessageKeys.MAX_BOUNTY.getMessage());
-            return;
-        }
+        Token token = CBounty.getInstance().getToken();
+        AbstractDatabase databaseManager = CBounty.getDatabaseManager();
 
-        switch (rewardType) {
-            case TOKEN -> CBounty.getInstance().getBountyManager().tryToSetBountyWithToken(player, reward);
-            case MONEY -> CBounty.getInstance().getBountyManager().tryToSetBountyWithVault(player, reward);
-        }
+        Optional.ofNullable(token)
+                .filter(Token::isEnabled)
+                .ifPresentOrElse(
+                        tokenManager -> {
+                            if (rewardType == RewardType.TOKEN) {
+                                int playerBalance = CBounty.getInstance().getToken().getTokens(player);
 
-        CBounty.getDatabaseManager().createBounty(player, target, rewardType, reward);
-        player.sendMessage(MessageKeys.SUCCESSFUL_SET.getMessage());
+                                if (playerBalance < reward) {
+                                    player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
+                                    return;
+                                }
+
+                                CBounty.getTokenManager().removeTokens(player, reward);
+                            } else if (rewardType == RewardType.MONEY) {
+                                Economy economy = Vault.getEconomy();
+                                double playerBalance = economy.getBalance(player);
+
+                                if (playerBalance < reward) {
+                                    player.sendMessage(MessageKeys.NOT_ENOUGH_MONEY.getMessage());
+                                    return;
+                                }
+
+                                economy.depositPlayer(player, reward);
+                            }
+
+                            databaseManager.createBounty(player, target, rewardType, reward);
+                            player.sendMessage(MessageKeys.SUCCESSFUL_SET.getMessage());
+                        },
+                        () -> player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage())
+                );
     }
 }

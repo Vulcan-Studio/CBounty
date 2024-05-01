@@ -1,5 +1,6 @@
 package coma112.cbounty.hooks;
 
+import coma112.cbounty.CBounty;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -21,4 +22,7 @@ public class Vault {
         if (Bukkit.getPluginManager().getPlugin("Vault") != null) setupEconomy();
     }
 
+    public static void register() {
+        if (CBounty.getInstance().getServer().getPluginManager().getPlugin("Vault") != null) BountyEconomy.register();
+    }
 }

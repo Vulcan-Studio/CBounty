@@ -26,7 +26,9 @@ public enum MessageKeys {
         MAX_TOP("messages.maximum-top"),
         TOP_HEADER("messages.top.header"),
         TOP_MESSAGE("messages.top.message"),
-        MAX_BOUNTY("messages.max-bounty");
+        MAX_BOUNTY("messages.max-bounty"),
+        FEATURE_DISABLED("messages.feature-disabled"),
+        FEATURE_DISABLED_EVENT("messages.feature-disabled-event");
 
         private final String path;
 

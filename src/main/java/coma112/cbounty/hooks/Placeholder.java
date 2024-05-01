@@ -63,4 +63,8 @@ public class Placeholder extends PlaceholderExpansion {
 
         return null;
     }
+
+    public static void registerHook() {
+        if (CBounty.getInstance().getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) new Placeholder().register();
+    }
 }
