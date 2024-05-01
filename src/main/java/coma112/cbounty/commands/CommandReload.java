@@ -16,7 +16,6 @@ public class CommandReload extends PluginCommand {
 
     @Override
     public boolean run(@NotNull CommandSender sender, @NotNull String[] args) {
-
         CBounty.getInstance().getLanguage().reload();
         CBounty.getInstance().getConfiguration().reload();
         sender.sendMessage(MessageKeys.RELOAD);

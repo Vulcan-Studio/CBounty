@@ -1,6 +1,9 @@
 package coma112.cbounty.item;
 
+import coma112.cbounty.CBounty;
+import coma112.cbounty.processor.MessageProcessor;
 import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -8,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 
 public interface IItemBuilder {
     static IItemBuilder create(@NotNull Material material) {
@@ -68,6 +72,22 @@ public interface IItemBuilder {
     ItemStack finish();
 
     boolean isFinished();
+
+    static ItemStack createItemFromSection(@NotNull String path) {
+        ConfigurationSection section = CBounty.getInstance().getConfiguration().getSection(path);
+
+        Material material = Material.valueOf(Objects.requireNonNull(section).getString("material"));
+        int amount = section.getInt("amount", 1);
+        String name = section.getString("name");
+        String[] loreArray = section.getStringList("lore").toArray(new String[0]);
+
+        for (int i = 0; i < loreArray.length; i++) loreArray[i] = MessageProcessor.process(loreArray[i]);
+
+        return IItemBuilder.create(material, amount)
+                .setName(Objects.requireNonNull(name))
+                .addLore(loreArray)
+                .finish();
+    }
 }
 
 

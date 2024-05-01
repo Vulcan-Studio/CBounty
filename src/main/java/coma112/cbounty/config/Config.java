@@ -23,6 +23,7 @@ public class Config extends ConfigUtils {
         yml.addDefault("database.mysql.poolsize", 10);
         yml.addDefault("database.mysql.lifetime", 1800000);
 
+        yml.addDefault("bounty-item.amount", 1);
         yml.addDefault("bounty-item.material", "PAPER");
         yml.addDefault("bounty-item.name", "&c&l! &6{target} &8(&7{id}&8) &c&l!");
         yml.addDefault("bounty-item.lore", List.of(
@@ -33,7 +34,22 @@ public class Config extends ConfigUtils {
                 "&6Streak: &f{streak} &c🔥"
         ));
 
-        yml.addDefault("max-top", 15);
+        yml.addDefault("max.top-to-get", 15);
+        yml.addDefault("max.bounty-per-player", 5);
+
+        yml.addDefault("menu.title", "&6&lBOUNTIES");
+        yml.addDefault("menu.size", 54);
+        yml.addDefault("menu.update-tick", 2);
+
+        yml.addDefault("menu.back-item.amount", 1);
+        yml.addDefault("menu.back-item.material", "RED_STAINED_GLASS");
+        yml.addDefault("menu.back-item.name", "&cBack");
+        yml.addDefault("menu.back-item.slot", 45);
+
+        yml.addDefault("menu.forward-item.amount", 1);
+        yml.addDefault("menu.forward-item.material", "GREEN_STAINED_GLASS");
+        yml.addDefault("menu.forward-item.name", "&aForward");
+        yml.addDefault("menu.forward-item.slot", 53);
 
         yml.options().copyDefaults(true);
         save();

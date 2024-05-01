@@ -17,12 +17,12 @@ public class CommandTopStreak extends PluginCommand {
 
     @Override
     public boolean run(@NotNull CommandSender sender, @NotNull String[] args) {
+        int value;
+
         if (args.length == 0) {
             sender.spigot().sendMessage(Top.getTopStreak(10));
             return true;
         }
-
-        int value;
 
         try {
             value = Integer.parseInt(args[0]);

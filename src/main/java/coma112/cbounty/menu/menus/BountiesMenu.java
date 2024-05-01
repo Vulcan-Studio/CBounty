@@ -14,11 +14,14 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("deprecation")
 public class BountiesMenu extends PaginatedMenu {
     public BountiesMenu(MenuUtils menuUtils) {
         super(menuUtils);
@@ -26,12 +29,12 @@ public class BountiesMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return "&6&lBOUNTIES";
+        return ConfigKeys.MENU_TITLE;
     }
 
     @Override
     public int getSlots() {
-        return 54;
+        return ConfigKeys.MENU_SIZE;
     }
 
     @Override
@@ -85,21 +88,29 @@ public class BountiesMenu extends PaginatedMenu {
 
     private static ItemStack createBountyItem(@NotNull Bounty bounty) {
         OfflinePlayer player = Bukkit.getOfflinePlayer(bounty.target());
+        ItemStack itemStack = IItemBuilder.createItemFromSection("bounty-item");
+        ItemMeta meta = itemStack.getItemMeta();
 
-        ItemBuilder itemBuilder = IItemBuilder.create(Material.valueOf(ConfigKeys.BOUNTY_ITEM_MATERIAL))
-                .setName(ConfigKeys.BOUNTY_ITEM_NAME
-                        .replace("{id}", String.valueOf(bounty.id()))
-                        .replace("{target}", bounty.target()))
-                .setLocalizedName("");
+        if (meta != null) {
+            String displayName = meta.getDisplayName()
+                    .replace("{target}", bounty.target())
+                    .replace("{id}", String.valueOf(bounty.id()));
+            meta.setDisplayName(displayName);
 
-        for (String lore : ConfigKeys.CODE_ITEM_LORE) {
-            itemBuilder.addLore(lore
-                    .replace("{streak}", String.valueOf(CBounty.getDatabaseManager().getStreak(player)))
-                    .replace("{reward_type}", bounty.reward_type().name())
-                    .replace("{reward}", String.valueOf(bounty.reward()))
-                    .replace("{player}", bounty.player()));
+            List<String> lore = meta.getLore();
+            if (lore != null) {
+                List<String> replacedLore = new ArrayList<>();
+                for (String line : lore) {
+                    replacedLore.add(line
+                            .replace("{streak}", String.valueOf(CBounty.getDatabaseManager().getStreak(player)))
+                            .replace("{reward_type}", bounty.reward_type().name())
+                            .replace("{reward}", String.valueOf(bounty.reward()))
+                            .replace("{player}", bounty.player()));
+                }
+                meta.setLore(replacedLore);
+            }
+            itemStack.setItemMeta(meta);
         }
-
-        return itemBuilder.finish();
+        return itemStack;
     }
 }

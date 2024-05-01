@@ -10,6 +10,7 @@ import coma112.cbounty.managers.BountyManager;
 import coma112.cbounty.utils.CommandRegister;
 import coma112.cbounty.utils.ListenerRegister;
 import lombok.Getter;
+import me.realized.tokenmanager.api.TokenManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
@@ -21,13 +22,13 @@ public final class CBounty extends JavaPlugin {
     private static Language language;
     private static Config config;
     private static BountyManager bountyManager;
+    @Getter private static TokenManager tokenManager;
 
     @Override
     public void onEnable() {
-        if (getServer().getPluginManager().getPlugin("Vault") != null) BountyEconomy.register();
-
         instance = this;
 
+        registerHooks();
         initializeComponents();
         registerListenersAndCommands();
         initializeDatabaseManager();
@@ -57,7 +58,12 @@ public final class CBounty extends JavaPlugin {
         language = new Language();
         config = new Config();
         bountyManager = new BountyManager();
-        new Placeholder().register();
+    }
+
+    private void registerHooks() {
+        if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) new Placeholder().register();
+        if (getServer().getPluginManager().getPlugin("Vault") != null) BountyEconomy.register();
+        if (getServer().getPluginManager().getPlugin("TokenManager") != null) tokenManager = (TokenManager) getServer().getPluginManager().getPlugin("TokenManager");
     }
 
     private void registerListenersAndCommands() {

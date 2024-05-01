@@ -2,3 +2,7 @@ name: CBounty
 version: '${version}'
 main: coma112.cbounty.CBounty
 api-version: '1.20'
+softdepend:
+  - Vault
+  - PlaceholderAPI
+  - TokenManager

@@ -1,8 +1,6 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
     id("io.freefair.lombok") version "8.6"
-
 }
 
 group = 'coma112'
@@ -30,10 +28,12 @@ dependencies {
     compileOnly "io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT"
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
     compileOnly 'me.clip:placeholderapi:2.11.3'
-    compileOnly files('libs/CToken-1.0.jar')
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
     implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.1.0'
     implementation 'mysql:mysql-connector-java:8.0.33'
+    compileOnly (group: 'com.github.Realizedd', name: 'TokenManager', version: '3.2.4') {
+        transitive = false
+    }
 }
 
 tasks {

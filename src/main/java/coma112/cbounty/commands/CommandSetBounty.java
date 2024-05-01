@@ -2,11 +2,9 @@ package coma112.cbounty.commands;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.RewardType;
-import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.language.MessageKeys;
 import coma112.cbounty.subcommand.CommandInfo;
 import coma112.cbounty.subcommand.PluginCommand;
-import net.coma.ctoken.CToken;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -21,14 +19,14 @@ public class CommandSetBounty extends PluginCommand {
 
     @Override
     public boolean run(@NotNull Player player, String[] args) {
+        Player target = Bukkit.getPlayerExact(args[0]);
+        RewardType rewardType;
+        int reward;
+
         if (args.length < 3) {
             player.sendMessage(MessageKeys.SET_BOUNTY_USAGE);
             return true;
         }
-
-        Player target = Bukkit.getPlayerExact(args[0]);
-        RewardType rewardType;
-        int reward;
 
         if (!Objects.requireNonNull(target).isOnline()) {
             player.sendMessage(MessageKeys.PLAYER_NOT_FOUND);

@@ -6,8 +6,8 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- I added placeholders
-- I added a top system
+- I removed CToken
+- I published it.
 
 # Server Status ✅
 

@@ -3,7 +3,6 @@ package coma112.cbounty.listeners;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.language.MessageKeys;
-import net.coma.ctoken.CToken;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,7 +19,7 @@ public class BountyDeathListener implements Listener {
             if (CBounty.getDatabaseManager().isBounty(target)) {
                 if (killer.equals(CBounty.getDatabaseManager().getSender(target))) {
                     switch (CBounty.getDatabaseManager().getRewardType(target)) {
-                        case TOKEN -> CToken.getInstance().getDatabaseManager().addToBalance(killer, CBounty.getDatabaseManager().getReward(target));
+                        case TOKEN -> CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
                         case MONEY -> Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                     }
                 }
