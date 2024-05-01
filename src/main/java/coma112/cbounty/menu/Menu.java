@@ -1,6 +1,6 @@
 package coma112.cbounty.menu;
 
-import coma112.cbounty.config.ConfigKeys;
+import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.processor.MessageProcessor;
 import coma112.cbounty.utils.MenuUtils;
 import org.bukkit.Bukkit;
@@ -34,7 +34,7 @@ public abstract class Menu implements InventoryHolder {
 
         menuUtils.getOwner().openInventory(inventory);
         MenuUpdater menuUpdater = new MenuUpdater(this);
-        menuUpdater.start(ConfigKeys.MENU_TICK * 20);
+        menuUpdater.start(ConfigKeys.MENU_TICK.getInt() * 20);
     }
 
     @Override

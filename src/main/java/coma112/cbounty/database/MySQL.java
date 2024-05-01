@@ -3,6 +3,7 @@ package coma112.cbounty.database;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import coma112.cbounty.CBounty;
+import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.managers.Top;
@@ -288,6 +289,24 @@ public class MySQL extends AbstractDatabase {
             throw new RuntimeException("Failed to reconnect to the database", exception);
         }
     }
+
+    @Override
+    public boolean reachedMaximumBounty(@NotNull Player player) {
+        String query = "SELECT COUNT(*) AS total FROM bounty WHERE PLAYER = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, player.getName());
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int totalItems = resultSet.getInt("total");
+                    return totalItems >= ConfigKeys.MAXIMUM_BOUNTY.getInt();
+                }
+            }
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+        return false;
+    }
+
 
     @Override
     public boolean isConnected() {

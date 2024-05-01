@@ -1,15 +1,13 @@
 package coma112.cbounty.menu.menus;
 
 import coma112.cbounty.CBounty;
-import coma112.cbounty.config.ConfigKeys;
+import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.item.IItemBuilder;
-import coma112.cbounty.item.ItemBuilder;
-import coma112.cbounty.language.MessageKeys;
+import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.menu.PaginatedMenu;
 import coma112.cbounty.utils.MenuUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -19,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 public class BountiesMenu extends PaginatedMenu {
@@ -29,12 +26,12 @@ public class BountiesMenu extends PaginatedMenu {
 
     @Override
     public String getMenuName() {
-        return ConfigKeys.MENU_TITLE;
+        return ConfigKeys.MENU_TITLE.getString();
     }
 
     @Override
     public int getSlots() {
-        return ConfigKeys.MENU_SIZE;
+        return ConfigKeys.MENU_SIZE.getInt();
     }
 
     @Override
@@ -49,7 +46,7 @@ public class BountiesMenu extends PaginatedMenu {
         switch (event.getSlot()) {
             case 45 -> {
                 if (page == 0) {
-                    player.sendMessage(MessageKeys.FIRST_PAGE);
+                    player.sendMessage(MessageKeys.FIRST_PAGE.getMessage());
                 } else {
                     page--;
                     super.open();
@@ -61,7 +58,7 @@ public class BountiesMenu extends PaginatedMenu {
                 int totalPages = (int) Math.ceil((double) bounties.size() / getMaxItemsPerPage());
 
                 if (nextPageIndex >= totalPages) {
-                    player.sendMessage(MessageKeys.LAST_PAGE);
+                    player.sendMessage(MessageKeys.LAST_PAGE.getMessage());
                 } else {
                     page++;
                     super.open();

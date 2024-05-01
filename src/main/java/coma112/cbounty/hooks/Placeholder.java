@@ -1,7 +1,8 @@
 package coma112.cbounty.hooks;
 
 import coma112.cbounty.CBounty;
-import coma112.cbounty.language.MessageKeys;
+import coma112.cbounty.enums.keys.ConfigKeys;
+import coma112.cbounty.enums.keys.MessageKeys;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ public class Placeholder extends PlaceholderExpansion {
     @Override
     public String onPlaceholderRequest(@NotNull Player player, @NotNull String params) {
         if (params.equals("isbounty")) {
-            return CBounty.getDatabaseManager().isBounty(player) ? MessageKeys.YES : MessageKeys.NO;
+            return CBounty.getDatabaseManager().isBounty(player) ? ConfigKeys.YES.getString() : ConfigKeys.NO.getString();
         }
 
         if (params.startsWith("top_")) {

@@ -2,7 +2,7 @@ package coma112.cbounty.listeners;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.hooks.Vault;
-import coma112.cbounty.language.MessageKeys;
+import coma112.cbounty.enums.keys.MessageKeys;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,9 +27,10 @@ public class BountyDeathListener implements Listener {
                 CBounty.getDatabaseManager().removeBounty(target);
                 target.setGlowing(false);
 
-                killer.sendMessage(MessageKeys.BOUNTY_DEAD_KILLER);
-                target.sendMessage(MessageKeys.BOUNTY_DEAD_TARGET);
+                killer.sendMessage(MessageKeys.BOUNTY_DEAD_KILLER.getMessage());
+                target.sendMessage(MessageKeys.BOUNTY_DEAD_TARGET.getMessage());
                 Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(MessageKeys.BOUNTY_DEAD_EVERYONE
+                        .getMessage()
                         .replace("{name}", target.getName())));
             }
         }

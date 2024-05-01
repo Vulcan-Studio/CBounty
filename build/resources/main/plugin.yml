@@ -1,5 +1,5 @@
 name: CBounty
-version: '${version}'
+version: '1.1'
 main: coma112.cbounty.CBounty
 api-version: '1.20'
 softdepend:

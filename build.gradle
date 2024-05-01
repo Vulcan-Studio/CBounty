@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id("io.freefair.lombok") version "8.6"
+    id 'io.freefair.lombok' version "8.6"
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'coma112'
@@ -29,11 +30,13 @@ dependencies {
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.32'
     compileOnly 'me.clip:placeholderapi:2.11.3'
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
-    implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.1.0'
-    implementation 'mysql:mysql-connector-java:8.0.33'
     compileOnly (group: 'com.github.Realizedd', name: 'TokenManager', version: '3.2.4') {
         transitive = false
     }
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.1.0'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'com.github.Revxrsal.Lamp:common:3.2.1'
+    implementation 'com.github.Revxrsal.Lamp:bukkit:3.2.1'
 }
 
 tasks {
@@ -41,5 +44,13 @@ tasks {
         options.encoding = 'UTF-8'
         options.release.set(17)
     }
+}
+
+compileJava {
+    options.compilerArgs += ["-parameters"]
+}
+
+shadowJar {
+    minimize()
 }
 

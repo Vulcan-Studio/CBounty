@@ -23,6 +23,9 @@ public class Config extends ConfigUtils {
         yml.addDefault("database.mysql.poolsize", 10);
         yml.addDefault("database.mysql.lifetime", 1800000);
 
+        yml.addDefault("placeholder.yes", "&aIgen");
+        yml.addDefault("placeholder.no", "&cNem");
+
         yml.addDefault("bounty-item.amount", 1);
         yml.addDefault("bounty-item.material", "PAPER");
         yml.addDefault("bounty-item.name", "&c&l! &6{target} &8(&7{id}&8) &c&l!");

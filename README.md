@@ -6,8 +6,9 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- I removed CToken
-- I published it.
+- I have published version 1.1 
+- I changed the command framework
+- I modernized the code a bit
 
 # Server Status ✅
 
