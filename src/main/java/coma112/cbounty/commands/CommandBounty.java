@@ -6,11 +6,10 @@ import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.hooks.Token;
-import coma112.cbounty.hooks.Vault;
+import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.managers.Top;
 import coma112.cbounty.menu.menus.BountiesMenu;
 import coma112.cbounty.utils.MenuUtils;
-import me.realized.tokenmanager.api.TokenManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -34,6 +33,7 @@ public class CommandBounty {
 
         CBounty.getInstance().getLanguage().reload();
         CBounty.getInstance().getConfiguration().reload();
+        CBounty.getDatabaseManager().reconnect(Objects.requireNonNull(CBounty.getInstance().getConfiguration().getSection("database.mysql")));
         sender.sendMessage(MessageKeys.RELOAD.getMessage());
     }
 

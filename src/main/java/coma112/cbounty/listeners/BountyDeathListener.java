@@ -1,7 +1,7 @@
 package coma112.cbounty.listeners;
 
 import coma112.cbounty.CBounty;
-import coma112.cbounty.hooks.Vault;
+import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.enums.keys.MessageKeys;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -24,6 +24,7 @@ public class BountyDeathListener implements Listener {
                              Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                              killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
                         }
+
                         case MONEY -> Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                     }
                 }

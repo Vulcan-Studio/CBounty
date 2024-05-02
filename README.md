@@ -6,9 +6,7 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- I made the TokenManager dependency customizable
-- I fixed the glowing effect problem
-- I added an UpdateChecker
+- I made that the glowing effect is customizable and colorable
 
 # Server Status ✅
 

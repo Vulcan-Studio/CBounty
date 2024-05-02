@@ -13,7 +13,10 @@ public enum ConfigKeys {
     MENU_TITLE("menu.title"),
     YES("messages.yes"),
     NO("messages.no"),
-    DEPENDENCY_TOKENMANAGER("dependency.tokenmanager");
+    DEPENDENCY_TOKENMANAGER("dependency.tokenmanager"),
+    GLOWING_ENABLED("feature.glowing.enabled"),
+    GLOWING_COLOR_ENABLED("feature.glowing.color-enabled"),
+    GLOWING_COLOR("feature.glowing.color");
 
     private final String path;
 

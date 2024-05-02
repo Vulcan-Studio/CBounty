@@ -1,4 +1,4 @@
-package coma112.cbounty.hooks;
+package coma112.cbounty.hooks.vault;
 
 import coma112.cbounty.CBounty;
 import net.milkbowl.vault.economy.AbstractEconomy;
