@@ -1,5 +1,5 @@
 name: CBounty
-version: '1.4'
+version: '1.5'
 main: coma112.cbounty.CBounty
 api-version: '1.20'
 folia-supported: true

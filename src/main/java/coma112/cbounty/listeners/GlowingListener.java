@@ -43,7 +43,9 @@ public class GlowingListener implements Listener {
 
         if (isGlowingEnabled()) {
             if (isGlowingColorEnabled()) {
-                Team team = scoreboard.registerNewTeam(playerName);
+                Team team = scoreboard.getTeam(playerName);
+                if (team != null) team.unregister();
+                team = scoreboard.registerNewTeam(playerName);
                 team.setColor(ChatColor.valueOf(ConfigKeys.GLOWING_COLOR.getString()));
                 team.addEntry(playerName);
                 player.setGlowing(CBounty.getDatabaseManager().isBounty(player));

@@ -6,7 +6,7 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- I made that the glowing effect is customizable and colorable
+- I fixed the glowing effect
 
 # Server Status ✅
 
