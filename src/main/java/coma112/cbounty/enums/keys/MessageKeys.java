@@ -28,6 +28,9 @@ public enum MessageKeys {
         TOP_MESSAGE("messages.top.message"),
         MAX_BOUNTY("messages.max-bounty"),
         FEATURE_DISABLED("messages.feature-disabled"),
+        NOT_BOUNTY("messages.not-a-bounty"),
+        REMOVE_PLAYER("successful-remove-player"),
+        REMOVE_TARGET("successful-remove-target"),
         FEATURE_DISABLED_EVENT("messages.feature-disabled-event");
 
         private final String path;

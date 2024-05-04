@@ -36,6 +36,9 @@ public class Language extends ConfigUtils {
         yml.addDefault("messages.max-bounty", "&6&lBOUNTY &8| &cYou can't set more bounty!");
         yml.addDefault("messages.feature-disabled", "&6&lBOUNTY &8| &cThis feature is disabled at the moment!");
         yml.addDefault("messages.feature-disabled-event", "&6&lBOUNTY &8| &cThis feature is disabled at the moment but I gave you the reward in money!");
+        yml.addDefault("messages.not-a-bounty", "&6&lBOUNTY &8| &cThe target is not a bounty!");
+        yml.addDefault("messages.successful-remove-player", "&6&lBOUNTY &8| &aYou have successfully removed the bounty from the target!");
+        yml.addDefault("messages.successful-remove-target", "&6&lBOUNTY &8| &aYou are no longer a bounty!");
 
         yml.options().copyDefaults(true);
         save();

@@ -9,14 +9,13 @@ public class MenuListener implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent event) {
         InventoryHolder holder = event.getInventory().getHolder();
-        if (holder instanceof Menu menu) {
+
+        if (holder instanceof PaginatedMenu menu) {
             event.setCancelled(true);
-
-            if (event.getCurrentItem() == null) return;
-
             menu.handleMenu(event);
         }
     }
 }
+
 
 

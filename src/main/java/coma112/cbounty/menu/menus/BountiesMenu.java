@@ -10,7 +10,10 @@ import coma112.cbounty.utils.MenuUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
@@ -19,9 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
-public class BountiesMenu extends PaginatedMenu {
+public class BountiesMenu extends PaginatedMenu implements Listener {
     public BountiesMenu(MenuUtils menuUtils) {
         super(menuUtils);
+    }
+
+    public BountiesMenu() {
+        super(null);
     }
 
     @Override
@@ -43,26 +50,25 @@ public class BountiesMenu extends PaginatedMenu {
 
         event.setCancelled(true);
 
-        switch (event.getSlot()) {
-            case 45 -> {
-                if (page == 0) {
-                    player.sendMessage(MessageKeys.FIRST_PAGE.getMessage());
-                } else {
-                    page--;
-                    super.open();
-                }
+        if (event.getSlot() == ConfigKeys.FORWARD_SLOT.getInt()) {
+            int nextPageIndex = page + 1;
+            int totalPages = (int) Math.ceil((double) bounties.size() / getMaxItemsPerPage());
+
+            if (nextPageIndex >= totalPages) {
+                player.sendMessage(MessageKeys.LAST_PAGE.getMessage());
+                return;
+            } else {
+                page++;
+                super.open();
             }
+        }
 
-            case 53 -> {
-                int nextPageIndex = page + 1;
-                int totalPages = (int) Math.ceil((double) bounties.size() / getMaxItemsPerPage());
-
-                if (nextPageIndex >= totalPages) {
-                    player.sendMessage(MessageKeys.LAST_PAGE.getMessage());
-                } else {
-                    page++;
-                    super.open();
-                }
+        if (event.getSlot() == ConfigKeys.BACK_SLOT.getInt()) {
+            if (page == 0) {
+                player.sendMessage(MessageKeys.FIRST_PAGE.getMessage());
+            } else {
+                page--;
+                super.open();
             }
         }
     }
@@ -109,5 +115,10 @@ public class BountiesMenu extends PaginatedMenu {
             itemStack.setItemMeta(meta);
         }
         return itemStack;
+    }
+
+    @EventHandler
+    public void onClose(InventoryCloseEvent event) {
+        if (event.getInventory().equals(inventory)) close();
     }
 }

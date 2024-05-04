@@ -67,22 +67,14 @@ public class CommandBounty {
     }
 
     @Subcommand("menu")
-    public void menu(@NotNull CommandSender sender) {
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
-            return;
-        }
-
+    public void menu(@NotNull Player player) {
         new BountiesMenu(MenuUtils.getMenuUtils(player)).open();
     }
 
-    @Subcommand("set")
-    public void set(CommandSender sender, @NotNull Player target, RewardType rewardType, int reward) {
-        if (!(sender instanceof Player player)) {
-            sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
-            return;
-        }
 
+
+    @Subcommand("set")
+    public void set(@NotNull Player player, @NotNull Player target, RewardType rewardType, int reward) {
         if (!target.isOnline()) {
             player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
             return;
@@ -136,5 +128,28 @@ public class CommandBounty {
                         },
                         () -> player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage())
                 );
+    }
+
+
+    @Subcommand("remove")
+    public void remove(@NotNull Player player, @NotNull Player target) {
+        if (!player.hasPermission("cbounty.remove")) {
+            player.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
+            return;
+        }
+
+        if (!target.isOnline()) {
+            player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
+            return;
+        }
+
+        if (!CBounty.getDatabaseManager().isBounty(target)) {
+            player.sendMessage(MessageKeys.NOT_BOUNTY.getMessage());
+            return;
+        }
+
+        CBounty.getDatabaseManager().removeBounty(target);
+        player.sendMessage(MessageKeys.REMOVE_PLAYER.getMessage());
+        target.sendMessage(MessageKeys.REMOVE_TARGET.getMessage());
     }
 }

@@ -6,7 +6,7 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- I fixed the glowing effect
+- I fixed the SERIOUS menu problems!
 
 # Server Status ✅
 
