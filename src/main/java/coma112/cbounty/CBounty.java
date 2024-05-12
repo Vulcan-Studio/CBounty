@@ -3,10 +3,12 @@ package coma112.cbounty;
 import coma112.cbounty.config.Config;
 import coma112.cbounty.database.AbstractDatabase;
 import coma112.cbounty.database.MySQL;
+import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.hooks.Placeholder;
+import coma112.cbounty.hooks.Token;
 import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.language.Language;
-import coma112.cbounty.hooks.Token;
+import coma112.cbounty.processor.BountyScheduler;
 import coma112.cbounty.update.UpdateChecker;
 import coma112.cbounty.utils.CommandRegister;
 import coma112.cbounty.utils.ListenerRegister;
@@ -38,6 +40,12 @@ public final class CBounty extends JavaPlugin {
 
         MySQL mysql = (MySQL) databaseManager;
         mysql.createTable();
+
+
+        if (ConfigKeys.RANDOM_BOUNTY_ENABLED.getBoolean()) {
+            BountyScheduler bountyScheduler = new BountyScheduler();
+            bountyScheduler.startScheduling();
+        }
 
         new UpdateChecker(116501).getVersion(version -> {
             if (this.getDescription().getVersion().equals(version)) {

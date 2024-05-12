@@ -3,6 +3,7 @@ package coma112.cbounty.listeners;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.event.CreateBountyEvent;
+import coma112.cbounty.event.TargetDeathEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -31,14 +32,17 @@ public class GlowingListener implements Listener {
         tryToSetGlowing(event.getTarget());
     }
 
+    @EventHandler
+    public void onDeath(TargetDeathEvent event) {
+        tryToRemoveGlowing(event.getTarget());
+    }
+
     public void tryToSetGlowing(@NotNull Player player) {
         String playerName = player.getName();
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
 
         if (isGlowingEnabled()) {
-            if (!isGlowingColorEnabled()) {
-                player.setGlowing(CBounty.getDatabaseManager().isBounty(player));
-            }
+            if (!isGlowingColorEnabled()) player.setGlowing(CBounty.getDatabaseManager().isBounty(player));
         }
 
         if (isGlowingEnabled()) {
@@ -50,6 +54,17 @@ public class GlowingListener implements Listener {
                 team.addEntry(playerName);
                 player.setGlowing(CBounty.getDatabaseManager().isBounty(player));
             }
+        }
+    }
+
+    public void tryToRemoveGlowing(@NotNull Player player) {
+        Team team = Bukkit.getScoreboardManager().getMainScoreboard().getTeam(player.getName());
+
+        if (team != null) {
+            team.removeEntry(player.getName());
+            team.setColor(ChatColor.WHITE);
+            team.unregister();
+            player.setGlowing(false);
         }
     }
 

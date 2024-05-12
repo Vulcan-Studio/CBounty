@@ -2,13 +2,12 @@ package coma112.cbounty.menu.menus;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
-import coma112.cbounty.item.IItemBuilder;
 import coma112.cbounty.enums.keys.MessageKeys;
+import coma112.cbounty.item.IItemBuilder;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.menu.PaginatedMenu;
 import coma112.cbounty.utils.MenuUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -73,29 +72,13 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
         }
     }
 
-    @Override
-    public void setMenuItems() {
-        List<Bounty> bounties = CBounty.getDatabaseManager().getBounties();
-        inventory.clear();
-        addMenuBorder();
-
-        int startIndex = page * getMaxItemsPerPage();
-        int endIndex = Math.min(startIndex + getMaxItemsPerPage(), bounties.size());
-
-        for (int i = startIndex; i < endIndex; i++) {
-            Bounty bounty = bounties.get(i);
-            ItemStack item = createBountyItem(bounty);
-            inventory.addItem(item);
-        }
-    }
-
     private static ItemStack createBountyItem(@NotNull Bounty bounty) {
-        OfflinePlayer player = Bukkit.getOfflinePlayer(bounty.target());
         ItemStack itemStack = IItemBuilder.createItemFromSection("bounty-item");
         ItemMeta meta = itemStack.getItemMeta();
 
         if (meta != null) {
-            String displayName = meta.getDisplayName()
+            String displayName = meta
+                    .getDisplayName()
                     .replace("{target}", bounty.target())
                     .replace("{id}", String.valueOf(bounty.id()));
             meta.setDisplayName(displayName);
@@ -103,9 +86,10 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
             List<String> lore = meta.getLore();
             if (lore != null) {
                 List<String> replacedLore = new ArrayList<>();
+
                 for (String line : lore) {
                     replacedLore.add(line
-                            .replace("{streak}", String.valueOf(CBounty.getDatabaseManager().getStreak(player)))
+                            .replace("{streak}", String.valueOf(CBounty.getDatabaseManager().getStreak(Bukkit.getOfflinePlayer(bounty.target()))))
                             .replace("{reward_type}", bounty.reward_type().name())
                             .replace("{reward}", String.valueOf(bounty.reward()))
                             .replace("{player}", bounty.player()));
@@ -115,6 +99,18 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
             itemStack.setItemMeta(meta);
         }
         return itemStack;
+    }
+
+    @Override
+    public void setMenuItems() {
+        List<Bounty> bounties = CBounty.getDatabaseManager().getBounties();
+        inventory.clear();
+        addMenuBorder();
+
+        int startIndex = page * getMaxItemsPerPage();
+        int endIndex = Math.min(startIndex + getMaxItemsPerPage(), bounties.size());
+
+        for (int i = startIndex; i < endIndex; i++) inventory.addItem(createBountyItem(bounties.get(i)));
     }
 
     @EventHandler

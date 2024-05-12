@@ -95,6 +95,11 @@ public class CommandBounty {
             return;
         }
 
+        if (CBounty.getDatabaseManager().reachedMaximumBounty(player)) {
+            player.sendMessage(MessageKeys.MAX_BOUNTY.getMessage());
+            return;
+        }
+
         Token token = CBounty.getInstance().getToken();
         AbstractDatabase databaseManager = CBounty.getDatabaseManager();
 
@@ -103,9 +108,7 @@ public class CommandBounty {
                 .ifPresentOrElse(
                         tokenManager -> {
                             if (rewardType == RewardType.TOKEN) {
-                                int playerBalance = CBounty.getInstance().getToken().getTokens(player);
-
-                                if (playerBalance < reward) {
+                                if (CBounty.getInstance().getToken().getTokens(player) < reward) {
                                     player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
                                     return;
                                 }
@@ -113,9 +116,8 @@ public class CommandBounty {
                                 CBounty.getTokenManager().removeTokens(player, reward);
                             } else if (rewardType == RewardType.MONEY) {
                                 Economy economy = Vault.getEconomy();
-                                double playerBalance = economy.getBalance(player);
 
-                                if (playerBalance < reward) {
+                                if (economy.getBalance(player) < reward) {
                                     player.sendMessage(MessageKeys.NOT_ENOUGH_MONEY.getMessage());
                                     return;
                                 }

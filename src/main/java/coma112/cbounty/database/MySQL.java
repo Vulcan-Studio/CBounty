@@ -3,8 +3,8 @@ package coma112.cbounty.database;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import coma112.cbounty.CBounty;
-import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.RewardType;
+import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.event.CreateBountyEvent;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.managers.Top;
@@ -63,7 +63,7 @@ public class MySQL extends AbstractDatabase {
     }
 
     public void createTable() {
-        String query = "CREATE TABLE IF NOT EXISTS bounty (ID INT AUTO_INCREMENT PRIMARY KEY, PLAYER VARCHAR(255) NOT NULL, TARGET VARCHAR(255) NOT NULL, REWARD_TYPE VARCHAR(255) NOT NULL, REWARD INT, BOUNTY_DATE DATETIME, STREAK INT)";
+        String query = "CREATE TABLE IF NOT EXISTS bounty (ID INT AUTO_INCREMENT PRIMARY KEY, PLAYER VARCHAR(255) NOT NULL, TARGET VARCHAR(255) NOT NULL, REWARD_TYPE VARCHAR(255) NOT NULL, REWARD INT, BOUNTY_DATE DATETIME, STREAK INT DEFAULT 0)";
 
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
             preparedStatement.execute();
@@ -87,6 +87,42 @@ public class MySQL extends AbstractDatabase {
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    @Override
+    public void createRandomBounty(@NotNull Player target, @NotNull RewardType rewardType, int reward) {
+        String query = "INSERT INTO bounty (PLAYER, TARGET, REWARD_TYPE, REWARD, BOUNTY_DATE) VALUES (?, ?, ?, ?, NOW())";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, ConfigKeys.RANDOM_BOUNTY_PLAYER_VALUE.getString());
+            preparedStatement.setString(2, target.getName());
+            preparedStatement.setString(3, rewardType.name());
+            preparedStatement.setInt(4, reward);
+
+            preparedStatement.executeUpdate();
+            CBounty.getInstance().getServer().getPluginManager().callEvent(new CreateBountyEvent(null, target, reward, rewardType));
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
+    public boolean isSenderIsRandom(@NotNull Player player) {
+        String query = "SELECT PLAYER FROM bounty WHERE TARGET = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, player.getName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String sender = resultSet.getString("PLAYER");
+                return sender.equals(ConfigKeys.RANDOM_BOUNTY_PLAYER_VALUE.getString());
+            }
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+
+        return false;
     }
 
     @Override

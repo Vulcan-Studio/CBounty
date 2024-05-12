@@ -2,6 +2,7 @@ package coma112.cbounty.enums.keys;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.processor.MessageProcessor;
+import org.jetbrains.annotations.NotNull;
 
 public enum ConfigKeys {
     MAXIMUM_TOP("max.top-to-get"),
@@ -16,11 +17,16 @@ public enum ConfigKeys {
     DEPENDENCY_TOKENMANAGER("dependency.tokenmanager"),
     GLOWING_ENABLED("feature.glowing.enabled"),
     GLOWING_COLOR_ENABLED("feature.glowing.color-enabled"),
-    GLOWING_COLOR("feature.glowing.color");
+    GLOWING_COLOR("feature.glowing.color"),
+    RANDOM_BOUNTY_ENABLED("feature.random-bounty.enabled"),
+    RANDOM_BOUNTY_REWARDTYPE("feature.random-bounty.rewardType"),
+    RANDOM_BOUNTY_REWARD("feature.random-bounty.reward"),
+    RANDOM_BOUNTY_PLAYER_VALUE("feature.random-bounty.player-value"),
+    RANDOM_BOUNTY_PER_SECOND("feature.random-bounty.per-second");
 
     private final String path;
 
-    ConfigKeys(String path) {
+    ConfigKeys(@NotNull String path) {
         this.path = path;
     }
 

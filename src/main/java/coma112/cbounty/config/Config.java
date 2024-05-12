@@ -60,6 +60,12 @@ public class Config extends ConfigUtils {
         yml.addDefault("feature.glowing.color-enabled", true);
         yml.addDefault("feature.glowing.color", "RED");
 
+        yml.addDefault("feature.random-bounty.enabled", true);
+        yml.addDefault("feature.random-bounty.rewardType", "TOKEN");
+        yml.addDefault("feature.random-bounty.reward", 50);
+        yml.addDefault("feature.random-bounty.per-second", 7200);
+        yml.addDefault("feature.random-bounty.player-value", "CONSOLE");
+
         yml.options().copyDefaults(true);
         save();
     }
