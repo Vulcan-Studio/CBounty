@@ -41,6 +41,7 @@ public class Config extends ConfigUtils {
 
         yml.addDefault("max.top-to-get", 15);
         yml.addDefault("max.bounty-per-player", 5);
+        yml.addDefault("max.rewardlimit", 9000);
 
         yml.addDefault("menu.title", "&6&lBOUNTIES");
         yml.addDefault("menu.size", 54);

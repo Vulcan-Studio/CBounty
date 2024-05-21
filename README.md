@@ -6,7 +6,8 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- I fixed the SERIOUS menu problems!
+- 1.9 published
+- Added a reward limit to set the reward limit.
 
 # Server Status ✅
 

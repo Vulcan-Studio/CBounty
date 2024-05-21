@@ -29,6 +29,7 @@ public enum MessageKeys {
         MAX_BOUNTY("messages.max-bounty"),
         FEATURE_DISABLED("messages.feature-disabled"),
         NOT_BOUNTY("messages.not-a-bounty"),
+        MAX_REWARD_LIMIT("messages.max-reward-limit"),
         REMOVE_PLAYER("successful-remove-player"),
         REMOVE_TARGET("successful-remove-target"),
         FEATURE_DISABLED_EVENT("messages.feature-disabled-event");

@@ -95,6 +95,11 @@ public class CommandBounty {
             return;
         }
 
+        if (reward > ConfigKeys.MAX_REWARD_LIMIT.getInt()) {
+            player.sendMessage(MessageKeys.MAX_REWARD_LIMIT.getMessage());
+            return;
+        }
+
         if (CBounty.getDatabaseManager().reachedMaximumBounty(player)) {
             player.sendMessage(MessageKeys.MAX_BOUNTY.getMessage());
             return;

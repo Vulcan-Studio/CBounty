@@ -22,6 +22,7 @@ public enum ConfigKeys {
     RANDOM_BOUNTY_REWARDTYPE("feature.random-bounty.rewardType"),
     RANDOM_BOUNTY_REWARD("feature.random-bounty.reward"),
     RANDOM_BOUNTY_PLAYER_VALUE("feature.random-bounty.player-value"),
+    MAX_REWARD_LIMIT("max.rewardlimit"),
     RANDOM_BOUNTY_PER_SECOND("feature.random-bounty.per-second");
 
     private final String path;
