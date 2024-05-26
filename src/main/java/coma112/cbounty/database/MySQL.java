@@ -5,7 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
-import coma112.cbounty.event.CreateBountyEvent;
+import coma112.cbounty.events.CreateBountyEvent;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.managers.Top;
 import lombok.Getter;

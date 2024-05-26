@@ -2,8 +2,9 @@ package coma112.cbounty.listeners;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
-import coma112.cbounty.event.CreateBountyEvent;
-import coma112.cbounty.event.TargetDeathEvent;
+import coma112.cbounty.events.CreateBountyEvent;
+import coma112.cbounty.events.TargetDeathEvent;
+import coma112.cbounty.hooks.Webhook;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -14,6 +15,9 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
+
+import java.awt.*;
+import java.io.IOException;
 
 @SuppressWarnings("deprecation")
 public class GlowingListener implements Listener {
@@ -26,8 +30,21 @@ public class GlowingListener implements Listener {
     }
 
     @EventHandler
-    public void onCreate(CreateBountyEvent event) {
+    public void onCreate(CreateBountyEvent event) throws IOException {
         tryToSetGlowing(event.getTarget());
+
+        Webhook.sendWebhook(
+                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_DESCRIPTION.getString(), event),
+                Webhook.getColor(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_COLOR.getString()),
+                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_NAME.getString(), event),
+                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_URL.getString(), event),
+                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_ICON.getString(), event),
+                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_FOOTER_TEXT.getString(), event),
+                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_FOOTER_ICON.getString(), event),
+                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_THUMBNAIL.getString(), event),
+                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_TITLE.getString(), event),
+                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_IMAGE.getString(), event)
+        );
     }
 
     @EventHandler
@@ -63,5 +80,12 @@ public class GlowingListener implements Listener {
 
     private boolean isGlowingEnabled() {
         return ConfigKeys.GLOWING_ENABLED.getBoolean();
+    }
+
+    private String replacePlaceholdersBountyCreate(@NotNull String text, CreateBountyEvent event) {
+        return text.replace("{sender}", event.getSender().getName())
+                .replace("{target}", event.getTarget().getName())
+                .replace("{reward}", String.valueOf(event.getReward()))
+                .replace("{rewardType}", String.valueOf(event.getRewardType()));
     }
 }

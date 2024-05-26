@@ -16,13 +16,39 @@ public enum ConfigKeys {
     NO("messages.no"),
     DEPENDENCY_TOKENMANAGER("dependency.tokenmanager"),
     GLOWING_ENABLED("feature.glowing.enabled"),
+    WEBHOOK_ENABLED("webhook.enabled"),
+    WEBHOOK_URL("webhook.url"),
     GLOWING_COLOR("feature.glowing.color"),
     RANDOM_BOUNTY_ENABLED("feature.random-bounty.enabled"),
     RANDOM_BOUNTY_REWARDTYPE("feature.random-bounty.rewardType"),
     RANDOM_BOUNTY_REWARD("feature.random-bounty.reward"),
     RANDOM_BOUNTY_PLAYER_VALUE("feature.random-bounty.player-value"),
     MAX_REWARD_LIMIT("max.rewardlimit"),
-    RANDOM_BOUNTY_PER_SECOND("feature.random-bounty.per-second");
+    RANDOM_BOUNTY_PER_SECOND("feature.random-bounty.per-second"),
+
+    WEBHOOK_RANDOM_SENDER("webhook.random-sender"),
+
+    WEBHOOK_BOUNTY_DEATH_EMBED_TITLE("webhook.bounty-death-embed.title"),
+    WEBHOOK_BOUNTY_DEATH_EMBED_DESCRIPTION("webhook.bounty-death-embed.description"),
+    WEBHOOK_BOUNTY_DEATH_EMBED_COLOR("webhook.bounty-death-embed.color"),
+    WEBHOOK_BOUNTY_DEATH_EMBED_AUTHOR_NAME("webhook.bounty-death-embed.author-name"),
+    WEBHOOK_BOUNTY_DEATH_EMBED_AUTHOR_URL("webhook.bounty-death-embed.author-url"),
+    WEBHOOK_BOUNTY_DEATH_EMBED_AUTHOR_ICON("webhook.bounty-death-embed.author-icon"),
+    WEBHOOK_BOUNTY_DEATH_EMBED_FOOTER_TEXT("webhook.bounty-death-embed.footer-text"),
+    WEBHOOK_BOUNTY_DEATH_EMBED_FOOTER_ICON("webhook.bounty-death-embed.footer-icon"),
+    WEBHOOK_BOUNTY_DEATH_EMBED_THUMBNAIL("webhook.bounty-death-embed.thumbnail"),
+    WEBHOOK_BOUNTY_DEATH_EMBED_IMAGE("webhook.bounty-death-embed.image"),
+
+    WEBHOOK_BOUNTY_CREATE_EMBED_TITLE("webhook.bounty-create-embed.title"),
+    WEBHOOK_BOUNTY_CREATE_EMBED_DESCRIPTION("webhook.bounty-create-embed.description"),
+    WEBHOOK_BOUNTY_CREATE_EMBED_COLOR("webhook.bounty-create-embed.color"),
+    WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_NAME("webhook.bounty-create-embed.author-name"),
+    WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_URL("webhook.bounty-create-embed.author-url"),
+    WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_ICON("webhook.bounty-create-embed.author-icon"),
+    WEBHOOK_BOUNTY_CREATE_EMBED_FOOTER_TEXT("webhook.bounty-create-embed.footer-text"),
+    WEBHOOK_BOUNTY_CREATE_EMBED_FOOTER_ICON("webhook.bounty-create-embed.footer-icon"),
+    WEBHOOK_BOUNTY_CREATE_EMBED_THUMBNAIL("webhook.bounty-create-embed.thumbnail"),
+    WEBHOOK_BOUNTY_CREATE_EMBED_IMAGE("webhook.bounty-create-embed.image");
 
     private final String path;
 

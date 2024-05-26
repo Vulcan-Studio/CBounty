@@ -3,7 +3,9 @@ package coma112.cbounty.config;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.utils.ConfigUtils;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.util.List;
 
 public class Config extends ConfigUtils {
@@ -65,6 +67,34 @@ public class Config extends ConfigUtils {
         yml.addDefault("feature.random-bounty.reward", 50);
         yml.addDefault("feature.random-bounty.per-second", 7200);
         yml.addDefault("feature.random-bounty.player-value", "CONSOLE");
+
+        yml.addDefault("webhook.enabled", true);
+        yml.addDefault("webhook.url", "WEBHOOK URL HERE!!!");
+
+        yml.addDefault("webhook.bounty-death-embed.title", "BOUNTY TARGET DEATH");
+        yml.addDefault("webhook.bounty-death-embed.description", "{killer} killed {target} for {reward} {rewardType}");
+        yml.addDefault("webhook.bounty-death-embed.color", "ORANGE");
+        yml.addDefault("webhook.bounty-death-embed.author-name", "");
+        yml.addDefault("webhook.bounty-death-embed.author-url", "");
+        yml.addDefault("webhook.bounty-death-embed.author-icon", "");
+        yml.addDefault("webhook.bounty-death-embed.footer-text", "SENT BY CBOUNTY");
+        yml.addDefault("webhook.bounty-death-embed.footer-icon", "");
+        yml.addDefault("webhook.bounty-death-embed.thumbnail", "");
+        yml.addDefault("webhook.bounty-death-embed.image", "");
+
+        yml.addDefault("webhook.bounty-create-embed.title", "NEW BOUNTY");
+        yml.addDefault("webhook.bounty-create-embed.description", "{sender} has put a bounty on {target}'s head ({reward} {rewardType})");
+        yml.addDefault("webhook.bounty-create-embed.color", "ORANGE");
+        yml.addDefault("webhook.bounty-create-embed.author-name", "");
+        yml.addDefault("webhook.bounty-create-embed.author-url", "");
+        yml.addDefault("webhook.bounty-create-embed.author-icon", "");
+        yml.addDefault("webhook.bounty-create-embed.footer-text", "SENT BY CBOUNTY");
+        yml.addDefault("webhook.bounty-create-embed.footer-icon", "");
+        yml.addDefault("webhook.bounty-create-embed.thumbnail", "");
+        yml.addDefault("webhook.bounty-create-embed.image", "");
+
+        yml.addDefault("webhook.random-sender", "UNKNOWN");
+
 
         yml.options().copyDefaults(true);
         save();

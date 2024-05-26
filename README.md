@@ -1,12 +1,10 @@
-![alt text](logo.png)
-
 # Description ❓
 
 This is a Minecraft plugin coded in spigot with the Paper framework. The plugin is an advanced BUT lightweight bounty plugin.
 
 # Last commit 💯
 
-- 2.0 published
+- 2.1 published
 - Fixed the glowing feature
 - Added **/bounty raise [target] [amount to raise by]**
 

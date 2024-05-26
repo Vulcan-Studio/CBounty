@@ -6,6 +6,7 @@ import coma112.cbounty.database.MySQL;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.hooks.Placeholder;
 import coma112.cbounty.hooks.Token;
+import coma112.cbounty.hooks.Webhook;
 import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.language.Language;
 import coma112.cbounty.processor.BountyScheduler;
@@ -16,13 +17,14 @@ import lombok.Getter;
 import me.realized.tokenmanager.api.TokenManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.awt.*;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 public final class CBounty extends JavaPlugin {
     @Getter public static TokenManager tokenManager;
-
     @Getter private static CBounty instance;
     @Getter private static AbstractDatabase databaseManager;
     private static Language language;
