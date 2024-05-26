@@ -18,9 +18,7 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("deprecation")
 public class GlowingListener implements Listener {
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        tryToSetGlowing(event.getPlayer());
-    }
+    public void onJoin(PlayerJoinEvent event) { tryToSetGlowing(event.getPlayer()); }
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
@@ -41,19 +39,14 @@ public class GlowingListener implements Listener {
         String playerName = player.getName();
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
 
-        if (isGlowingEnabled()) {
-            if (!isGlowingColorEnabled()) player.setGlowing(CBounty.getDatabaseManager().isBounty(player));
-        }
+        if (isGlowingEnabled() && CBounty.getDatabaseManager().isBounty(player)) {
+            player.setGlowing(true);
 
-        if (isGlowingEnabled()) {
-            if (isGlowingColorEnabled()) {
-                Team team = scoreboard.getTeam(playerName);
-                if (team != null) team.unregister();
-                team = scoreboard.registerNewTeam(playerName);
-                team.setColor(ChatColor.valueOf(ConfigKeys.GLOWING_COLOR.getString()));
-                team.addEntry(playerName);
-                player.setGlowing(CBounty.getDatabaseManager().isBounty(player));
-            }
+            Team team = scoreboard.getTeam(playerName);
+            if (team != null) team.unregister();
+            team = scoreboard.registerNewTeam(playerName);
+            team.setColor(ChatColor.valueOf(ConfigKeys.GLOWING_COLOR.getString()));
+            team.addEntry(playerName);
         }
     }
 
@@ -70,9 +63,5 @@ public class GlowingListener implements Listener {
 
     private boolean isGlowingEnabled() {
         return ConfigKeys.GLOWING_ENABLED.getBoolean();
-    }
-
-    private boolean isGlowingColorEnabled() {
-        return ConfigKeys.GLOWING_COLOR_ENABLED.getBoolean();
     }
 }

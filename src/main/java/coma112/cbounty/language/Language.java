@@ -39,6 +39,9 @@ public class Language extends ConfigUtils {
         yml.addDefault("messages.not-a-bounty", "&6&lBOUNTY &8| &cThe target is not a bounty!");
         yml.addDefault("messages.successful-remove-player", "&6&lBOUNTY &8| &aYou have successfully removed the bounty from the target!");
         yml.addDefault("messages.successful-remove-target", "&6&lBOUNTY &8| &aYou are no longer a bounty!");
+        yml.addDefault("messages.not-matching-owners", "&6&lBOUNTY &8| &cYou didn't put a bounty on this player!");
+        yml.addDefault("messages.target-raise", "&6&lBOUNTY &8| &eThe bounty on you has been increased from {old} to {new}!");
+        yml.addDefault("messages.player-raise", "&6&lBOUNTY &8| &aYou have successfully raised your bounty!");
         yml.addDefault("messages.max-reward-limit", "&6&lBOUNTY &8| &cYou can't enter a bigger number than: &4{limit}");
 
         yml.options().copyDefaults(true);

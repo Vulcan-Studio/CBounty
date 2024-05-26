@@ -58,7 +58,6 @@ public class Config extends ConfigUtils {
         yml.addDefault("menu.forward-item.slot", 53);
 
         yml.addDefault("feature.glowing.enabled", true);
-        yml.addDefault("feature.glowing.color-enabled", true);
         yml.addDefault("feature.glowing.color", "RED");
 
         yml.addDefault("feature.random-bounty.enabled", true);

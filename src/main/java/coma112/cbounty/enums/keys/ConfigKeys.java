@@ -16,7 +16,6 @@ public enum ConfigKeys {
     NO("messages.no"),
     DEPENDENCY_TOKENMANAGER("dependency.tokenmanager"),
     GLOWING_ENABLED("feature.glowing.enabled"),
-    GLOWING_COLOR_ENABLED("feature.glowing.color-enabled"),
     GLOWING_COLOR("feature.glowing.color"),
     RANDOM_BOUNTY_ENABLED("feature.random-bounty.enabled"),
     RANDOM_BOUNTY_REWARDTYPE("feature.random-bounty.rewardType"),

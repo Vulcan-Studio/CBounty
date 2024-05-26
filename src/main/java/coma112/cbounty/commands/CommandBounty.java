@@ -161,4 +161,38 @@ public class CommandBounty {
         player.sendMessage(MessageKeys.REMOVE_PLAYER.getMessage());
         target.sendMessage(MessageKeys.REMOVE_TARGET.getMessage());
     }
+
+    @Subcommand("raise")
+    public void raise(@NotNull Player player, @NotNull Player target, int newReward) {
+        if (!target.isOnline()) {
+            player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
+            return;
+        }
+
+        if (!CBounty.getDatabaseManager().isBounty(target)) {
+            player.sendMessage(MessageKeys.NOT_BOUNTY.getMessage());
+            return;
+        }
+
+        if (newReward <= 0) {
+            player.sendMessage(MessageKeys.NO_NEGATIVE.getMessage());
+            return;
+        }
+
+        if (newReward > ConfigKeys.MAX_REWARD_LIMIT.getInt()) {
+            player.sendMessage(MessageKeys.MAX_REWARD_LIMIT.getMessage());
+            return;
+        }
+
+        if (CBounty.getDatabaseManager().getSender(target) != player) {
+            player.sendMessage(MessageKeys.NOT_MATCHING_OWNERS.getMessage());
+            return;
+        }
+
+        int oldReward = CBounty.getDatabaseManager().getReward(target);
+
+        CBounty.getDatabaseManager().changeReward(target, newReward);
+        player.sendMessage(MessageKeys.PLAYER_RAISE.getMessage());
+        target.sendMessage(MessageKeys.TARGET_RAISE.getMessage().replace("{old}", String.valueOf(oldReward)).replace("{new}", String.valueOf(oldReward + newReward)));
+    }
 }

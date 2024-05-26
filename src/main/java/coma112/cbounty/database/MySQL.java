@@ -185,6 +185,21 @@ public class MySQL extends AbstractDatabase {
     }
 
     @Override
+    public void changeReward(@NotNull Player player, int newReward) {
+        String query = "UPDATE bounty SET REWARD = ? WHERE TARGET = ?";
+
+        try {
+            try (PreparedStatement updateStatement = getConnection().prepareStatement(query)) {
+                updateStatement.setInt(1, getReward(player) + newReward);
+                updateStatement.setString(2, player.getName());
+                updateStatement.executeUpdate();
+            }
+        } catch (SQLException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    @Override
     public int getReward(@NotNull Player player) {
         String query = "SELECT REWARD FROM bounty WHERE TARGET = ?";
 

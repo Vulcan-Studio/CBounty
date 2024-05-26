@@ -6,8 +6,9 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- 1.9 published
-- Added a reward limit to set the reward limit.
+- 2.0 published
+- Fixed the glowing feature
+- Added **/bounty raise [target] [amount to raise by]**
 
 # Server Status ✅
 
