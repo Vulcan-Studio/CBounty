@@ -4,15 +4,18 @@ import coma112.cbounty.enums.keys.ConfigKeys;
 import lombok.Getter;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
+import org.json.simple.JSONArray;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.Array;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Webhook {
     private final String url;
@@ -40,6 +43,38 @@ public class Webhook {
 
     public void addEmbed(@NotNull EmbedObject embed) {
         this.embeds.add(embed);
+    }
+
+    private static boolean isEnabled() {
+        return ConfigKeys.WEBHOOK_ENABLED.getBoolean();
+    }
+
+    public static void sendWebhook(String description,
+                                   String color,
+                                   String authorName,
+                                   String authorURL,
+                                   String authorIconURL,
+                                   String footerText,
+                                   String footerIconURL,
+                                   String thumbnailURL,
+                                   String title,
+                                   String imageURL) throws IOException, NoSuchFieldException, IllegalAccessException {
+
+        if (isEnabled()) {
+            Webhook webhook = new Webhook(ConfigKeys.WEBHOOK_URL.getString());
+
+            webhook.addEmbed(new Webhook.EmbedObject()
+                    .setDescription(description)
+                    .setColor((Color) Color.class.getField(color.toUpperCase()).get(null))
+                    .setFooter(footerText, footerIconURL)
+                    .setThumbnail(thumbnailURL)
+                    .setTitle(title)
+                    .setAuthor(authorName, authorURL, authorIconURL)
+                    .setImage(imageURL)
+            );
+
+            webhook.execute();
+        }
     }
 
     public void execute() throws IOException {
@@ -114,9 +149,9 @@ public class Webhook {
                 for (EmbedObject.Field field : fields) {
                     JSONObject jsonField = new JSONObject();
 
-                    jsonField.put("name", field.getName());
-                    jsonField.put("value", field.getValue());
-                    jsonField.put("inline", field.isInline());
+                    jsonField.put("name", field.name());
+                    jsonField.put("value", field.value());
+                    jsonField.put("inline", field.inline());
 
                     jsonFields.add(jsonField);
                 }
@@ -208,28 +243,7 @@ public class Webhook {
 
         private record Author(@NotNull String name, @NotNull String url, @NotNull String iconUrl) {}
 
-        private static class Field {
-            private final String name;
-            private final String value;
-            private final boolean inline;
-
-            private Field(@NotNull String name, @NotNull String value, boolean inline) {
-                this.name = name;
-                this.value = value;
-                this.inline = inline;
-            }
-
-            private String getName() {
-                return name;
-            }
-
-            private String getValue() {
-                return value;
-            }
-
-            private boolean isInline() {
-                return inline;
-            }
+        private record Field(String name, String value, boolean inline) {
         }
     }
 
@@ -242,85 +256,34 @@ public class Webhook {
 
         @Override
         public String toString() {
-            StringBuilder builder = new StringBuilder();
-            Set<Map.Entry<String, Object>> entrySet = map.entrySet();
-            builder.append("{");
+            return "{" + map.entrySet().stream()
+                    .map(entry -> quote(entry.getKey()) + ": " + stringifyValue(entry.getValue()))
+                    .collect(Collectors.joining(", ")) + "}";
+        }
 
-            int i = 0;
-            for (Map.Entry<String, Object> entry : entrySet) {
-                Object val = entry.getValue();
-                builder.append(quote(entry.getKey())).append(":");
+        private String stringifyValue(Object value) {
+            if (value instanceof String) return quote((String) value);
+            if (value instanceof JSONArray) return quote(value.toString());
+            if (value != null && value.getClass().isArray()) return arrayToString((Object[]) value);
+            if (value instanceof List<?>) return listToString((List<?>) value);
 
-                if (val instanceof String) {
-                    builder.append(quote(String.valueOf(val)));
-                } else if (val instanceof Integer) {
-                    builder.append(Integer.valueOf(String.valueOf(val)));
-                } else if (val instanceof Boolean) {
-                    builder.append(val);
-                } else if (val instanceof JSONObject) {
-                    builder.append(val);
-                } else if (val.getClass().isArray()) {
-                    builder.append("[");
-                    int len = Array.getLength(val);
-                    for (int j = 0; j < len; j++)
-                        builder.append(Array.get(val, j).toString()).append(j != len - 1 ? "," : "");
-                    builder.append("]");
-                } else if (val instanceof List<?> list) {
-                    builder.append("[");
-                    for (int j = 0; j < list.size(); j++) {
-                        builder.append(list.get(j).toString()).append(j != list.size() - 1 ? "," : "");
-                    }
-
-                    builder.append("]");
-                }
-                builder.append(++i == entrySet.size() ? "}" : ",");
-            }
-
-            return builder.toString();
+            return String.valueOf(value);
         }
 
         private String quote(@NotNull String string) {
-            return "\"" + string + "\"";
+            return "\"" + string.replace("\"", "\\\"") + "\"";
         }
-    }
 
-    public static boolean isEnabled() {
-        return ConfigKeys.WEBHOOK_ENABLED.getBoolean();
-    }
-
-    public static void sendWebhook(String description,
-                                   Color color,
-                                   String authorName,
-                                   String authorURL,
-                                   String authorIconURL,
-                                   String footerText,
-                                   String footerIconURL,
-                                   String thumbnailURL,
-                                   String title,
-                                   String imageURL) throws IOException {
-
-        if (isEnabled()) {
-            Webhook webhook = new Webhook(ConfigKeys.WEBHOOK_URL.getString());
-
-            webhook.addEmbed(new Webhook.EmbedObject()
-                    .setDescription(description)
-                    .setColor(color)
-                    .setFooter(footerText, footerIconURL)
-                    .setThumbnail(thumbnailURL)
-                    .setTitle(title)
-                    .setAuthor(authorName, authorURL, authorIconURL)
-                    .setImage(imageURL)
-            );
-
-            webhook.execute();
+        private String arrayToString(Object[] array) {
+            return "[" + Arrays.stream(array)
+                    .map(element -> element instanceof String ? quote((String) element) : String.valueOf(element))
+                    .collect(Collectors.joining(", ")) + "]";
         }
-    }
 
-    public static Color getColor(@NotNull String colorName) {
-        try {
-            return (Color) Color.class.getField(colorName.toUpperCase()).get(null);
-        } catch (Exception exception) {
-            return Color.BLACK;
+        private String listToString(List<?> list) {
+            return "[" + list.stream()
+                    .map(element -> element instanceof String ? quote((String) element) : String.valueOf(element))
+                    .collect(Collectors.joining(", ")) + "]";
         }
     }
 }

@@ -193,6 +193,9 @@ public class CommandBounty {
 
         CBounty.getDatabaseManager().changeReward(target, newReward);
         player.sendMessage(MessageKeys.PLAYER_RAISE.getMessage());
-        target.sendMessage(MessageKeys.TARGET_RAISE.getMessage().replace("{old}", String.valueOf(oldReward)).replace("{new}", String.valueOf(oldReward + newReward)));
+        target.sendMessage(MessageKeys.TARGET_RAISE
+                .getMessage()
+                .replace("{old}", String.valueOf(oldReward))
+                .replace("{new}", String.valueOf(oldReward + newReward)));
     }
 }

@@ -13,12 +13,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class BountyDeathListener implements Listener {
     @EventHandler
-    public void onDeath(PlayerDeathEvent event) throws IOException {
+    public void onDeath(PlayerDeathEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
         Player target = event.getEntity();
         Player killer = target.getKiller();
 
@@ -40,7 +39,7 @@ public class BountyDeathListener implements Listener {
 
                 Webhook.sendWebhook(
                         replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_DESCRIPTION.getString(), killer, target),
-                        Webhook.getColor(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_COLOR.getString()),
+                        ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_COLOR.getString(),
                         replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_AUTHOR_NAME.getString(), killer, target),
                         replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_AUTHOR_URL.getString(), killer, target),
                         replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_AUTHOR_ICON.getString(), killer, target),
@@ -66,7 +65,7 @@ public class BountyDeathListener implements Listener {
         }
     }
 
-    private String replacePlaceholdersTargetDeath(@NotNull String text, Player killer, Player target) {
+    private String replacePlaceholdersTargetDeath(@NotNull String text, @NotNull Player killer, @NotNull Player target) {
         if (CBounty.getDatabaseManager().isSenderIsRandom(target)) {
             return text.replace("{killer}", ConfigKeys.WEBHOOK_RANDOM_SENDER.getString())
                     .replace("{target}", target.getName())

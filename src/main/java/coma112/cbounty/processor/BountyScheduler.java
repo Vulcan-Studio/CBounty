@@ -3,7 +3,6 @@ package coma112.cbounty.processor;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
-import coma112.cbounty.events.CreateBountyEvent;
 import coma112.cbounty.hooks.Webhook;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -29,7 +28,7 @@ public class BountyScheduler {
                 Bukkit.getServer().getScheduler().runTask(CBounty.getInstance(), () -> {
                     try {
                         addRandomBounty();
-                    } catch (IOException exception) {
+                    } catch (IOException | NoSuchFieldException | IllegalAccessException exception) {
                         throw new RuntimeException(exception);
                     }
                 });
@@ -37,7 +36,7 @@ public class BountyScheduler {
         }, 0, ConfigKeys.RANDOM_BOUNTY_PER_SECOND.getInt() * 1000L);
     }
 
-    private void addRandomBounty() throws IOException {
+    private void addRandomBounty() throws IOException, NoSuchFieldException, IllegalAccessException {
         Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
 
         if (onlinePlayers.length > 0) {
@@ -54,7 +53,7 @@ public class BountyScheduler {
 
                 Webhook.sendWebhook(
                         replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_DESCRIPTION.getString(), randomPlayer),
-                        Webhook.getColor(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_COLOR.getString()),
+                        ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_COLOR.getString(),
                         replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_NAME.getString(), randomPlayer),
                         replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_URL.getString(), randomPlayer),
                         replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_ICON.getString(), randomPlayer),

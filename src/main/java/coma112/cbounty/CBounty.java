@@ -17,7 +17,6 @@ import lombok.Getter;
 import me.realized.tokenmanager.api.TokenManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -34,6 +33,9 @@ public final class CBounty extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        saveDefaultConfig();
+        saveResource("locales/messages_en.yml", false);
 
         initializeComponents();
         registerListenersAndCommands();

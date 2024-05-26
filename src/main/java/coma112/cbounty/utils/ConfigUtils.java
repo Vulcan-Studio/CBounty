@@ -37,7 +37,6 @@ public class ConfigUtils {
         }
 
         yml = YamlConfiguration.loadConfiguration(config);
-        yml.options().copyDefaults(true);
         this.name = name;
     }
 

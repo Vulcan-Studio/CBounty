@@ -1,0 +1,88 @@
+database:
+  type: "mysql"
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "coma112"
+    username: "root"
+    password: ""
+    ssl: false
+    certificateverification: false
+    poolsize: 10
+    lifetime: 1800000
+
+placeholder:
+  yes: "&aIgen"
+  no: "&cNem"
+
+dependency:
+  tokenmanager: true
+
+bounty-item:
+  amount: 1
+  material: "PAPER"
+  name: "&c&l! &6{target} &8(&7{id}&8) &c&l!"
+  lore:
+    - ""
+    - "&6Sender: &f{player} &c⚡"
+    - "&6Reward: &f{reward} &c⚡"
+    - "&6Reward Type: &f{reward_type} &c⚡"
+    - "&6Streak: &f{streak} &c🔥"
+
+max:
+  top-to-get: 15
+  bounty-per-player: 5
+  rewardlimit: 9000
+
+menu:
+  title: "&6&lBOUNTIES"
+  size: 54
+  update-tick: 2
+  back-item:
+    amount: 1
+    material: "RED_STAINED_GLASS"
+    name: "&cBack"
+    slot: 45
+  forward-item:
+    amount: 1
+    material: "GREEN_STAINED_GLASS"
+    name: "&aForward"
+    slot: 53
+
+feature:
+  glowing:
+    enabled: true
+    color: "RED"
+  random-bounty:
+    enabled: true
+    rewardType: "TOKEN"
+    reward: 50
+    per-second: 7200
+    player-value: "CONSOLE"
+
+webhook:
+  enabled: true
+  url: "WEBHOOK URL HERE!!!"
+  bounty-death-embed:
+    title: "BOUNTY TARGET DEATH"
+    description: "{killer} killed {target} for {reward} {rewardType}"
+    color: "ORANGE"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CBOUNTY"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""
+  bounty-create-embed:
+    title: "NEW BOUNTY"
+    description: "{sender} has put a bounty on {target}'s head ({reward} {rewardType})"
+    color: "ORANGE"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CBOUNTY"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""
+  random-sender: "UNKNOWN"

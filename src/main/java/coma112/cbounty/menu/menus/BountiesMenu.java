@@ -72,6 +72,23 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
         }
     }
 
+    @Override
+    public void setMenuItems() {
+        List<Bounty> bounties = CBounty.getDatabaseManager().getBounties();
+        inventory.clear();
+        addMenuBorder();
+
+        int startIndex = page * getMaxItemsPerPage();
+        int endIndex = Math.min(startIndex + getMaxItemsPerPage(), bounties.size());
+
+        for (int i = startIndex; i < endIndex; i++) inventory.addItem(createBountyItem(bounties.get(i)));
+    }
+
+    @EventHandler
+    public void onClose(InventoryCloseEvent event) {
+        if (event.getInventory().equals(inventory)) close();
+    }
+
     private static ItemStack createBountyItem(@NotNull Bounty bounty) {
         ItemStack itemStack = IItemBuilder.createItemFromSection("bounty-item");
         ItemMeta meta = itemStack.getItemMeta();
@@ -99,22 +116,5 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
             itemStack.setItemMeta(meta);
         }
         return itemStack;
-    }
-
-    @Override
-    public void setMenuItems() {
-        List<Bounty> bounties = CBounty.getDatabaseManager().getBounties();
-        inventory.clear();
-        addMenuBorder();
-
-        int startIndex = page * getMaxItemsPerPage();
-        int endIndex = Math.min(startIndex + getMaxItemsPerPage(), bounties.size());
-
-        for (int i = startIndex; i < endIndex; i++) inventory.addItem(createBountyItem(bounties.get(i)));
-    }
-
-    @EventHandler
-    public void onClose(InventoryCloseEvent event) {
-        if (event.getInventory().equals(inventory)) close();
     }
 }

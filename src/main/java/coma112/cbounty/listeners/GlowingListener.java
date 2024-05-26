@@ -16,7 +16,6 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
 import java.io.IOException;
 
 @SuppressWarnings("deprecation")
@@ -30,12 +29,12 @@ public class GlowingListener implements Listener {
     }
 
     @EventHandler
-    public void onCreate(CreateBountyEvent event) throws IOException {
+    public void onCreate(CreateBountyEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
         tryToSetGlowing(event.getTarget());
 
         Webhook.sendWebhook(
                 replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_DESCRIPTION.getString(), event),
-                Webhook.getColor(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_COLOR.getString()),
+                ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_COLOR.getString(),
                 replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_NAME.getString(), event),
                 replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_URL.getString(), event),
                 replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_ICON.getString(), event),

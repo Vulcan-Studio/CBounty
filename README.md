@@ -4,9 +4,8 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- 2.1 published
-- Fixed the glowing feature
-- Added **/bounty raise [target] [amount to raise by]**
+- 2.2 published
+- Cleaned up some code
 
 # Server Status ✅
 

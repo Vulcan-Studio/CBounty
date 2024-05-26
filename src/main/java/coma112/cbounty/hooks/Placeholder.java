@@ -35,15 +35,13 @@ public class Placeholder extends PlaceholderExpansion {
 
     @Override
     public String onPlaceholderRequest(@NotNull Player player, @NotNull String params) {
-        if (params.equals("isbounty")) {
-            return CBounty.getDatabaseManager().isBounty(player) ? ConfigKeys.YES.getString() : ConfigKeys.NO.getString();
-        }
+        if (params.equals("isbounty")) return CBounty.getDatabaseManager().isBounty(player) ? ConfigKeys.YES.getString() : ConfigKeys.NO.getString();
 
         if (params.startsWith("top_")) {
             try {
-                int pos = Integer.parseInt(params.split("_")[1]);
+                int position = Integer.parseInt(params.split("_")[1]);
 
-                if (CBounty.getDatabaseManager().getTopStreakPlayer(pos) != null) return CBounty.getDatabaseManager().getTopStreakPlayer(pos);
+                if (CBounty.getDatabaseManager().getTopStreakPlayer(position) != null) return CBounty.getDatabaseManager().getTopStreakPlayer(position);
                 return "---";
             } catch (Exception exception) {
                 return "";
@@ -52,9 +50,9 @@ public class Placeholder extends PlaceholderExpansion {
 
         if (params.startsWith("topstreak_")) {
             try {
-                int pos = Integer.parseInt(params.split("_")[1]);
+                int position = Integer.parseInt(params.split("_")[1]);
 
-                if (CBounty.getDatabaseManager().getTopStreak(pos) != 0) return String.valueOf(CBounty.getDatabaseManager().getTopStreak(pos));
+                if (CBounty.getDatabaseManager().getTopStreak(position) != 0) return String.valueOf(CBounty.getDatabaseManager().getTopStreak(position));
                 return "---";
             } catch (Exception exception) {
                 return "";
