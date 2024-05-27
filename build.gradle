@@ -7,6 +7,7 @@ plugins {
 
 group = 'coma112'
 version = '2.3'
+def version = '2.3'
 
 repositories {
     mavenCentral()
@@ -64,7 +65,7 @@ if (gitPropertiesFile.exists()) {
     gitCommitId = gitProps['git.commit.id.abbrev']
 }
 
-version = "2.2-${gitCommitId}"
+version = "${version}-${gitCommitId}"
 
 jar {
     manifest {
