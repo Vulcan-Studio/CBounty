@@ -6,7 +6,6 @@ import coma112.cbounty.database.MySQL;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.hooks.Placeholder;
 import coma112.cbounty.hooks.Token;
-import coma112.cbounty.hooks.Webhook;
 import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.language.Language;
 import coma112.cbounty.processor.BountyScheduler;
@@ -16,8 +15,6 @@ import coma112.cbounty.utils.ListenerRegister;
 import lombok.Getter;
 import me.realized.tokenmanager.api.TokenManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -46,10 +43,7 @@ public final class CBounty extends JavaPlugin {
         mysql.createTable();
 
 
-        if (ConfigKeys.RANDOM_BOUNTY_ENABLED.getBoolean()) {
-            BountyScheduler bountyScheduler = new BountyScheduler();
-            bountyScheduler.startScheduling();
-        }
+        if (ConfigKeys.RANDOM_BOUNTY_ENABLED.getBoolean()) new BountyScheduler().startScheduling();
 
         new UpdateChecker(116501).getVersion(version -> {
             if (this.getDescription().getVersion().equals(version)) {

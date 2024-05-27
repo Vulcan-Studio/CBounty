@@ -1,8 +1,12 @@
 package coma112.cbounty.hooks;
 
+import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
+import coma112.cbounty.events.BountyCreateEvent;
+import coma112.cbounty.events.BountyRemoveEvent;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 
@@ -285,5 +289,30 @@ public class Webhook {
                     .map(element -> element instanceof String ? quote((String) element) : String.valueOf(element))
                     .collect(Collectors.joining(", ")) + "]";
         }
+    }
+
+    public static String replacePlaceholdersBountyCreate(@NotNull String text, BountyCreateEvent event) {
+        return text.replace("{sender}", event.getSender().getName())
+                .replace("{target}", event.getTarget().getName())
+                .replace("{reward}", String.valueOf(event.getReward()))
+                .replace("{rewardType}", String.valueOf(event.getRewardType()));
+    }
+
+    public static String replacePlaceholdersBountyRemove(@NotNull String text, BountyRemoveEvent event) {
+        return text.replace("{target}", event.getTarget().getName());
+    }
+
+    public static String replacePlaceholdersTargetDeath(@NotNull String text, @NotNull Player killer, @NotNull Player target) {
+        if (CBounty.getDatabaseManager().isSenderIsRandom(target)) {
+            return text.replace("{killer}", ConfigKeys.WEBHOOK_RANDOM_SENDER.getString())
+                    .replace("{target}", target.getName())
+                    .replace("{reward}", String.valueOf(CBounty.getDatabaseManager().getReward(target)))
+                    .replace("{rewardType}", String.valueOf(CBounty.getDatabaseManager().getRewardType(target)));
+        }
+
+        return text.replace("{killer}", killer.getName())
+                .replace("{target}", target.getName())
+                .replace("{reward}", String.valueOf(CBounty.getDatabaseManager().getReward(target)))
+                .replace("{rewardType}", String.valueOf(CBounty.getDatabaseManager().getRewardType(target)));
     }
 }

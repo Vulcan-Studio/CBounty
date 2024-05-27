@@ -5,7 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
-import coma112.cbounty.events.CreateBountyEvent;
+import coma112.cbounty.events.BountyCreateEvent;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.managers.Top;
 import lombok.Getter;
@@ -83,7 +83,7 @@ public class MySQL extends AbstractDatabase {
             preparedStatement.setInt(4, reward);
 
             preparedStatement.executeUpdate();
-            CBounty.getInstance().getServer().getPluginManager().callEvent(new CreateBountyEvent(player, target, reward, rewardType));
+            CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyCreateEvent(player, target, reward, rewardType));
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }
@@ -100,7 +100,7 @@ public class MySQL extends AbstractDatabase {
             preparedStatement.setInt(4, reward);
 
             preparedStatement.executeUpdate();
-            CBounty.getInstance().getServer().getPluginManager().callEvent(new CreateBountyEvent(null, target, reward, rewardType));
+            CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyCreateEvent(null, target, reward, rewardType));
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         }

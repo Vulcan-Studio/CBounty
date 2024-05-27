@@ -4,8 +4,11 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- 2.2 published
-- Cleaned up some code
+- 2.3 published
+- Added **/bounty takeoff [target]**
+- Added **cbounty.admin**
+- Fixed some issue
+- Fixed the glowing feature
 
 # Server Status ✅
 

@@ -5,6 +5,8 @@ import coma112.cbounty.database.AbstractDatabase;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
+import coma112.cbounty.events.BountyCreateEvent;
+import coma112.cbounty.events.BountyRemoveEvent;
 import coma112.cbounty.hooks.Token;
 import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.managers.Top;
@@ -25,8 +27,8 @@ import java.util.Optional;
 public class CommandBounty {
 
     @Subcommand("reload")
-    public void reload(CommandSender sender) {
-        if (!sender.hasPermission("cbounty.reload")) {
+    public void reload(@NotNull CommandSender sender) {
+        if (!sender.hasPermission("cbounty.reload") || !sender.hasPermission("cbounty.admin")) {
             sender.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
             return;
         }
@@ -38,12 +40,7 @@ public class CommandBounty {
     }
 
     @Subcommand("streaktop")
-    public void streaktop(CommandSender sender, int value) {
-        if (value == 0) {
-            sender.spigot().sendMessage(Top.getTopStreak(10));
-            return;
-        }
-
+    public void streaktop(@NotNull CommandSender sender, int value) {
         try {
             value = Integer.parseInt(String.valueOf(value));
         } catch (NumberFormatException exception) {
@@ -67,14 +64,22 @@ public class CommandBounty {
     }
 
     @Subcommand("menu")
-    public void menu(@NotNull Player player) {
+    public void menu(@NotNull CommandSender sender) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
+            return;
+        }
+
         new BountiesMenu(MenuUtils.getMenuUtils(player)).open();
     }
 
-
-
     @Subcommand("set")
-    public void set(@NotNull Player player, @NotNull Player target, RewardType rewardType, int reward) {
+    public void set(@NotNull CommandSender sender, @NotNull Player target, RewardType rewardType, int reward) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
+            return;
+        }
+
         if (!target.isOnline()) {
             player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
             return;
@@ -121,7 +126,9 @@ public class CommandBounty {
                                 }
 
                                 CBounty.getTokenManager().removeTokens(player, reward);
-                            } else if (rewardType == RewardType.MONEY) {
+                            }
+
+                            if (rewardType == RewardType.MONEY) {
                                 Economy economy = Vault.getEconomy();
 
                                 if (economy.getBalance(player) < reward) {
@@ -129,20 +136,24 @@ public class CommandBounty {
                                     return;
                                 }
 
-                                economy.depositPlayer(player, reward);
+                                economy.withdrawPlayer(player, reward);
                             }
 
                             databaseManager.createBounty(player, target, rewardType, reward);
                             player.sendMessage(MessageKeys.SUCCESSFUL_SET.getMessage());
-                        },
-                        () -> player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage())
+                        }, () -> player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage())
                 );
     }
 
 
     @Subcommand("remove")
-    public void remove(@NotNull Player player, @NotNull Player target) {
-        if (!player.hasPermission("cbounty.remove")) {
+    public void remove(@NotNull CommandSender sender, @NotNull Player target) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
+            return;
+        }
+
+        if (!player.hasPermission("cbounty.remove") || !player.hasPermission("cbounty.admin")) {
             player.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
             return;
         }
@@ -160,10 +171,16 @@ public class CommandBounty {
         CBounty.getDatabaseManager().removeBounty(target);
         player.sendMessage(MessageKeys.REMOVE_PLAYER.getMessage());
         target.sendMessage(MessageKeys.REMOVE_TARGET.getMessage());
+        CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyRemoveEvent(player, target));
     }
 
     @Subcommand("raise")
-    public void raise(@NotNull Player player, @NotNull Player target, int newReward) {
+    public void raise(@NotNull CommandSender sender, @NotNull Player target, int newReward) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
+            return;
+        }
+
         if (!target.isOnline()) {
             player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
             return;
@@ -197,5 +214,44 @@ public class CommandBounty {
                 .getMessage()
                 .replace("{old}", String.valueOf(oldReward))
                 .replace("{new}", String.valueOf(oldReward + newReward)));
+    }
+
+    @Subcommand("takeoff")
+    public void takeoff(@NotNull CommandSender sender, @NotNull Player target) {
+        if (!(sender instanceof Player player)) {
+            sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
+            return;
+        }
+
+        if (!target.isOnline()) {
+            player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
+            return;
+        }
+
+        if (!CBounty.getDatabaseManager().isBounty(target)) {
+            player.sendMessage(MessageKeys.NOT_BOUNTY.getMessage());
+            return;
+        }
+
+        if (CBounty.getDatabaseManager().getSender(target) != player) {
+            player.sendMessage(MessageKeys.NOT_MATCHING_OWNERS.getMessage());
+            return;
+        }
+
+
+        switch (CBounty.getDatabaseManager().getRewardType(target)) {
+            case TOKEN -> CBounty.getTokenManager().addTokens(player, CBounty.getDatabaseManager().getReward(target));
+            case MONEY -> Vault.getEconomy().depositPlayer(player, CBounty.getDatabaseManager().getReward(target));
+        }
+
+        player.sendMessage(MessageKeys.SUCCESSFUL_TAKEOFF_TARGET
+                .getMessage()
+                .replace("{target}", target.getName()));
+
+        target.sendMessage(MessageKeys.SUCCESSFUL_TAKEOFF_TARGET
+                .getMessage()
+                .replace("{player}", player.getName()));
+        CBounty.getDatabaseManager().removeBounty(target);
+        CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyRemoveEvent(player, target));
     }
 }

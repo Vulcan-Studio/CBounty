@@ -9,27 +9,22 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @Getter
-public class CreateBountyEvent extends Event {
+public class BountyRemoveEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     private final Player sender;
     private final Player target;
-    private final int reward;
-    private final RewardType rewardType;
 
-    public CreateBountyEvent(@Nullable Player sender, @NotNull Player target, int reward, @NotNull RewardType rewardType) {
+    public BountyRemoveEvent(@Nullable Player sender, @NotNull Player target) {
         this.sender = sender;
         this.target = target;
-        this.reward = reward;
-        this.rewardType = rewardType;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 
     @Override
     public @NotNull HandlerList getHandlers() {
         return handlers;
     }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
-    }
 }
-

@@ -34,7 +34,9 @@ public enum MessageKeys {
         REMOVE_PLAYER("successful-remove-player"),
         TARGET_RAISE("messages.target-raise"),
         PLAYER_RAISE("messages.player-raise"),
-        REMOVE_TARGET("successful-remove-target"),
+        SUCCESSFUL_TAKEOFF_PLAYER("messages.successful-takeoff-player"),
+        SUCCESSFUL_TAKEOFF_TARGET("messages.successful-takeoff-target"),
+        REMOVE_TARGET("messages.successful-remove-target"),
         FEATURE_DISABLED_EVENT("messages.feature-disabled-event");
 
         private final String path;

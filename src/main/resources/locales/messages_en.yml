@@ -31,3 +31,5 @@ messages:
   target-raise: "&6&lBOUNTY &8| &eThe bounty on you has been increased from {old} to {new}!"
   player-raise: "&6&lBOUNTY &8| &aYou have successfully raised your bounty!"
   max-reward-limit: "&6&lBOUNTY &8| &cYou can't enter a bigger number than: &4{limit}"
+  successful-takeoff-player: "&6&lBOUNTY &8| &aYou have successfully took off the bounty from {target}!"
+  successful-takeoff-target: "&6&lBOUNTY &8| &a{player} took off the bounty from you!"

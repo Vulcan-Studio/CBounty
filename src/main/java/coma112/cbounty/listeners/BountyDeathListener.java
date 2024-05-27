@@ -3,7 +3,7 @@ package coma112.cbounty.listeners;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
-import coma112.cbounty.events.TargetDeathEvent;
+import coma112.cbounty.events.BountyDeathEvent;
 import coma112.cbounty.hooks.Webhook;
 import coma112.cbounty.hooks.vault.Vault;
 import org.bukkit.Bukkit;
@@ -11,9 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
+import static coma112.cbounty.hooks.Webhook.replacePlaceholdersTargetDeath;
 
 public class BountyDeathListener implements Listener {
     @EventHandler
@@ -56,26 +55,12 @@ public class BountyDeathListener implements Listener {
                         .getMessage()
                         .replace("{name}", target.getName())));
 
-                CBounty.getInstance().getServer().getPluginManager().callEvent(new TargetDeathEvent(killer, target,
+                CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyDeathEvent(killer, target,
                         CBounty.getDatabaseManager().getReward(target),
                         CBounty.getDatabaseManager().getRewardType(target)));
 
                 CBounty.getDatabaseManager().removeBounty(target);
             }
         }
-    }
-
-    private String replacePlaceholdersTargetDeath(@NotNull String text, @NotNull Player killer, @NotNull Player target) {
-        if (CBounty.getDatabaseManager().isSenderIsRandom(target)) {
-            return text.replace("{killer}", ConfigKeys.WEBHOOK_RANDOM_SENDER.getString())
-                    .replace("{target}", target.getName())
-                    .replace("{reward}", String.valueOf(CBounty.getDatabaseManager().getReward(target)))
-                    .replace("{rewardType}", String.valueOf(CBounty.getDatabaseManager().getRewardType(target)));
-        }
-
-        return text.replace("{killer}", killer.getName())
-                .replace("{target}", target.getName())
-                .replace("{reward}", String.valueOf(CBounty.getDatabaseManager().getReward(target)))
-                .replace("{rewardType}", String.valueOf(CBounty.getDatabaseManager().getRewardType(target)));
     }
 }

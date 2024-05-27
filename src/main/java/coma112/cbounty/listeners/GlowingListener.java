@@ -2,8 +2,9 @@ package coma112.cbounty.listeners;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
-import coma112.cbounty.events.CreateBountyEvent;
-import coma112.cbounty.events.TargetDeathEvent;
+import coma112.cbounty.events.BountyCreateEvent;
+import coma112.cbounty.events.BountyDeathEvent;
+import coma112.cbounty.events.BountyRemoveEvent;
 import coma112.cbounty.hooks.Webhook;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -18,6 +19,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyCreate;
+import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyRemove;
+
 @SuppressWarnings("deprecation")
 public class GlowingListener implements Listener {
     @EventHandler
@@ -29,7 +33,30 @@ public class GlowingListener implements Listener {
     }
 
     @EventHandler
-    public void onCreate(CreateBountyEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public void onDeath(BountyDeathEvent event) {
+        tryToRemoveGlowing(event.getTarget());
+    }
+
+    @EventHandler
+    public void onRemove(BountyRemoveEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
+        tryToRemoveGlowing(event.getTarget());
+
+        Webhook.sendWebhook(
+                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_DESCRIPTION.getString(), event),
+                ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_COLOR.getString(),
+                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_AUTHOR_NAME.getString(), event),
+                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_AUTHOR_URL.getString(), event),
+                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_AUTHOR_ICON.getString(), event),
+                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_FOOTER_TEXT.getString(), event),
+                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_FOOTER_ICON.getString(), event),
+                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_THUMBNAIL.getString(), event),
+                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_TITLE.getString(), event),
+                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_IMAGE.getString(), event)
+        );
+    }
+
+    @EventHandler
+    public void onCreate(BountyCreateEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
         tryToSetGlowing(event.getTarget());
 
         Webhook.sendWebhook(
@@ -44,11 +71,6 @@ public class GlowingListener implements Listener {
                 replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_TITLE.getString(), event),
                 replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_IMAGE.getString(), event)
         );
-    }
-
-    @EventHandler
-    public void onDeath(TargetDeathEvent event) {
-        tryToRemoveGlowing(event.getTarget());
     }
 
     public void tryToSetGlowing(@NotNull Player player) {
@@ -79,12 +101,5 @@ public class GlowingListener implements Listener {
 
     private boolean isGlowingEnabled() {
         return ConfigKeys.GLOWING_ENABLED.getBoolean();
-    }
-
-    private String replacePlaceholdersBountyCreate(@NotNull String text, CreateBountyEvent event) {
-        return text.replace("{sender}", event.getSender().getName())
-                .replace("{target}", event.getTarget().getName())
-                .replace("{reward}", String.valueOf(event.getReward()))
-                .replace("{rewardType}", String.valueOf(event.getRewardType()));
     }
 }
