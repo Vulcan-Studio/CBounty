@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Implementation-Title: CBounty
-Implementation-Version: 2.5-unknown
+Implementation-Version: 2.5-cb9b042
 
