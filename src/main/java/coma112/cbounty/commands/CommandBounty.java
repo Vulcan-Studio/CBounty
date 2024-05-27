@@ -7,12 +7,14 @@ import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.events.BountyCreateEvent;
 import coma112.cbounty.events.BountyRemoveEvent;
+import coma112.cbounty.hooks.PlayerPoints;
 import coma112.cbounty.hooks.Token;
 import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.managers.Top;
 import coma112.cbounty.menu.menus.BountiesMenu;
 import coma112.cbounty.utils.MenuUtils;
 import net.milkbowl.vault.economy.Economy;
+import org.black_ixx.playerpoints.PlayerPointsAPI;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -21,6 +23,7 @@ import revxrsal.commands.annotation.Subcommand;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 @SuppressWarnings("deprecation")
 @Command({"bounty", "cbounty"})
@@ -119,24 +122,10 @@ public class CommandBounty {
                 .filter(Token::isEnabled)
                 .ifPresentOrElse(
                         tokenManager -> {
-                            if (rewardType == RewardType.TOKEN) {
-                                if (CBounty.getInstance().getToken().getTokens(player) < reward) {
-                                    player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
-                                    return;
-                                }
-
-                                CBounty.getTokenManager().removeTokens(player, reward);
-                            }
-
-                            if (rewardType == RewardType.MONEY) {
-                                Economy economy = Vault.getEconomy();
-
-                                if (economy.getBalance(player) < reward) {
-                                    player.sendMessage(MessageKeys.NOT_ENOUGH_MONEY.getMessage());
-                                    return;
-                                }
-
-                                economy.withdrawPlayer(player, reward);
+                            switch (rewardType) {
+                                case TOKEN -> handleTokenReward(player, target, reward);
+                                case MONEY -> handleMoneyReward(player, target, reward);
+                                case PLAYERPOINTS -> handlePlayerPointsReward(player, target, reward);
                             }
 
                             databaseManager.createBounty(player, target, rewardType, reward);
@@ -144,7 +133,6 @@ public class CommandBounty {
                         }, () -> player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage())
                 );
     }
-
 
     @Subcommand("remove")
     public void remove(@NotNull CommandSender sender, @NotNull Player target) {
@@ -244,7 +232,7 @@ public class CommandBounty {
             case MONEY -> Vault.getEconomy().depositPlayer(player, CBounty.getDatabaseManager().getReward(target));
         }
 
-        player.sendMessage(MessageKeys.SUCCESSFUL_TAKEOFF_TARGET
+        player.sendMessage(MessageKeys.SUCCESSFUL_TAKEOFF_PLAYER
                 .getMessage()
                 .replace("{target}", target.getName()));
 
@@ -253,5 +241,32 @@ public class CommandBounty {
                 .replace("{player}", player.getName()));
         CBounty.getDatabaseManager().removeBounty(target);
         CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyRemoveEvent(player, target));
+    }
+
+    private void handleTokenReward(Player player, Player target, int reward) {
+        if (CBounty.getInstance().getToken().getTokens(player) < reward) {
+            player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
+            return;
+        }
+        CBounty.getTokenManager().removeTokens(player, reward);
+    }
+
+    private void handleMoneyReward(Player player, Player target, int reward) {
+        Economy economy = Vault.getEconomy();
+        if (economy.getBalance(player) < reward) {
+            player.sendMessage(MessageKeys.NOT_ENOUGH_MONEY.getMessage());
+            return;
+        }
+        economy.withdrawPlayer(player, reward);
+    }
+
+    private void handlePlayerPointsReward(Player player, Player target, int reward) {
+        PlayerPointsAPI api = CBounty.getPlayerPointsManager();
+        UUID uuid = player.getUniqueId();
+        if (api.look(uuid) < reward) {
+            player.sendMessage(MessageKeys.NOT_ENOUGH_PLAYERPOINTS.getMessage());
+            return;
+        }
+        api.take(uuid, reward);
     }
 }

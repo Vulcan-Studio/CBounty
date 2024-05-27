@@ -5,6 +5,7 @@ import coma112.cbounty.database.AbstractDatabase;
 import coma112.cbounty.database.MySQL;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.hooks.Placeholder;
+import coma112.cbounty.hooks.PlayerPoints;
 import coma112.cbounty.hooks.Token;
 import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.language.Language;
@@ -14,6 +15,7 @@ import coma112.cbounty.utils.CommandRegister;
 import coma112.cbounty.utils.ListenerRegister;
 import lombok.Getter;
 import me.realized.tokenmanager.api.TokenManager;
+import org.black_ixx.playerpoints.PlayerPointsAPI;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -21,6 +23,7 @@ import java.util.Objects;
 @SuppressWarnings("deprecation")
 public final class CBounty extends JavaPlugin {
     @Getter public static TokenManager tokenManager;
+    @Getter public static PlayerPointsAPI playerPointsManager;
     @Getter private static CBounty instance;
     @Getter private static AbstractDatabase databaseManager;
     private static Language language;
@@ -71,6 +74,10 @@ public final class CBounty extends JavaPlugin {
         return token;
     }
 
+    public PlayerPointsAPI getPlayerPoints() {
+        return playerPointsManager;
+    }
+
     private void initializeComponents() {
         language = new Language();
         config = new Config();
@@ -81,6 +88,7 @@ public final class CBounty extends JavaPlugin {
         Placeholder.registerHook();
         Vault.register();
         Token.register();
+        PlayerPoints.register();
     }
 
     private void registerListenersAndCommands() {

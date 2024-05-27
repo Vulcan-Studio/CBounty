@@ -15,6 +15,7 @@ public enum ConfigKeys {
     YES("messages.yes"),
     NO("messages.no"),
     DEPENDENCY_TOKENMANAGER("dependency.tokenmanager"),
+    DEPENDENCY_PLAYERPOINTS("dependency.playerpoints"),
     GLOWING_ENABLED("feature.glowing.enabled"),
     WEBHOOK_ENABLED("webhook.enabled"),
     WEBHOOK_URL("webhook.url"),

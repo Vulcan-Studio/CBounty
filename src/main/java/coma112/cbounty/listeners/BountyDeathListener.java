@@ -4,6 +4,8 @@ import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.events.BountyDeathEvent;
+import coma112.cbounty.hooks.PlayerPoints;
+import coma112.cbounty.hooks.Token;
 import coma112.cbounty.hooks.Webhook;
 import coma112.cbounty.hooks.vault.Vault;
 import org.bukkit.Bukkit;
@@ -22,12 +24,17 @@ public class BountyDeathListener implements Listener {
 
         if (killer != null) {
             if (CBounty.getDatabaseManager().isBounty(target)) {
-                if (killer.equals(CBounty.getDatabaseManager().getSender(target))) {
+                if (!killer.equals(CBounty.getDatabaseManager().getSender(target))) {
                     switch (CBounty.getDatabaseManager().getRewardType(target)) {
                         case TOKEN -> {
                              if (CBounty.getInstance().getToken().isEnabled()) CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
                              Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                              killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
+                        }
+
+                        case PLAYERPOINTS -> {
+                            if (PlayerPoints.isEnabled()) CBounty.getPlayerPointsManager().give(killer.getUniqueId(), CBounty.getDatabaseManager().getReward(target));
+                            Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                         }
 
                         case MONEY -> Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
@@ -55,11 +62,11 @@ public class BountyDeathListener implements Listener {
                         .getMessage()
                         .replace("{name}", target.getName())));
 
+                CBounty.getDatabaseManager().removeBounty(target);
+
                 CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyDeathEvent(killer, target,
                         CBounty.getDatabaseManager().getReward(target),
                         CBounty.getDatabaseManager().getRewardType(target)));
-
-                CBounty.getDatabaseManager().removeBounty(target);
             }
         }
     }

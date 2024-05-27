@@ -17,6 +17,7 @@ placeholder:
 
 dependency:
   tokenmanager: true
+  playerpoints: true
 
 bounty-item:
   amount: 1

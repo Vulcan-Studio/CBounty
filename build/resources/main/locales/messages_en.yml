@@ -17,6 +17,7 @@ messages:
   bounty-dead-killer: "&6&lBOUNTY &8| &aYou have successfully killed a bounty!"
   not-enough-token: "&6&lBOUNTY &8| &cYou don't have enough token!"
   not-enough-money: "&6&lBOUNTY &8| &cYou don't have enough money!"
+  not-enough-playerpoints: "&6&lBOUNTY &8| &cYou don't have enough playerpoints!"
   maximum-top: "&6&lBOUNTY &8| &cCan't be bigger than {top}"
   top:
     header: '\n&6Top {value} Streaks:&f\n\n'

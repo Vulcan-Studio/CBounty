@@ -18,6 +18,7 @@ import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyCreate;
 import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyRemove;
@@ -77,7 +78,7 @@ public class GlowingListener implements Listener {
         String playerName = player.getName();
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
 
-        if (isGlowingEnabled() && CBounty.getDatabaseManager().isBounty(player)) {
+        if (isEnabled() && CBounty.getDatabaseManager().isBounty(player)) {
             player.setGlowing(true);
 
             Team team = scoreboard.getTeam(playerName);
@@ -93,13 +94,12 @@ public class GlowingListener implements Listener {
 
         if (team != null) {
             team.removeEntry(player.getName());
-            team.setColor(ChatColor.WHITE);
             team.unregister();
             player.setGlowing(false);
         }
     }
 
-    private boolean isGlowingEnabled() {
+    private boolean isEnabled() {
         return ConfigKeys.GLOWING_ENABLED.getBoolean();
     }
 }

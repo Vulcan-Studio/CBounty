@@ -23,6 +23,7 @@ public enum MessageKeys {
         BOUNTY_DEAD_KILLER("messages.bounty-dead-killer"),
         NOT_ENOUGH_TOKEN("messages.not-enough-token"),
         NOT_ENOUGH_MONEY("messages.not-enough-money"),
+        NOT_ENOUGH_PLAYERPOINTS("messages.not-enough-playerpoints"),
         MAX_TOP("messages.maximum-top"),
         TOP_HEADER("messages.top.header"),
         TOP_MESSAGE("messages.top.message"),

@@ -17,9 +17,7 @@ public class Token {
     }
 
     public static void register() {
-        if (ConfigKeys.DEPENDENCY_TOKENMANAGER.getBoolean()) {
-            if (CBounty.getInstance().getServer().getPluginManager().getPlugin("TokenManager") != null) CBounty.tokenManager = (TokenManager) CBounty.getInstance().getServer().getPluginManager().getPlugin("TokenManager");
-        }
+        if (ConfigKeys.DEPENDENCY_PLAYERPOINTS.getBoolean() && CBounty.getInstance().getServer().getPluginManager().getPlugin("TokenManager") != null) CBounty.tokenManager = (TokenManager) CBounty.getInstance().getServer().getPluginManager().getPlugin("TokenManager");
     }
 
     public boolean isEnabled() {
