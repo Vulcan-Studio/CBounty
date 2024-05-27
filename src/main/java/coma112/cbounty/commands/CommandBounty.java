@@ -5,9 +5,7 @@ import coma112.cbounty.database.AbstractDatabase;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
-import coma112.cbounty.events.BountyCreateEvent;
 import coma112.cbounty.events.BountyRemoveEvent;
-import coma112.cbounty.hooks.PlayerPoints;
 import coma112.cbounty.hooks.Token;
 import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.managers.Top;
@@ -123,9 +121,9 @@ public class CommandBounty {
                 .ifPresentOrElse(
                         tokenManager -> {
                             switch (rewardType) {
-                                case TOKEN -> handleTokenReward(player, target, reward);
-                                case MONEY -> handleMoneyReward(player, target, reward);
-                                case PLAYERPOINTS -> handlePlayerPointsReward(player, target, reward);
+                                case TOKEN -> handleTokenReward(player, reward);
+                                case MONEY -> handleMoneyReward(player, reward);
+                                case PLAYERPOINTS -> handlePlayerPointsReward(player, reward);
                             }
 
                             databaseManager.createBounty(player, target, rewardType, reward);
@@ -230,6 +228,7 @@ public class CommandBounty {
         switch (CBounty.getDatabaseManager().getRewardType(target)) {
             case TOKEN -> CBounty.getTokenManager().addTokens(player, CBounty.getDatabaseManager().getReward(target));
             case MONEY -> Vault.getEconomy().depositPlayer(player, CBounty.getDatabaseManager().getReward(target));
+            case PLAYERPOINTS -> CBounty.getPlayerPointsManager().give(player.getUniqueId(), CBounty.getDatabaseManager().getReward(target));
         }
 
         player.sendMessage(MessageKeys.SUCCESSFUL_TAKEOFF_PLAYER
@@ -243,7 +242,7 @@ public class CommandBounty {
         CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyRemoveEvent(player, target));
     }
 
-    private void handleTokenReward(Player player, Player target, int reward) {
+    private void handleTokenReward(@NotNull Player player, int reward) {
         if (CBounty.getInstance().getToken().getTokens(player) < reward) {
             player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
             return;
@@ -251,8 +250,9 @@ public class CommandBounty {
         CBounty.getTokenManager().removeTokens(player, reward);
     }
 
-    private void handleMoneyReward(Player player, Player target, int reward) {
+    private void handleMoneyReward(@NotNull Player player, int reward) {
         Economy economy = Vault.getEconomy();
+
         if (economy.getBalance(player) < reward) {
             player.sendMessage(MessageKeys.NOT_ENOUGH_MONEY.getMessage());
             return;
@@ -260,13 +260,15 @@ public class CommandBounty {
         economy.withdrawPlayer(player, reward);
     }
 
-    private void handlePlayerPointsReward(Player player, Player target, int reward) {
+    private void handlePlayerPointsReward(@NotNull Player player, int reward) {
         PlayerPointsAPI api = CBounty.getPlayerPointsManager();
         UUID uuid = player.getUniqueId();
+
         if (api.look(uuid) < reward) {
             player.sendMessage(MessageKeys.NOT_ENOUGH_PLAYERPOINTS.getMessage());
             return;
         }
+
         api.take(uuid, reward);
     }
 }

@@ -7,6 +7,7 @@ import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.hooks.Placeholder;
 import coma112.cbounty.hooks.PlayerPoints;
 import coma112.cbounty.hooks.Token;
+import coma112.cbounty.hooks.Webhook;
 import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.language.Language;
 import coma112.cbounty.processor.BountyScheduler;
@@ -45,7 +46,6 @@ public final class CBounty extends JavaPlugin {
         MySQL mysql = (MySQL) databaseManager;
         mysql.createTable();
 
-
         if (ConfigKeys.RANDOM_BOUNTY_ENABLED.getBoolean()) new BountyScheduler().startScheduling();
 
         new UpdateChecker(116501).getVersion(version -> {
@@ -72,10 +72,6 @@ public final class CBounty extends JavaPlugin {
 
     public Token getToken() {
         return token;
-    }
-
-    public PlayerPointsAPI getPlayerPoints() {
-        return playerPointsManager;
     }
 
     private void initializeComponents() {
