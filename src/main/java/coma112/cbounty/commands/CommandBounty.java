@@ -61,12 +61,12 @@ public class CommandBounty {
             return;
         }
 
-        sender.spigot().sendMessage(Top.getTopStreak(value));
+        sender.sendMessage(Top.getTopStreak(value).toPlainText());
     }
 
     @Subcommand("menu")
     public void menu(@NotNull CommandSender sender) {
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof @NotNull Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;
         }
@@ -76,7 +76,7 @@ public class CommandBounty {
 
     @Subcommand("set")
     public void set(@NotNull CommandSender sender, @NotNull Player target, RewardType rewardType, int reward) {
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof @NotNull Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;
         }
@@ -134,7 +134,7 @@ public class CommandBounty {
 
     @Subcommand("remove")
     public void remove(@NotNull CommandSender sender, @NotNull Player target) {
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof @NotNull Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;
         }
@@ -162,7 +162,7 @@ public class CommandBounty {
 
     @Subcommand("raise")
     public void raise(@NotNull CommandSender sender, @NotNull Player target, int newReward) {
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof @NotNull Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;
         }
@@ -204,7 +204,7 @@ public class CommandBounty {
 
     @Subcommand("takeoff")
     public void takeoff(@NotNull CommandSender sender, @NotNull Player target) {
-        if (!(sender instanceof Player player)) {
+        if (!(sender instanceof @NotNull Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;
         }

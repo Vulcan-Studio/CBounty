@@ -1,34 +1,34 @@
 database:
-  type: mysql
+  type: "mysql"
   mysql:
-    host: 'sql.diekieboy.com:3306'
+    host: "localhost"
     port: 3306
-    database: 's161_CBounty'
-    username: 'u161_x1zIHJt5Dk'
-    password: '.kEztjpJ=E9I.O=T^0yP7NO!'
+    database: "coma112"
+    username: "root"
+    password: ""
     ssl: false
     certificateverification: false
     poolsize: 10
     lifetime: 1800000
 
 placeholder:
-  'true': '&aIgen'
-  'false': '&cNem'
+  yes: "&aIgen"
+  no: "&cNem"
 
 dependency:
-  tokenmanager: false
-  playerpoints: false
+  tokenmanager: true
+  playerpoints: true
 
 bounty-item:
   amount: 1
-  material: PAPER
-  name: '&c&l! &6{target} &8(&7{id}&8) &c&l!'
+  material: "PAPER"
+  name: "&c&l! &6{target} &8(&7{id}&8) &c&l!"
   lore:
-    - ''
-    - '&6Sender: &f{player} &c⚡'
-    - '&6Reward: &f{reward} &c⚡'
-    - '&6Reward Type: &f{reward_type} &c⚡'
-    - '&6Streak: &f{streak} &c🔥'
+    - ""
+    - "&6Sender: &f{player} &c⚡"
+    - "&6Reward: &f{reward} &c⚡"
+    - "&6Reward Type: &f{reward_type} &c⚡"
+    - "&6Streak: &f{streak} &c🔥"
 
 max:
   top-to-get: 15
@@ -36,65 +36,65 @@ max:
   rewardlimit: 9000
 
 menu:
-  title: '&6&lBOUNTIES'
+  title: "&6&lBOUNTIES"
   size: 54
   update-tick: 2
   back-item:
     amount: 1
-    material: RED_STAINED_GLASS
-    name: '&cBack'
+    material: "RED_STAINED_GLASS"
+    name: "&cBack"
     slot: 45
   forward-item:
     amount: 1
-    material: GREEN_STAINED_GLASS
-    name: '&aForward'
+    material: "GREEN_STAINED_GLASS"
+    name: "&aForward"
     slot: 53
 
 feature:
   glowing:
     enabled: true
-    color: RED
+    color: "RED"
   random-bounty:
     enabled: true
-    rewardType: TOKEN
+    rewardType: "TOKEN"
     reward: 50
     per-second: 7200
-    player-value: CONSOLE
+    player-value: "CONSOLE"
 
 webhook:
   enabled: true
-  url: https://discord.com/api/webhooks/1244716068199469056/8UXovQsH7sx8UyRnUpAuw_uYMcP3LxdMxSbmSDIbjGZR8iKlmr7e8UvA1yPI_ky6qd-Q
+  url: "WEBHOOK URL HERE!!!"
   bounty-death-embed:
-    title: BOUNTY TARGET DEATH
-    description: '{killer} killed {target} for {reward} {rewardType}'
-    color: ORANGE
-    author-name: ''
-    author-url: ''
-    author-icon: ''
-    footer-text: SENT BY CBOUNTY
-    footer-icon: ''
-    thumbnail: ''
-    image: ''
+    title: "BOUNTY TARGET DEATH"
+    description: "{killer} killed {target} for {reward} {rewardType}"
+    color: "ORANGE"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CBOUNTY"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""
   bounty-create-embed:
-    title: NEW BOUNTY
-    description: '{sender} has put a bounty on {target}''s head ({reward} {rewardType})'
-    color: ORANGE
-    author-name: ''
-    author-url: ''
-    author-icon: ''
-    footer-text: SENT BY CBOUNTY
-    footer-icon: ''
-    thumbnail: ''
-    image: ''
+    title: "NEW BOUNTY"
+    description: "{sender} has put a bounty on {target}'s head ({reward} {rewardType})"
+    color: "ORANGE"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CBOUNTY"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""
   bounty-remove-embed:
-    title: REMOVED BOUNTY
-    description: '{target}''s bounty has been removed!'
-    color: ORANGE
-    author-name: ''
-    author-url: ''
-    author-icon: ''
-    footer-text: SENT BY CBOUNTY
-    footer-icon: ''
-    thumbnail: ''
-    image: ''
-  random-sender: UNKNOWN
+    title: "REMOVED BOUNTY"
+    description: "{target}'s bounty has been removed!"
+    color: "ORANGE"
+    author-name: ""
+    author-url: ""
+    author-icon: ""
+    footer-text: "SENT BY CBOUNTY"
+    footer-icon: ""
+    thumbnail: ""
+    image: ""
+  random-sender: "UNKNOWN"
