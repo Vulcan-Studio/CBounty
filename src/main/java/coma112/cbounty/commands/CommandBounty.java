@@ -6,6 +6,7 @@ import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.events.BountyRemoveEvent;
+import coma112.cbounty.hooks.PlayerPoints;
 import coma112.cbounty.hooks.Token;
 import coma112.cbounty.hooks.vault.Vault;
 import coma112.cbounty.managers.Top;
@@ -113,23 +114,53 @@ public class CommandBounty {
             return;
         }
 
-        Token token = CBounty.getInstance().getToken();
         AbstractDatabase databaseManager = CBounty.getDatabaseManager();
 
-        Optional.ofNullable(token)
-                .filter(Token::isEnabled)
-                .ifPresentOrElse(
-                        tokenManager -> {
-                            switch (rewardType) {
-                                case TOKEN -> handleTokenReward(player, reward);
-                                case MONEY -> handleMoneyReward(player, reward);
-                                case PLAYERPOINTS -> handlePlayerPointsReward(player, reward);
-                            }
+        switch (rewardType) {
+            case TOKEN -> {
+                if (!CBounty.getInstance().getToken().isEnabled()) {
+                    player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage());
+                    return;
+                }
 
-                            databaseManager.createBounty(player, target, rewardType, reward);
-                            player.sendMessage(MessageKeys.SUCCESSFUL_SET.getMessage());
-                        }, () -> player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage())
-                );
+                handleTokenReward(player, reward);
+                databaseManager.createBounty(player, target, rewardType, reward);
+                player.sendMessage(MessageKeys.SUCCESSFUL_SET.getMessage());
+            }
+
+            case MONEY -> {
+                if (!Vault.getEconomy().isEnabled()) {
+                    player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage());
+                    return;
+                }
+
+                handleMoneyReward(player, reward);
+                databaseManager.createBounty(player, target, rewardType, reward);
+                player.sendMessage(MessageKeys.SUCCESSFUL_SET.getMessage());
+            }
+
+            case PLAYERPOINTS -> {
+                if (!PlayerPoints.isEnabled()) {
+                    player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage());
+                    return;
+                }
+
+                handlePlayerPointsReward(player, reward);
+                databaseManager.createBounty(player, target, rewardType, reward);
+                player.sendMessage(MessageKeys.SUCCESSFUL_SET.getMessage());
+            }
+
+            case LEVEL -> {
+                if (!ConfigKeys.DEPENDENCY_LEVEL.getBoolean()) {
+                    player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage());
+                    return;
+                }
+
+                handleLevelReward(player, reward);
+                databaseManager.createBounty(player, target, rewardType, reward);
+                player.sendMessage(MessageKeys.SUCCESSFUL_SET.getMessage());
+            }
+        }
     }
 
     @Subcommand("remove")
@@ -229,6 +260,7 @@ public class CommandBounty {
             case TOKEN -> CBounty.getTokenManager().addTokens(player, CBounty.getDatabaseManager().getReward(target));
             case MONEY -> Vault.getEconomy().depositPlayer(player, CBounty.getDatabaseManager().getReward(target));
             case PLAYERPOINTS -> CBounty.getPlayerPointsManager().give(player.getUniqueId(), CBounty.getDatabaseManager().getReward(target));
+            case LEVEL -> player.setLevel(player.getLevel() + CBounty.getDatabaseManager().getReward(target));
         }
 
         player.sendMessage(MessageKeys.SUCCESSFUL_TAKEOFF_PLAYER
@@ -270,5 +302,14 @@ public class CommandBounty {
         }
 
         api.take(uuid, reward);
+    }
+
+    private void handleLevelReward(@NotNull Player player, int reward) {
+        if (player.getLevel() < reward) {
+            player.sendMessage(MessageKeys.NOT_ENOUGH_LEVEL.getMessage());
+            return;
+        }
+
+        player.setLevel(player.getLevel() - reward);
     }
 }

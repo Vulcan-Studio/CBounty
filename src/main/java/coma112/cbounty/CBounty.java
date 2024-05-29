@@ -52,6 +52,7 @@ public final class CBounty extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
+        VersionSupport support;
 
         try {
             Class.forName("org.spigotmc.SpigotConfig");
@@ -60,7 +61,6 @@ public final class CBounty extends JavaPlugin {
             return;
         }
 
-        VersionSupport support;
         try {
             int midVersion = Integer.parseInt((Bukkit.getServer().getClass().getName().split("\\.")[3]).split("_")[1]);
 
@@ -72,7 +72,7 @@ public final class CBounty extends JavaPlugin {
             BountyLogger.info("Found everything moving onto VersionSupport...");
             support = new VersionSupport(this, MinecraftVersion.getCurrentVersion());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException exception) {
-            exception.printStackTrace();
+            BountyLogger.error(exception.getMessage());
             isSupported = false;
             return;
         }
@@ -109,7 +109,7 @@ public final class CBounty extends JavaPlugin {
         if (ConfigKeys.RANDOM_BOUNTY_ENABLED.getBoolean()) new BountyScheduler().startScheduling();
 
         new UpdateChecker(116501).getVersion(version -> {
-            getLogger().info(this.getDescription().getVersion().equals(version) ? "Everything is up to date" : "You are using an outdated version! Please download the new version so that your server is always fresh! The newest version: " + version);
+            BountyLogger.info(this.getDescription().getVersion().equals(version) ? "Everything is up to date" : "You are using an outdated version! Please download the new version so that your server is always fresh! The newest version: " + version);
         });
     }
 
@@ -152,7 +152,7 @@ public final class CBounty extends JavaPlugin {
         try {
             databaseManager = new MySQL(Objects.requireNonNull(getConfiguration().getSection("database.mysql")));
         } catch (SQLException | ClassNotFoundException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
     }
 

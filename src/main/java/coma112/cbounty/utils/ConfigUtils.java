@@ -32,7 +32,7 @@ public class ConfigUtils {
             try {
                 if (!config.createNewFile()) return;
             } catch (IOException exception) {
-                throw new RuntimeException(exception);
+                BountyLogger.error(exception.getMessage());
             }
         }
 
@@ -54,7 +54,7 @@ public class ConfigUtils {
         try {
             yml.save(config);
         } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
     }
 

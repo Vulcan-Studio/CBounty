@@ -8,6 +8,7 @@ import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.events.BountyCreateEvent;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.managers.Top;
+import coma112.cbounty.utils.BountyLogger;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -25,6 +26,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Getter
+@SuppressWarnings("deprecation")
 public class MySQL extends AbstractDatabase {
     private final Connection connection;
 
@@ -68,7 +70,7 @@ public class MySQL extends AbstractDatabase {
         try (PreparedStatement preparedStatement = getConnection().prepareStatement(query)) {
             preparedStatement.execute();
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
     }
 
@@ -85,7 +87,7 @@ public class MySQL extends AbstractDatabase {
             preparedStatement.executeUpdate();
             CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyCreateEvent(player, target, reward, rewardType));
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
     }
 
@@ -102,7 +104,7 @@ public class MySQL extends AbstractDatabase {
             preparedStatement.executeUpdate();
             CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyCreateEvent(null, target, reward, rewardType));
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
     }
 
@@ -119,7 +121,7 @@ public class MySQL extends AbstractDatabase {
                 return sender.equals(ConfigKeys.RANDOM_BOUNTY_PLAYER_VALUE.getString());
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
 
         return false;
@@ -142,7 +144,7 @@ public class MySQL extends AbstractDatabase {
                 bounties.add(new Bounty(id, player, target, RewardType.valueOf(reward_type), reward));
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
 
         return bounties;
@@ -161,11 +163,10 @@ public class MySQL extends AbstractDatabase {
 
             selectStatement.setString(1, player.getName());
             ResultSet resultSet = selectStatement.executeQuery();
-            if (resultSet.next()) {
-                return resultSet.getInt("STREAK");
-            }
+
+            if (resultSet.next()) return resultSet.getInt("STREAK");
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
 
         return 0;
@@ -180,8 +181,10 @@ public class MySQL extends AbstractDatabase {
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next();
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
+
+        return false;
     }
 
     @Override
@@ -195,7 +198,7 @@ public class MySQL extends AbstractDatabase {
                 updateStatement.executeUpdate();
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
     }
 
@@ -213,7 +216,7 @@ public class MySQL extends AbstractDatabase {
                 return reward;
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
 
         return 0;
@@ -233,10 +236,10 @@ public class MySQL extends AbstractDatabase {
                 return rewardType;
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
 
-        return RewardType.TOKEN;
+        return RewardType.MONEY;
     }
 
     @Override
@@ -249,7 +252,7 @@ public class MySQL extends AbstractDatabase {
 
             if (resultSet.next()) return Bukkit.getPlayerExact(resultSet.getString("PLAYER"));
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
 
         return null;
@@ -265,7 +268,7 @@ public class MySQL extends AbstractDatabase {
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
     }
 
@@ -288,7 +291,7 @@ public class MySQL extends AbstractDatabase {
                 }
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
 
         return topStreaks;
@@ -308,7 +311,7 @@ public class MySQL extends AbstractDatabase {
                 if (resultSet.next()) playerName = resultSet.getString("TARGET");
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
 
         return playerName;
@@ -327,7 +330,7 @@ public class MySQL extends AbstractDatabase {
                 if (resultSet.next()) return resultSet.getInt("STREAK");
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
 
         return 0;
@@ -339,7 +342,7 @@ public class MySQL extends AbstractDatabase {
             if (getConnection() != null && !getConnection().isClosed()) getConnection().close();
             new MySQL(Objects.requireNonNull(CBounty.getInstance().getConfiguration().getSection("database.mysql")));
         } catch (SQLException | ClassNotFoundException exception) {
-            throw new RuntimeException("Failed to reconnect to the database", exception);
+            BountyLogger.error(exception.getMessage());
         }
     }
 
@@ -355,7 +358,7 @@ public class MySQL extends AbstractDatabase {
                 }
             }
         } catch (SQLException exception) {
-            throw new RuntimeException(exception);
+            BountyLogger.error(exception.getMessage());
         }
         return false;
     }
@@ -372,7 +375,7 @@ public class MySQL extends AbstractDatabase {
             try {
                 connection.close();
             } catch (SQLException exception) {
-                throw new RuntimeException(exception);
+                BountyLogger.error(exception.getMessage());
             }
         }
     }

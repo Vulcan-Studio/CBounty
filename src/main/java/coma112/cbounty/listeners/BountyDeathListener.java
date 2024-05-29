@@ -38,6 +38,7 @@ public class BountyDeathListener implements Listener {
                         }
 
                         case MONEY -> Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
+                        case LEVEL -> killer.setLevel(killer.getLevel() + CBounty.getDatabaseManager().getReward(target));
                     }
                 }
 

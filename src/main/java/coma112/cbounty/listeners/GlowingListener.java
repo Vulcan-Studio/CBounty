@@ -18,12 +18,10 @@ import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyCreate;
 import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyRemove;
 
-@SuppressWarnings("deprecation")
 public class GlowingListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) { tryToSetGlowing(event.getPlayer()); }

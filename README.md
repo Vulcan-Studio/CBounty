@@ -4,9 +4,9 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- 2.6 published
-- Fixed serious issues
-- Added 1.19, .1, .2, .3, .4 support!
+- 2.7 published
+- Fixed some issues
+- Added 'xp level' currency
 
 # Server Status ✅
 

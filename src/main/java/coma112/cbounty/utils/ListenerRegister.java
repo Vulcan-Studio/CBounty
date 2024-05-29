@@ -18,7 +18,7 @@ public class ListenerRegister {
             try {
                 CBounty.getInstance().getServer().getPluginManager().registerEvents(clazz.newInstance(), CBounty.getInstance());
             } catch (InstantiationException | IllegalAccessException exception) {
-                throw new RuntimeException(exception);
+                BountyLogger.error(exception.getMessage());
             }
         }
     }

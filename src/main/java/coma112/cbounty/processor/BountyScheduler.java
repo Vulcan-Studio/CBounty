@@ -4,6 +4,7 @@ import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.hooks.Webhook;
+import coma112.cbounty.utils.BountyLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,7 @@ public class BountyScheduler {
                     try {
                         addRandomBounty();
                     } catch (IOException | NoSuchFieldException | IllegalAccessException exception) {
-                        throw new RuntimeException(exception);
+                        BountyLogger.error(exception.getMessage());
                     }
                 });
             }
@@ -40,7 +41,8 @@ public class BountyScheduler {
         Player[] onlinePlayers = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
 
         if (onlinePlayers.length > 0) {
-            List<Player> playersWithoutBounty = Arrays.stream(onlinePlayers)
+            List<Player> playersWithoutBounty = Arrays
+                    .stream(onlinePlayers)
                     .filter(player -> !CBounty.getDatabaseManager().isBounty(player))
                     .toList();
 

@@ -5,18 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="280be881-f07b-4195-8777-62cb9290a3b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/CBounty.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/BountyLogger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/MinecraftVersion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/ServerVersionSupport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/VersionSupport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_19_R1/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_19_R2/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_19_R3/Version.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_19_R4/Version.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R1/Version.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R2/Version.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R3/Version.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R4/Version.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R5/Version.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R6/Version.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.7/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.bin" afterDir="false" />
@@ -25,26 +20,50 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/discord.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/CBounty.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/CBounty.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/CBounty.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/CBounty.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/hooks/Webhook.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/hooks/Webhook.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/commands/CommandBounty$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/commands/CommandBounty$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/commands/CommandBounty.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/commands/CommandBounty.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/database/MySQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/database/MySQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/enums/RewardType.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/enums/RewardType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/enums/keys/ConfigKeys.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/enums/keys/ConfigKeys.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/enums/keys/MessageKeys.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/enums/keys/MessageKeys.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/BountyDeathListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/BountyDeathListener$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/BountyDeathListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/BountyDeathListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/GlowingListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/GlowingListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/processor/BountyScheduler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/processor/BountyScheduler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/processor/BountyScheduler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/processor/BountyScheduler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/processor/MessageProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/processor/MessageProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/update/UpdateChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/update/UpdateChecker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/ConfigUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/ConfigUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/ListenerRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/ListenerRegister.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/MinecraftVersion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/MinecraftVersion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/CBounty-2.6-dev-all.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/git.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/git.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/locales/messages_en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/locales/messages_en.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CommandBounty$1.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CommandBounty.class.uniqueId2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CommandRegister.class.uniqueId0" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/shadowJar/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/CBounty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/CBounty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/commands/CommandBounty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/commands/CommandBounty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/database/MySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/database/MySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/RewardType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/RewardType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/keys/ConfigKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/keys/ConfigKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/keys/MessageKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/keys/MessageKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/listeners/BountyDeathListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/listeners/BountyDeathListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/listeners/GlowingListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/listeners/GlowingListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/processor/BountyScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/processor/BountyScheduler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/processor/MessageProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/processor/MessageProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/update/UpdateChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/update/UpdateChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/ConfigUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/ConfigUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/ListenerRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/ListenerRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/MinecraftVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/MinecraftVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,27 +129,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.CBounty [clean].executor": "Run",
-    "Gradle.CBounty [compileJava].executor": "Run",
-    "Gradle.CBounty [jar].executor": "Run",
-    "Gradle.CBounty [shadowJar].executor": "Run",
-    "Gradle.CBounty [wrapper].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore_missing_gitignore": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/kulas/Desktop/Projects/CBounty",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.CBounty [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CBounty [compileJava].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CBounty [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CBounty [shadowJar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.CBounty [wrapper].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore_missing_gitignore&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kulas/Desktop/Projects/CBounty&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\kulas\Desktop\Projects\CBounty" />
@@ -327,7 +346,10 @@
       <workItem from="1716914598453" duration="1680000" />
       <workItem from="1716917246466" duration="11000" />
       <workItem from="1717013207847" duration="17000" />
-      <workItem from="1717013232398" duration="1977000" />
+      <workItem from="1717013232398" duration="2714000" />
+      <workItem from="1717021024711" duration="1302000" />
+      <workItem from="1717022414694" duration="365000" />
+      <workItem from="1717022825678" duration="2956000" />
     </task>
     <servers />
   </component>

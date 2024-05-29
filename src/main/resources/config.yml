@@ -16,9 +16,9 @@ placeholder:
   no: "&cNem"
 
 dependency:
-  tokenmanager: true
-  playerpoints: true
-
+  tokenmanager: false
+  playerpoints: false
+  level: true
 bounty-item:
   amount: 1
   material: "PAPER"
