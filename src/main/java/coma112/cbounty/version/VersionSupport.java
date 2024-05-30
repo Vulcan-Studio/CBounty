@@ -29,5 +29,4 @@ public class VersionSupport {
 
         BountyLogger.info("Version support for {} loaded!", version);
     }
-
 }

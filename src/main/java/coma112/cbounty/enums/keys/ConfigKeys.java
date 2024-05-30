@@ -5,6 +5,7 @@ import coma112.cbounty.processor.MessageProcessor;
 import org.jetbrains.annotations.NotNull;
 
 public enum ConfigKeys {
+    LANGUAGE("language"),
     MAXIMUM_TOP("max.top-to-get"),
     MAXIMUM_BOUNTY("max.bounty-per-player"),
     MENU_SIZE("menu.size"),

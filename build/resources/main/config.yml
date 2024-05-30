@@ -1,3 +1,5 @@
+language: "de" # Supported languages -> hu, de, en
+
 database:
   type: "mysql"
   mysql:
@@ -6,19 +8,24 @@ database:
     database: "coma112"
     username: "root"
     password: ""
+    # You shouldn't touch this part except if you are familiar with it.
     ssl: false
     certificateverification: false
     poolsize: 10
     lifetime: 1800000
 
+# With this you can modify in the placeholders the yes and no text.
 placeholder:
-  yes: "&aIgen"
-  no: "&cNem"
+  yes: "&aYes"
+  no: "&cNo"
 
+# You can turn off and on dependencies.
 dependency:
   tokenmanager: false
   playerpoints: false
   level: true
+
+# This is the bounty item in the GUI.
 bounty-item:
   amount: 1
   material: "PAPER"
@@ -30,11 +37,15 @@ bounty-item:
     - "&6Reward Type: &f{reward_type} &c⚡"
     - "&6Streak: &f{streak} &c🔥"
 
+# This shows maximum values for methods. Like: maximum toplist to get is 15 so you can only get the 15th toplist.
+# bounty-per-player -> Maximum bounty a player can set.
+# rewardlimit -> The maximum integer of reward a player can set.
 max:
   top-to-get: 15
   bounty-per-player: 5
   rewardlimit: 9000
 
+# Menu Configuration
 menu:
   title: "&6&lBOUNTIES"
   size: 54
@@ -50,6 +61,15 @@ menu:
     name: "&aForward"
     slot: 53
 
+# Features
+# glowing.enabled -> You can enable and disable the glowing feature for the bounties.
+# glowing.color -> If the glowing.enabled is true then you can set a custom glowing color.
+
+# random-bounty.enabled -> You can enable and disable the random bounty feature.
+# random-bounty.rewardType -> You can set reward types so that the type is the same when the random bounty is run
+# random-bounty.reward -> The reward (int) with the rewardType
+# random-bounty.per-second -> Shows how many seconds to set a random bounty
+# random-bounty.player-value -> You can specify how to show the random bounty in the GUI
 feature:
   glowing:
     enabled: true
@@ -60,6 +80,11 @@ feature:
     reward: 50
     per-second: 7200
     player-value: "CONSOLE"
+
+# Webhook
+# webhook.enabled -> You can enable and disable the webhook feature
+# webhook.url -> Discord Webhook URL
+# webhook.random-sender -> The value if the bounty setter is random (by the random bounty feature)
 
 webhook:
   enabled: true
