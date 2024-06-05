@@ -26,10 +26,6 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
         super(menuUtils);
     }
 
-    public BountiesMenu() {
-        super(null);
-    }
-
     @Override
     public String getMenuName() {
         return ConfigKeys.MENU_TITLE.getString();

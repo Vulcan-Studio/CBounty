@@ -70,9 +70,7 @@ public enum ConfigKeys {
         this.path = path;
     }
 
-    public String getString() {
-        return MessageProcessor.process(CBounty.getInstance().getConfiguration().getString(path));
-    }
+    public String getString() { return MessageProcessor.process(CBounty.getInstance().getConfiguration().getString(path)); }
 
     public int getInt() {
         return CBounty.getInstance().getConfiguration().getInt(path);

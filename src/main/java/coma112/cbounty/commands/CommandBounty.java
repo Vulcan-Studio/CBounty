@@ -7,8 +7,7 @@ import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.events.BountyRemoveEvent;
 import coma112.cbounty.hooks.PlayerPoints;
-import coma112.cbounty.hooks.Token;
-import coma112.cbounty.hooks.vault.Vault;
+import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.managers.Top;
 import coma112.cbounty.menu.menus.BountiesMenu;
 import coma112.cbounty.utils.MenuUtils;
@@ -21,7 +20,6 @@ import revxrsal.commands.annotation.Command;
 import revxrsal.commands.annotation.Subcommand;
 
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 @SuppressWarnings("deprecation")
@@ -43,6 +41,11 @@ public class CommandBounty {
 
     @Subcommand("streaktop")
     public void streaktop(@NotNull CommandSender sender, int value) {
+        if (!sender.hasPermission("cbounty.streaktop") || !sender.hasPermission("cbounty.admin")) {
+            sender.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
+            return;
+        }
+
         try {
             value = Integer.parseInt(String.valueOf(value));
         } catch (NumberFormatException exception) {
@@ -67,6 +70,11 @@ public class CommandBounty {
 
     @Subcommand("menu")
     public void menu(@NotNull CommandSender sender) {
+        if (!sender.hasPermission("cbounty.menu") || !sender.hasPermission("cbounty.admin")) {
+            sender.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
+            return;
+        }
+
         if (!(sender instanceof @NotNull Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;
@@ -77,6 +85,11 @@ public class CommandBounty {
 
     @Subcommand("set")
     public void set(@NotNull CommandSender sender, @NotNull Player target, RewardType rewardType, int reward) {
+        if (!sender.hasPermission("cbounty.set") || !sender.hasPermission("cbounty.admin")) {
+            sender.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
+            return;
+        }
+
         if (!(sender instanceof @NotNull Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;
@@ -165,6 +178,11 @@ public class CommandBounty {
 
     @Subcommand("remove")
     public void remove(@NotNull CommandSender sender, @NotNull Player target) {
+        if (!sender.hasPermission("cbounty.remove") || !sender.hasPermission("cbounty.admin")) {
+            sender.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
+            return;
+        }
+
         if (!(sender instanceof @NotNull Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;
@@ -193,6 +211,11 @@ public class CommandBounty {
 
     @Subcommand("raise")
     public void raise(@NotNull CommandSender sender, @NotNull Player target, int newReward) {
+        if (!sender.hasPermission("cbounty.raise") || !sender.hasPermission("cbounty.admin")) {
+            sender.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
+            return;
+        }
+
         if (!(sender instanceof @NotNull Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;
@@ -235,6 +258,11 @@ public class CommandBounty {
 
     @Subcommand("takeoff")
     public void takeoff(@NotNull CommandSender sender, @NotNull Player target) {
+        if (!sender.hasPermission("cbounty.takeoff") || !sender.hasPermission("cbounty.admin")) {
+            sender.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
+            return;
+        }
+
         if (!(sender instanceof @NotNull Player player)) {
             sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
             return;

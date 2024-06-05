@@ -1,4 +1,4 @@
-package coma112.cbounty.hooks.vault;
+package coma112.cbounty.hooks;
 
 import coma112.cbounty.CBounty;
 import lombok.Getter;

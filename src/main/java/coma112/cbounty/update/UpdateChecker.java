@@ -22,7 +22,7 @@ public class UpdateChecker {
             try (InputStream is = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId + "/~").openStream(); Scanner scanner = new Scanner(is)) {
                 if (scanner.hasNext()) { consumer.accept(scanner.next()); }
             } catch (IOException exception) {
-                BountyLogger.info("Unable to check for updates: " + exception.getMessage());
+                BountyLogger.warn("Unable to check for updates: " + exception.getMessage());
             }
         });
     }

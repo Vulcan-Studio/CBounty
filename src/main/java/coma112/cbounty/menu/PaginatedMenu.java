@@ -9,7 +9,6 @@ public abstract class PaginatedMenu extends Menu {
 
     protected int page = 0;
     @Getter protected int maxItemsPerPage = ConfigKeys.MENU_SIZE.getInt() - 2;
-    protected int index = 0;
 
     public PaginatedMenu(MenuUtils menuUtils) {
         super(menuUtils);

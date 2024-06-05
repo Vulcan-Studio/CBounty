@@ -4,9 +4,8 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- 2.8 published
-- Multi Language
-- Added comments in the config
+- 3.0 published
+- Added more permissions
 
 # Server Status ✅
 

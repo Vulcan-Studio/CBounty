@@ -67,9 +67,8 @@ public class ItemBuilder implements IItemBuilder {
     }
 
     @Override
-    public ItemBuilder addEnchantment(@NotNull Enchantment enchantment, int level) {
+    public void addEnchantment(@NotNull Enchantment enchantment, int level) {
         meta.addEnchant(enchantment, level, true);
-        return this;
     }
 
     @Override

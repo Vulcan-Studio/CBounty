@@ -7,13 +7,14 @@ import coma112.cbounty.hooks.Webhook;
 import coma112.cbounty.utils.BountyLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyCreate;
 
 public class BountyScheduler {
     private final Timer timer;
@@ -48,11 +49,8 @@ public class BountyScheduler {
 
             if (!playersWithoutBounty.isEmpty()) {
                 Player randomPlayer = playersWithoutBounty.get((int) (Math.random() * playersWithoutBounty.size()));
-                CBounty.getDatabaseManager().createRandomBounty(
-                        randomPlayer,
-                        RewardType.valueOf(ConfigKeys.RANDOM_BOUNTY_REWARDTYPE.getString()),
-                        ConfigKeys.RANDOM_BOUNTY_REWARD.getInt());
 
+                CBounty.getDatabaseManager().createRandomBounty(randomPlayer, RewardType.valueOf(ConfigKeys.RANDOM_BOUNTY_REWARDTYPE.getString()), ConfigKeys.RANDOM_BOUNTY_REWARD.getInt());
                 Webhook.sendWebhook(
                         replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_DESCRIPTION.getString(), randomPlayer),
                         ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_COLOR.getString(),
@@ -67,12 +65,5 @@ public class BountyScheduler {
                 );
             }
         }
-    }
-
-    private String replacePlaceholdersBountyCreate(@NotNull String text, @NotNull Player target) {
-        return text.replace("{sender}", ConfigKeys.WEBHOOK_RANDOM_SENDER.getString())
-                .replace("{target}", target.getName())
-                .replace("{reward}", String.valueOf(CBounty.getDatabaseManager().getReward(target)))
-                .replace("{rewardType}", String.valueOf(CBounty.getDatabaseManager().getRewardType(target)));
     }
 }

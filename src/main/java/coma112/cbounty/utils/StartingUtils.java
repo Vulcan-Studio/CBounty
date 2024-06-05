@@ -4,7 +4,7 @@ import coma112.cbounty.CBounty;
 import coma112.cbounty.hooks.Placeholder;
 import coma112.cbounty.hooks.PlayerPoints;
 import coma112.cbounty.hooks.Token;
-import coma112.cbounty.hooks.vault.Vault;
+import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.update.UpdateChecker;
 import coma112.cbounty.version.MinecraftVersion;
 import coma112.cbounty.version.ServerVersionSupport;
@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 
 public class StartingUtils {
     private static boolean isSupported;
-    private static ServerVersionSupport nms;
 
     public static void registerHooks() {
         Placeholder.registerHook();
@@ -70,7 +69,7 @@ public class StartingUtils {
             return;
         }
 
-        nms = support.getVersionSupport();
+        ServerVersionSupport nms = support.getVersionSupport();
         isSupported = true;
     }
 

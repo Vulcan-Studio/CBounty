@@ -10,8 +10,8 @@ public class Version implements ServerVersionSupport {
 
     @Contract(pure = true)
     public Version(@NotNull Plugin plugin) {
-        BountyLogger.info("Loading support for version 1.20.4...");
-        BountyLogger.info("Support for 1.20.4 is loaded!");
+        BountyLogger.info("Loading support for version 1.20.6...");
+        BountyLogger.info("Support for 1.20.6 is loaded!");
     }
 
     @Override

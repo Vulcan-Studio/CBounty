@@ -19,12 +19,12 @@ public class VersionSupport {
         versionSupport = (ServerVersionSupport) clazz.getConstructor(Plugin.class).newInstance(plugin);
 
         if (!versionSupport.isSupported()) {
-            BountyLogger.error("---   VERSION IS SUPPORTED BUT,   ---");
-            BountyLogger.error("The version you are using is badly");
-            BountyLogger.error("implemented. Many features won't work.");
-            BountyLogger.error("Please consider updating your server ");
-            BountyLogger.error("version to a newer version. (like 1.19_R2)");
-            BountyLogger.error("---   PLEASE READ THIS MESSAGE!   ---");
+            BountyLogger.warn("---   VERSION IS SUPPORTED BUT,   ---");
+            BountyLogger.warn("The version you are using is badly");
+            BountyLogger.warn("implemented. Many features won't work.");
+            BountyLogger.warn("Please consider updating your server ");
+            BountyLogger.warn("version to a newer version. (like 1.19_R2)");
+            BountyLogger.warn("---   PLEASE READ THIS MESSAGE!   ---");
         }
 
         BountyLogger.info("Version support for {} loaded!", version);

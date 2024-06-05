@@ -315,4 +315,11 @@ public class Webhook {
                 .replace("{reward}", String.valueOf(CBounty.getDatabaseManager().getReward(target)))
                 .replace("{rewardType}", String.valueOf(CBounty.getDatabaseManager().getRewardType(target)));
     }
+
+    public static String replacePlaceholdersBountyCreate(@NotNull String text, @NotNull Player target) {
+        return text.replace("{sender}", ConfigKeys.WEBHOOK_RANDOM_SENDER.getString())
+                .replace("{target}", target.getName())
+                .replace("{reward}", String.valueOf(CBounty.getDatabaseManager().getReward(target)))
+                .replace("{rewardType}", String.valueOf(CBounty.getDatabaseManager().getRewardType(target)));
+    }
 }

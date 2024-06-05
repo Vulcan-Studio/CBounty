@@ -70,12 +70,13 @@ menu:
 # random-bounty.reward -> The reward (int) with the rewardType
 # random-bounty.per-second -> Shows how many seconds to set a random bounty
 # random-bounty.player-value -> You can specify how to show the random bounty in the GUI
+
 feature:
   glowing:
     enabled: true
     color: "RED"
   random-bounty:
-    enabled: true
+    enabled: false
     rewardType: "TOKEN"
     reward: 50
     per-second: 7200
@@ -87,7 +88,7 @@ feature:
 # webhook.random-sender -> The value if the bounty setter is random (by the random bounty feature)
 
 webhook:
-  enabled: true
+  enabled: false
   url: "WEBHOOK URL HERE!!!"
   bounty-death-embed:
     title: "BOUNTY TARGET DEATH"

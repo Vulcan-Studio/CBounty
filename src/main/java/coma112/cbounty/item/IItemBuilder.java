@@ -42,7 +42,7 @@ public interface IItemBuilder {
 
     ItemBuilder setLocalizedName(@NotNull String name);
 
-    ItemBuilder addEnchantment(@NotNull Enchantment enchantment, int level);
+    void addEnchantment(@NotNull Enchantment enchantment, int level);
 
     default IItemBuilder addEnchantments(Map<Enchantment, Integer> enchantments) {
         enchantments.forEach(this::addEnchantment);
