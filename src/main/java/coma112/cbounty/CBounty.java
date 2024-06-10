@@ -2,7 +2,10 @@ package coma112.cbounty;
 
 import coma112.cbounty.config.Config;
 import coma112.cbounty.database.AbstractDatabase;
+import coma112.cbounty.database.MongoDB;
 import coma112.cbounty.database.MySQL;
+import coma112.cbounty.enums.DatabaseType;
+import coma112.cbounty.enums.LanguageType;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.hooks.Token;
 import coma112.cbounty.language.Language;
@@ -33,7 +36,6 @@ public final class CBounty extends JavaPlugin {
         instance = this;
 
         StartingUtils.checkVersion();
-
     }
 
     @Override
@@ -45,9 +47,6 @@ public final class CBounty extends JavaPlugin {
         registerListenersAndCommands();
         initializeDatabaseManager();
         registerHooks();
-
-        MySQL mysql = (MySQL) databaseManager;
-        mysql.createTable();
 
         if (ConfigKeys.RANDOM_BOUNTY_ENABLED.getBoolean()) new BountyScheduler().startScheduling();
 
@@ -76,18 +75,30 @@ public final class CBounty extends JavaPlugin {
         config = new Config();
         token = new Token();
 
-        String languageCode = ConfigKeys.LANGUAGE.getString().toLowerCase();
-
         saveResource("locales/messages_en.yml", false);
         saveResource("locales/messages_hu.yml", false);
         saveResource("locales/messages_de.yml", false);
 
-        language = new Language("messages_" + languageCode);
+        language = new Language("messages_" + LanguageType.valueOf(ConfigKeys.LANGUAGE.getString()));
     }
 
     private void initializeDatabaseManager() {
         try {
-            databaseManager = new MySQL(Objects.requireNonNull(getConfiguration().getSection("database.mysql")));
+            switch (DatabaseType.valueOf(ConfigKeys.DATABASE.getString())) {
+                case MYSQL, mysql -> {
+                    databaseManager = new MySQL(Objects.requireNonNull(getConfiguration().getSection("database.mysql")));
+                    MySQL mysql = (MySQL) databaseManager;
+                    mysql.createTable();
+                }
+
+
+                case MONGODB, mongodb -> {
+                    databaseManager = new MongoDB(Objects.requireNonNull(getConfiguration().getSection("database.mongodb")));
+                    MongoDB mongodb = (MongoDB) databaseManager;
+                    mongodb.createCollection();
+                    mongodb.initializeCounter();
+                }
+            }
         } catch (SQLException | ClassNotFoundException exception) {
             BountyLogger.error(exception.getMessage());
         }

@@ -35,3 +35,4 @@ messages:
   max-reward-limit: "&6&lBOUNTY &8| &cNem adhatsz meg nagyobb számot, mint: &4{limit}"
   successful-takeoff-player: "&6&lBOUNTY &8| &aSikeresen eltávolítottad a bűndíjat {target}-ról!"
   successful-takeoff-target: "&6&lBOUNTY &8| &a{player} eltávolította a bűndíjat rólad!"
+  full-inventory: "A megadott játékos eszköztára tele van!"

@@ -13,6 +13,16 @@ database:
     certificateverification: false
     poolsize: 10
     lifetime: 1800000
+  mongodb:
+    host: "localhost"
+    port: 27017
+    database: "bounty"
+    username: ""
+    password: ""
+    # You shouldn't touch this part except if you are familiar with it.
+    ssl: false
+    poolsize: 10
+    lifetime: 1800
 
 # With this you can modify in the placeholders the yes and no text.
 placeholder:
@@ -36,6 +46,15 @@ bounty-item:
     - "&6Reward: &f{reward} &c⚡"
     - "&6Reward Type: &f{reward_type} &c⚡"
     - "&6Streak: &f{streak} &c🔥"
+
+bountyfinder-item:
+  amount: 1
+  material: "COMPASS"
+  name: "&e&lBOUNTYFINDER"
+  lore:
+    - ""
+    - "&eHold this item in your hand,"
+    - "&eto see which bounty is closest to you"
 
 # This shows maximum values for methods. Like: maximum toplist to get is 15 so you can only get the 15th toplist.
 # bounty-per-player -> Maximum bounty a player can set.
@@ -71,6 +90,9 @@ menu:
 # random-bounty.per-second -> Shows how many seconds to set a random bounty
 # random-bounty.player-value -> You can specify how to show the random bounty in the GUI
 
+# bountyfinder.no-bounty-nearby -> The message to show when there is no bounty nearby
+# bountyfinder.nearest-bounty -> The message to show when there is a bounty nearby
+
 feature:
   glowing:
     enabled: true
@@ -81,6 +103,9 @@ feature:
     reward: 50
     per-second: 7200
     player-value: "CONSOLE"
+  bountyfinder:
+    no-bounty-nearby: "&cNo bounties nearby"
+    nearest-bounty: "&a{bounty} &8| &a{distance}m"
 
 # Webhook
 # webhook.enabled -> You can enable and disable the webhook feature

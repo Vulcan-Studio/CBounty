@@ -26,7 +26,6 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Getter
-@SuppressWarnings("deprecation")
 public class MySQL extends AbstractDatabase {
     private final Connection connection;
 

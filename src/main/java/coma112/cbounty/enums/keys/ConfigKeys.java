@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public enum ConfigKeys {
     LANGUAGE("language"),
+    DATABASE("database.type"),
     MAXIMUM_TOP("max.top-to-get"),
     MAXIMUM_BOUNTY("max.bounty-per-player"),
     MENU_SIZE("menu.size"),
@@ -27,6 +28,8 @@ public enum ConfigKeys {
     RANDOM_BOUNTY_REWARD("feature.random-bounty.reward"),
     RANDOM_BOUNTY_PLAYER_VALUE("feature.random-bounty.player-value"),
     MAX_REWARD_LIMIT("max.rewardlimit"),
+    NO_BOUNTY_NEARBY("feature.bountyfinder.no-bounty-nearby"),
+    NEAREST_BOUNTY("feature.bountyfinder.nearest-bounty"),
     RANDOM_BOUNTY_PER_SECOND("feature.random-bounty.per-second"),
 
     WEBHOOK_RANDOM_SENDER("webhook.random-sender"),

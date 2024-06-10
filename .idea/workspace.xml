@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="280be881-f07b-4195-8777-62cb9290a3b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/database/MongoDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/DatabaseType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/LanguageType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/listeners/BountyFinderListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/checksums/md5-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.7/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/checksums/sha1-checksums.bin" afterDir="false" />
@@ -18,88 +21,71 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/CBounty.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/CBounty.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/commands/CommandBounty$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/commands/CommandBounty$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/commands/CommandBounty.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/commands/CommandBounty.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/database/MySQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/database/MySQL.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/enums/keys/ConfigKeys.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/enums/keys/ConfigKeys.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/hooks/Webhook.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/hooks/Webhook.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/hooks/vault/BountyEconomy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/hooks/vault/Vault.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/item/IItemBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/item/IItemBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/item/ItemBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/item/ItemBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/BountyDeathListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/BountyDeathListener$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/enums/keys/MessageKeys.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/enums/keys/MessageKeys.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/BountyDeathListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/BountyDeathListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/managers/Top.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/managers/Top.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/menu/PaginatedMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/menu/PaginatedMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/menu/menus/BountiesMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/menu/menus/BountiesMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/processor/BountyScheduler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/processor/BountyScheduler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/processor/BountyScheduler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/processor/BountyScheduler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/update/UpdateChecker.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/update/UpdateChecker.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/StartingUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/StartingUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/GlowingListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/listeners/GlowingListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/BountyLogger.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/BountyLogger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/ListenerRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/ListenerRegister.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/MinecraftVersion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/MinecraftVersion.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/VersionSupport.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/VersionSupport.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/nms/v1_20_R3/Version.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/nms/v1_20_R3/Version.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/nms/v1_20_R4/Version.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/nms/v1_20_R4/Version.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/nms/v1_20_R5/Version.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/nms/v1_20_R6/Version.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/locales/messages_de.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/locales/messages_de.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/locales/messages_en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/locales/messages_en.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/locales/messages_hu.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/locales/messages_hu.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountiesMenu.class.uniqueId26" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyDeathListener$1.class.uniqueId19" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyDeathListener.class.uniqueId4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyEconomy.class.uniqueId10" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyScheduler$1.class.uniqueId16" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyScheduler.class.uniqueId27" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CBounty.class.uniqueId31" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CommandBounty$1.class.uniqueId15" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountiesMenu.class.uniqueId25" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyDeathListener$1.class.uniqueId18" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyDeathListener.class.uniqueId4" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyDeathListener.class.uniqueId4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyEconomy.class.uniqueId22" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyScheduler$1.class.uniqueId15" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/BountyScheduler.class.uniqueId26" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CBounty.class.uniqueId30" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CommandBounty$1.class.uniqueId14" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CommandBounty.class.uniqueId7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CommandRegister.class.uniqueId23" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Config.class.uniqueId33" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ConfigKeys.class.uniqueId29" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CommandRegister.class.uniqueId21" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Config.class.uniqueId32" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ConfigKeys.class.uniqueId28" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/GlowingListener.class.uniqueId9" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/IItemBuilder.class.uniqueId6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Language.class.uniqueId25" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ListenerRegister.class.uniqueId5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/MenuUpdater.class.uniqueId32" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/MessageKeys.class.uniqueId18" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/MySQL.class.uniqueId17" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Placeholder.class.uniqueId20" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Language.class.uniqueId24" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ListenerRegister.class.uniqueId5" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ListenerRegister.class.uniqueId5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/MenuUpdater.class.uniqueId31" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/MessageKeys.class.uniqueId17" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/MySQL.class.uniqueId16" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Placeholder.class.uniqueId19" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/PlayerPoints.class.uniqueId8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StartingUtils.class.uniqueId28" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Token.class.uniqueId0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Top.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UpdateChecker.class.uniqueId13" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Vault.class.uniqueId21" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject$Author.class.uniqueId11" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject$Field.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject$Footer.class.uniqueId22" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject$Image.class.uniqueId24" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject$Thumbnail.class.uniqueId14" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject.class.uniqueId12" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$JSONObject.class.uniqueId3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook.class.uniqueId30" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StartingUtils.class.uniqueId27" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UpdateChecker.class.uniqueId12" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Vault.class.uniqueId33" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject$Author.class.uniqueId10" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject$Footer.class.uniqueId20" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject$Image.class.uniqueId23" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject$Thumbnail.class.uniqueId13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook$EmbedObject.class.uniqueId11" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Webhook.class.uniqueId29" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/CBounty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/CBounty.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/commands/CommandBounty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/commands/CommandBounty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/database/MySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/database/MySQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/keys/ConfigKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/keys/ConfigKeys.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/hooks/Webhook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/hooks/Webhook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/hooks/vault/BountyEconomy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/hooks/BountyEconomy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/hooks/vault/Vault.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/hooks/Vault.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/item/IItemBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/item/IItemBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/item/ItemBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/item/ItemBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/keys/MessageKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/keys/MessageKeys.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/listeners/BountyDeathListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/listeners/BountyDeathListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/managers/Top.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/managers/Top.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/menu/PaginatedMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/menu/PaginatedMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/menu/menus/BountiesMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/menu/menus/BountiesMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/processor/BountyScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/processor/BountyScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/update/UpdateChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/update/UpdateChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/StartingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/StartingUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/listeners/GlowingListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/listeners/GlowingListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/BountyLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/BountyLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/ListenerRegister.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/ListenerRegister.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/MinecraftVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/MinecraftVersion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/VersionSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/VersionSupport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R3/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R3/Version.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R4/Version.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R4/Version.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R5/Version.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/nms/v1_20_R6/Version.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/messages_de.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/messages_de.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/messages_en.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/locales/messages_hu.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/locales/messages_hu.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,6 +117,23 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="CBounty" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="CBounty" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="CBounty" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="shadow" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="CBounty" type="f1a62948:ProjectNode" />
                 <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
@@ -144,9 +147,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="Enum" />
         <option value="Record" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -306,8 +309,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.CBounty [shadowJar]" />
-        <item itemvalue="Gradle.CBounty [jar]" />
         <item itemvalue="Gradle.CBounty [clean]" />
+        <item itemvalue="Gradle.CBounty [jar]" />
         <item itemvalue="Gradle.CBounty [compileJava]" />
       </list>
     </recent_temporary>
@@ -395,6 +398,23 @@
       <workItem from="1717273040756" duration="295000" />
       <workItem from="1717595979847" duration="4033000" />
       <workItem from="1717600121082" duration="49000" />
+      <workItem from="1717600197883" duration="39000" />
+      <workItem from="1717602012509" duration="93000" />
+      <workItem from="1717602637293" duration="23000" />
+      <workItem from="1717602945520" duration="39000" />
+      <workItem from="1717605066855" duration="619000" />
+      <workItem from="1717606657592" duration="6832000" />
+      <workItem from="1717704427151" duration="2541000" />
+      <workItem from="1717707110641" duration="140000" />
+      <workItem from="1717707542107" duration="68000" />
+      <workItem from="1717707794549" duration="67000" />
+      <workItem from="1717707883119" duration="292000" />
+      <workItem from="1717708203854" duration="104000" />
+      <workItem from="1717968706955" duration="2113000" />
+      <workItem from="1717971045887" duration="84000" />
+      <workItem from="1717971179442" duration="45000" />
+      <workItem from="1717971337394" duration="1317000" />
+      <workItem from="1718010515377" duration="3011000" />
     </task>
     <servers />
   </component>

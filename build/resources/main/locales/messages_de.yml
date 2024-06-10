@@ -35,3 +35,4 @@ messages:
   max-reward-limit: "&6&lBOUNTY &8| &cDu kannst keine größere Zahl als {limit} angeben"
   successful-takeoff-player: "&6&lBOUNTY &8| &aDu hast erfolgreich die Belohnung von {target} entfernt!"
   successful-takeoff-target: "&6&lBOUNTY &8| &a{player} hat die Belohnung von dir entfernt!"
+  full-inventory: "Das Inventar des Ziels ist voll!"

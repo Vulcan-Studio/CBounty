@@ -13,9 +13,7 @@ public enum MinecraftVersion {
     v1_20_R1,
     v1_20_R2,
     v1_20_R3,
-    v1_20_R4,
-    v1_20_R5,
-    v1_20_R6;
+    v1_20_R4;
 
     private static final String packagePath = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
     private static final MinecraftVersion serverVersion = getVersion();

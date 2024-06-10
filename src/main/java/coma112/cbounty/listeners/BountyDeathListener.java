@@ -36,11 +36,13 @@ public class BountyDeathListener implements Listener {
                         case PLAYERPOINTS -> {
                             if (PlayerPoints.isEnabled()) CBounty.getPlayerPointsManager().give(killer.getUniqueId(), CBounty.getDatabaseManager().getReward(target));
                             Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
+                            killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
                         }
 
                         case LEVEL -> {
                             if (ConfigKeys.DEPENDENCY_LEVEL.getBoolean()) killer.setLevel(killer.getLevel() + CBounty.getDatabaseManager().getReward(target));
                             Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
+                            killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
                         }
 
                         case MONEY -> Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));

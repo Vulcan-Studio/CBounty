@@ -4,8 +4,9 @@ This is a Minecraft plugin coded in spigot with the Paper framework. The plugin 
 
 # Last commit 💯
 
-- 3.0 published
-- Added more permissions
+- 3.3 published
+- Added MongoDB support
+- Fixed BountyFinder
 
 # Server Status ✅
 

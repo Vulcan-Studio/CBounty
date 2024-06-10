@@ -35,3 +35,4 @@ messages:
   max-reward-limit: "&6&lBOUNTY &8| &cYou can't enter a bigger number than: &4{limit}"
   successful-takeoff-player: "&6&lBOUNTY &8| &aYou have successfully took off the bounty from {target}!"
   successful-takeoff-target: "&6&lBOUNTY &8| &a{player} took off the bounty from you!"
+  full-inventory: "The target's inventory is full!"

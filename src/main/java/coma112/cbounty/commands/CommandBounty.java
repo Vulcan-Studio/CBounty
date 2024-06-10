@@ -8,6 +8,7 @@ import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.events.BountyRemoveEvent;
 import coma112.cbounty.hooks.PlayerPoints;
 import coma112.cbounty.hooks.Vault;
+import coma112.cbounty.item.IItemBuilder;
 import coma112.cbounty.managers.Top;
 import coma112.cbounty.menu.menus.BountiesMenu;
 import coma112.cbounty.utils.MenuUtils;
@@ -15,8 +16,10 @@ import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import revxrsal.commands.annotation.Command;
+import revxrsal.commands.annotation.Default;
 import revxrsal.commands.annotation.Subcommand;
 
 import java.util.Objects;
@@ -257,7 +260,7 @@ public class CommandBounty {
     }
 
     @Subcommand("takeoff")
-    public void takeoff(@NotNull CommandSender sender, @NotNull Player target) {
+    public void takeOff(@NotNull CommandSender sender, @NotNull Player target) {
         if (!sender.hasPermission("cbounty.takeoff") || !sender.hasPermission("cbounty.admin")) {
             sender.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
             return;
@@ -300,6 +303,31 @@ public class CommandBounty {
                 .replace("{player}", player.getName()));
         CBounty.getDatabaseManager().removeBounty(target);
         CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyRemoveEvent(player, target));
+    }
+
+    @Subcommand("bountyfinder")
+    public void giveBountyFinder(@NotNull CommandSender sender, @NotNull @Default("me") Player target) {
+        if (!sender.hasPermission("cbounty.bountyfinder") || !sender.hasPermission("cbounty.admin")) {
+            sender.sendMessage(MessageKeys.NO_PERMISSION.getMessage());
+            return;
+        }
+
+        if (!(sender instanceof @NotNull Player player)) {
+            sender.sendMessage(MessageKeys.PLAYER_REQUIRED.getMessage());
+            return;
+        }
+
+        if (!target.isOnline()) {
+            player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
+            return;
+        }
+
+        if (target.getInventory().firstEmpty() == -1) {
+            sender.sendMessage(MessageKeys.FULL_INVENTORY.getMessage());
+            return;
+        }
+
+        target.getInventory().addItem(IItemBuilder.createItemFromSection("bountyfinder-item"));
     }
 
     private void handleTokenReward(@NotNull Player player, int reward) {

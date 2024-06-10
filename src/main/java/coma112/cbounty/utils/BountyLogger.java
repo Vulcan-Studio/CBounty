@@ -9,7 +9,7 @@ import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 public class BountyLogger {
-    static final Logger logger = LogManager.getLogger("BOUNTY");
+    static final Logger logger = LogManager.getLogger("CBounty");
 
     public static void info(@NotNull String msg, @NotNull Object... objs) {
         logger.info(msg, objs);
