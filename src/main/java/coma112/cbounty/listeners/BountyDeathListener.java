@@ -29,7 +29,7 @@ public class BountyDeathListener implements Listener {
                 if (killer == CBounty.getDatabaseManager().getSender(target)) return;
 
                 switch (CBounty.getDatabaseManager().getRewardType(target)) {
-hit                        case TOKEN -> {
+                   case TOKEN -> {
                             if (CBounty.getInstance().getToken().isEnabled()) {
                                 CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
                             } else {
