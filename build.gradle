@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'coma112'
-version = '3.3'
+version = '3.4'
 
 repositories {
     mavenCentral()
@@ -41,6 +41,7 @@ dependencies {
     implementation 'com.github.Revxrsal.Lamp:bukkit:3.2.1'
     implementation 'org.bstats:bstats-bukkit:3.0.2'
     implementation 'org.mongodb:mongodb-driver-sync:5.1.0'
+    implementation 'com.github.Anon8281:UniversalScheduler:0.1.6'
     paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
 }
 
@@ -55,8 +56,13 @@ compileJava {
 }
 
 shadowJar {
-    minimize()
     relocate 'org.bstats', 'coma112.cbounty'
+    relocate 'com.github.Anon8281.universalScheduler', 'coma112.cbounty.universalScheduler'
+    minimize()
+}
+
+tasks.build {
+    dependsOn shadowJar
 }
 
 

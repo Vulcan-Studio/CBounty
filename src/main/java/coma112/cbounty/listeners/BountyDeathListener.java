@@ -5,14 +5,16 @@ import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.events.BountyDeathEvent;
 import coma112.cbounty.hooks.PlayerPoints;
-import coma112.cbounty.hooks.Webhook;
 import coma112.cbounty.hooks.Vault;
+import coma112.cbounty.hooks.Webhook;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+
 import java.io.IOException;
+
 import static coma112.cbounty.hooks.Webhook.replacePlaceholdersTargetDeath;
 
 public class BountyDeathListener implements Listener {
@@ -24,32 +26,43 @@ public class BountyDeathListener implements Listener {
 
         if (killer != null) {
             if (CBounty.getDatabaseManager().isBounty(target)) {
-                if (!killer.equals(CBounty.getDatabaseManager().getSender(target))) {
+                if (killer == CBounty.getDatabaseManager().getSender(target)) return;
 
-                    switch (CBounty.getDatabaseManager().getRewardType(target)) {
-                        case TOKEN -> {
-                             if (CBounty.getInstance().getToken().isEnabled()) CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
-                             Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
-                             killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
+                switch (CBounty.getDatabaseManager().getRewardType(target)) {
+hit                        case TOKEN -> {
+                            if (CBounty.getInstance().getToken().isEnabled()) {
+                                CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
+                            } else {
+                                Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
+                                killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
+                            }
                         }
 
                         case PLAYERPOINTS -> {
-                            if (PlayerPoints.isEnabled()) CBounty.getPlayerPointsManager().give(killer.getUniqueId(), CBounty.getDatabaseManager().getReward(target));
-                            Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
-                            killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
+                            if (PlayerPoints.isEnabled()) {
+                                CBounty.getPlayerPointsManager().give(killer.getUniqueId(), CBounty.getDatabaseManager().getReward(target));
+                            } else {
+                                Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
+                                killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
+                            }
                         }
 
                         case LEVEL -> {
-                            if (ConfigKeys.DEPENDENCY_LEVEL.getBoolean()) killer.setLevel(killer.getLevel() + CBounty.getDatabaseManager().getReward(target));
-                            Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
-                            killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
+                            if (ConfigKeys.DEPENDENCY_LEVEL.getBoolean()) {
+                                killer.setLevel(killer.getLevel() + CBounty.getDatabaseManager().getReward(target));
+                            } else {
+                                Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
+                                killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
+                            }
                         }
 
                         case MONEY -> Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                     }
                 }
 
-                if (!CBounty.getDatabaseManager().isSenderIsRandom(target)) killer.sendMessage(MessageKeys.BOUNTY_DEAD_KILLER.getMessage());
+                if (!CBounty.getDatabaseManager().isSenderIsRandom(target)) {
+                    killer.sendMessage(MessageKeys.BOUNTY_DEAD_KILLER.getMessage());
+                }
 
                 Webhook.sendWebhook(
                         replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_DESCRIPTION.getString(), killer, target),
@@ -77,5 +90,4 @@ public class BountyDeathListener implements Listener {
                         CBounty.getDatabaseManager().getRewardType(target)));
             }
         }
-    }
 }

@@ -1,5 +1,7 @@
 package coma112.cbounty;
 
+import com.github.Anon8281.universalScheduler.UniversalScheduler;
+import com.github.Anon8281.universalScheduler.scheduling.schedulers.TaskScheduler;
 import coma112.cbounty.config.Config;
 import coma112.cbounty.database.AbstractDatabase;
 import coma112.cbounty.database.MongoDB;
@@ -30,6 +32,7 @@ public final class CBounty extends JavaPlugin {
     private static Language language;
     private static Config config;
     private static Token token;
+    private static TaskScheduler scheduler;
 
     @Override
     public void onLoad() {
@@ -44,6 +47,7 @@ public final class CBounty extends JavaPlugin {
         saveDefaultConfig();
 
         initializeComponents();
+        scheduler = UniversalScheduler.getScheduler(this);
         registerListenersAndCommands();
         initializeDatabaseManager();
         registerHooks();
@@ -69,6 +73,10 @@ public final class CBounty extends JavaPlugin {
 
     public Token getToken() {
         return token;
+    }
+
+    public TaskScheduler getScheduler() {
+        return scheduler;
     }
 
     private void initializeComponents() {

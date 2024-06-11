@@ -11,31 +11,18 @@ import org.bukkit.entity.Player;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyCreate;
 
 public class BountyScheduler {
-    private final Timer timer;
-
-    public BountyScheduler() {
-        this.timer = new Timer();
-    }
-
     public void startScheduling() {
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Bukkit.getServer().getScheduler().runTask(CBounty.getInstance(), () -> {
-                    try {
-                        addRandomBounty();
-                    } catch (IOException | NoSuchFieldException | IllegalAccessException exception) {
-                        BountyLogger.error(exception.getMessage());
-                    }
-                });
+        CBounty.getInstance().getScheduler().runTaskTimer(() -> {
+            try {
+                addRandomBounty();
+            } catch (IOException | NoSuchFieldException | IllegalAccessException exception) {
+                BountyLogger.error(exception.getMessage());
             }
-        }, 0, ConfigKeys.RANDOM_BOUNTY_PER_SECOND.getInt() * 1000L);
+        }, 0, ConfigKeys.RANDOM_BOUNTY_PER_SECOND.getInt() * 20L);
     }
 
     private void addRandomBounty() throws IOException, NoSuchFieldException, IllegalAccessException {

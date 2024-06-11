@@ -6,6 +6,7 @@ import coma112.cbounty.events.BountyCreateEvent;
 import coma112.cbounty.events.BountyDeathEvent;
 import coma112.cbounty.events.BountyRemoveEvent;
 import coma112.cbounty.hooks.Webhook;
+import coma112.cbounty.utils.StartingUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -25,7 +26,9 @@ import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyRemove;
 @SuppressWarnings("deprecation")
 public class GlowingListener implements Listener {
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) { tryToSetGlowing(event.getPlayer()); }
+    public void onJoin(PlayerJoinEvent event) {
+        tryToSetGlowing(event.getPlayer());
+    }
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
@@ -57,7 +60,7 @@ public class GlowingListener implements Listener {
 
     @EventHandler
     public void onCreate(BountyCreateEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
-        tryToSetGlowing(event.getTarget());
+        if (!StartingUtils.isFolia) tryToSetGlowing(event.getTarget());
 
         Webhook.sendWebhook(
                 replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_DESCRIPTION.getString(), event),
@@ -77,7 +80,7 @@ public class GlowingListener implements Listener {
         String playerName = player.getName();
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
 
-        if (isEnabled() && CBounty.getDatabaseManager().isBounty(player)) {
+        if (isEnabled() && CBounty.getDatabaseManager().isBounty(player) && !StartingUtils.isFolia) {
             player.setGlowing(true);
 
             Team team = scoreboard.getTeam(playerName);
@@ -91,7 +94,7 @@ public class GlowingListener implements Listener {
     public void tryToRemoveGlowing(@NotNull Player player) {
         Team team = Bukkit.getScoreboardManager().getMainScoreboard().getTeam(player.getName());
 
-        if (team != null) {
+        if (team != null && !StartingUtils.isFolia) {
             team.removeEntry(player.getName());
             team.unregister();
             player.setGlowing(false);

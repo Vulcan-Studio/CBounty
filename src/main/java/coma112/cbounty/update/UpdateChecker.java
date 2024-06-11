@@ -2,7 +2,6 @@ package coma112.cbounty.update;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.utils.BountyLogger;
-import org.bukkit.Bukkit;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,12 +17,15 @@ public class UpdateChecker {
     }
 
     public void getVersion(final Consumer<String> consumer) {
-        Bukkit.getScheduler().runTaskAsynchronously(CBounty.getInstance(), () -> {
+        CBounty.getInstance().getScheduler().runTaskAsynchronously(() -> {
             try (InputStream is = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId + "/~").openStream(); Scanner scanner = new Scanner(is)) {
-                if (scanner.hasNext()) { consumer.accept(scanner.next()); }
+                if (scanner.hasNext()) {
+                    consumer.accept(scanner.next());
+                }
             } catch (IOException exception) {
                 BountyLogger.warn("Unable to check for updates: " + exception.getMessage());
             }
         });
     }
 }
+

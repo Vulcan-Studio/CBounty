@@ -3,6 +3,7 @@ package coma112.cbounty.hooks;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
+import coma112.cbounty.utils.BountyLogger;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -63,6 +64,6 @@ public class Placeholder extends PlaceholderExpansion {
     }
 
     public static void registerHook() {
-        if (CBounty.getInstance().getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) new Placeholder().register();
+        new Placeholder().register();
     }
 }

@@ -1,5 +1,6 @@
 package coma112.cbounty.utils;
 
+import com.github.Anon8281.universalScheduler.utils.JavaUtil;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.hooks.Placeholder;
 import coma112.cbounty.hooks.PlayerPoints;
@@ -15,7 +16,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("deprecation")
 public class StartingUtils {
+    public static final boolean isFolia = JavaUtil.classExists("io.papermc.paper.threadedregions.RegionizedServer");
     private static boolean isSupported;
 
     public static void registerHooks() {

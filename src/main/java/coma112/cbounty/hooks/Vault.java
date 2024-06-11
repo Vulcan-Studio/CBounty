@@ -1,6 +1,7 @@
 package coma112.cbounty.hooks;
 
 import coma112.cbounty.CBounty;
+import coma112.cbounty.utils.BountyLogger;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;

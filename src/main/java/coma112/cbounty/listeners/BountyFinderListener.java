@@ -1,5 +1,6 @@
 package coma112.cbounty.listeners;
 
+import com.github.Anon8281.universalScheduler.scheduling.tasks.MyScheduledTask;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.item.IItemBuilder;
@@ -11,7 +12,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
@@ -21,18 +21,12 @@ public class BountyFinderListener implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItem(event.getNewSlot());
 
-
         if (item != null && item.equals(IItemBuilder.createItemFromSection("bountyfinder-item"))) {
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    if (player.getInventory().getItemInMainHand().equals(item)) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(getNearestBountyInfo(player)));
-                    } else {
-                        cancel();
-                    }
+            MyScheduledTask task = CBounty.getInstance().getScheduler().runTaskTimer(() -> {
+                if (player.getInventory().getItemInMainHand().equals(item)) {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(getNearestBountyInfo(player)));
                 }
-            }.runTaskTimer(CBounty.getInstance(), 0, 10);
+            }, 0, 10);
         }
     }
 
