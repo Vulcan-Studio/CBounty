@@ -1,17 +1,19 @@
 package coma112.cbounty.utils;
 
 import coma112.cbounty.CBounty;
+import coma112.cbounty.commands.CommandBounty;
 import coma112.cbounty.listeners.BountyDeathListener;
 import coma112.cbounty.listeners.BountyFinderListener;
 import coma112.cbounty.listeners.GlowingListener;
 import coma112.cbounty.menu.MenuListener;
 import org.bukkit.event.Listener;
+import revxrsal.commands.bukkit.BukkitCommandHandler;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @SuppressWarnings("deprecation")
-public class ListenerRegister {
+public class RegisterUtils {
     public static void registerEvents() {
         Set<Class<? extends Listener>> listenerClasses = getListenerClasses();
 
@@ -22,6 +24,11 @@ public class ListenerRegister {
                 BountyLogger.error(exception.getMessage());
             }
         }
+    }
+
+    public static void registerCommands() {
+        BukkitCommandHandler handler = BukkitCommandHandler.create(CBounty.getInstance());
+        handler.register(new CommandBounty());
     }
 
     private static Set<Class<? extends Listener>> getListenerClasses() {

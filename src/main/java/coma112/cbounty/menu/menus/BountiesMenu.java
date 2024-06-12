@@ -37,7 +37,7 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
     }
 
     @Override
-    public void handleMenu(InventoryClickEvent event) {
+    public void handleMenu(final InventoryClickEvent event) {
         List<Bounty> bounties = CBounty.getDatabaseManager().getBounties();
 
         if (!(event.getWhoClicked() instanceof Player player)) return;
@@ -81,7 +81,7 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
     }
 
     @EventHandler
-    public void onClose(InventoryCloseEvent event) {
+    public void onClose(final InventoryCloseEvent event) {
         if (event.getInventory().equals(inventory)) close();
     }
 

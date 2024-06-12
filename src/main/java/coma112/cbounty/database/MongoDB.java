@@ -46,11 +46,9 @@ public class MongoDB extends AbstractDatabase {
         String password = section.getString("password");
         String connectionString;
 
-        if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) {
-            connectionString = String.format("mongodb://%s:%s@%s:%d/%s", username, password, host, port, databaseName);
-        } else {
-            connectionString = String.format("mongodb://%s:%d/%s", host, port, databaseName);
-        }
+        if (username != null && !username.isEmpty() && password != null && !password.isEmpty()) connectionString = String.format("mongodb://%s:%s@%s:%d/%s", username, password, host, port, databaseName);
+        else connectionString = String.format("mongodb://%s:%d/%s", host, port, databaseName);
+
 
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(new ConnectionString(connectionString))
@@ -143,10 +141,12 @@ public class MongoDB extends AbstractDatabase {
         Document result = bountyCollection.find(eq("target", player.getName()))
                 .sort(new Document("bountyDate", -1))
                 .first();
+
         if (result != null) {
             long diff = new java.util.Date().getTime() - result.getDate("bountyDate").getTime();
             return (int) (diff / (1000 * 60 * 60 * 24));
         }
+
         return 0;
     }
 
@@ -186,6 +186,7 @@ public class MongoDB extends AbstractDatabase {
     @Override
     public List<Top> getTop(int number) {
         List<Top> topStreaks = new ArrayList<>();
+
         try (MongoCursor<Document> cursor = bountyCollection.find()
                 .sort(new Document("streak", -1))
                 .limit(number)
@@ -207,6 +208,7 @@ public class MongoDB extends AbstractDatabase {
                 .sort(new Document("streak", -1))
                 .skip(top - 1)
                 .first();
+
         return result != null ? result.getString("target") : null;
     }
 
@@ -216,6 +218,7 @@ public class MongoDB extends AbstractDatabase {
                 .sort(new Document("streak", -1))
                 .skip(top - 1)
                 .first();
+
         return result != null ? result.getInteger("streak") : 0;
     }
 

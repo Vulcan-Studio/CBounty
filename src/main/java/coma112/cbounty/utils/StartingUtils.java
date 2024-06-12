@@ -29,8 +29,8 @@ public class StartingUtils {
     }
 
     public static void registerListenersAndCommands() {
-        ListenerRegister.registerEvents();
-        CommandRegister.registerCommands();
+        RegisterUtils.registerEvents();
+        RegisterUtils.registerCommands();
     }
 
     public static void checkVM() {

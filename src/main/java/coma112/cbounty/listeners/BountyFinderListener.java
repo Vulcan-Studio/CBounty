@@ -17,15 +17,13 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("deprecation")
 public class BountyFinderListener implements Listener {
     @EventHandler
-    public void onPlayerItemHeld(PlayerItemHeldEvent event) {
+    public void onPlayerItemHeld(final PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItem(event.getNewSlot());
 
         if (item != null && item.equals(IItemBuilder.createItemFromSection("bountyfinder-item"))) {
-            MyScheduledTask task = CBounty.getInstance().getScheduler().runTaskTimer(() -> {
-                if (player.getInventory().getItemInMainHand().equals(item)) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(getNearestBountyInfo(player)));
-                }
+            CBounty.getInstance().getScheduler().runTaskTimer(() -> {
+                if (player.getInventory().getItemInMainHand().equals(item)) player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(getNearestBountyInfo(player)));
             }, 0, 10);
         }
     }

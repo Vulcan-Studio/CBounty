@@ -23,7 +23,7 @@ public abstract class Menu implements InventoryHolder {
 
     public abstract int getSlots();
 
-    public abstract void handleMenu(InventoryClickEvent event);
+    public abstract void handleMenu(final InventoryClickEvent event);
 
     public abstract void setMenuItems();
 

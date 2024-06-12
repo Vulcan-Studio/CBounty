@@ -1,6 +1,5 @@
 package coma112.cbounty.events;
 
-import coma112.cbounty.enums.RewardType;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -17,10 +16,6 @@ public class BountyRemoveEvent extends Event {
     public BountyRemoveEvent(@Nullable Player sender, @NotNull Player target) {
         this.sender = sender;
         this.target = target;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
     }
 
     @Override

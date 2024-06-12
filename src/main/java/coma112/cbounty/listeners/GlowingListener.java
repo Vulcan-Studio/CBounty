@@ -26,22 +26,22 @@ import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyRemove;
 @SuppressWarnings("deprecation")
 public class GlowingListener implements Listener {
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
+    public void onJoin(final PlayerJoinEvent event) {
         tryToSetGlowing(event.getPlayer());
     }
 
     @EventHandler
-    public void onRespawn(PlayerRespawnEvent event) {
+    public void onRespawn(final PlayerRespawnEvent event) {
         tryToSetGlowing(event.getPlayer());
     }
 
     @EventHandler
-    public void onDeath(BountyDeathEvent event) {
+    public void onDeath(final BountyDeathEvent event) {
         tryToRemoveGlowing(event.getTarget());
     }
 
     @EventHandler
-    public void onRemove(BountyRemoveEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public void onRemove(final BountyRemoveEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
         tryToRemoveGlowing(event.getTarget());
 
         Webhook.sendWebhook(
@@ -59,7 +59,7 @@ public class GlowingListener implements Listener {
     }
 
     @EventHandler
-    public void onCreate(BountyCreateEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public void onCreate(final BountyCreateEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
         if (!StartingUtils.isFolia) tryToSetGlowing(event.getTarget());
 
         Webhook.sendWebhook(

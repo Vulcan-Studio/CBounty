@@ -20,7 +20,7 @@ import static coma112.cbounty.hooks.Webhook.replacePlaceholdersTargetDeath;
 public class BountyDeathListener implements Listener {
 
     @EventHandler
-    public void onDeath(PlayerDeathEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public void onDeath(final PlayerDeathEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
         Player target = event.getEntity();
         Player killer = target.getKiller();
 
