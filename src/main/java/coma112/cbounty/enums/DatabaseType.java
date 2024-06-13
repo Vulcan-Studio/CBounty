@@ -2,5 +2,6 @@ package coma112.cbounty.enums;
 
 public enum DatabaseType {
     MYSQL, mysql,
-    MONGODB, mongodb
+    MONGODB, mongodb,
+    SQLITE, sqlite
 }

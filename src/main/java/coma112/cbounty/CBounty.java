@@ -6,6 +6,7 @@ import coma112.cbounty.config.Config;
 import coma112.cbounty.database.AbstractDatabase;
 import coma112.cbounty.database.MongoDB;
 import coma112.cbounty.database.MySQL;
+import coma112.cbounty.database.SQLite;
 import coma112.cbounty.enums.DatabaseType;
 import coma112.cbounty.enums.LanguageType;
 import coma112.cbounty.enums.keys.ConfigKeys;
@@ -105,6 +106,12 @@ public final class CBounty extends JavaPlugin {
                     MongoDB mongodb = (MongoDB) databaseManager;
                     mongodb.createCollection();
                     mongodb.initializeCounter();
+                }
+
+                case SQLITE, sqlite -> {
+                    databaseManager = new SQLite();
+                    SQLite sqlite = (SQLite) databaseManager;
+                    sqlite.createTable();
                 }
             }
         } catch (SQLException | ClassNotFoundException exception) {

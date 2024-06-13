@@ -23,6 +23,11 @@ public class BountyDeathEvent extends Event {
         this.rewardType = rewardType;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+
     @Override
     public @NotNull HandlerList getHandlers() {
         return handlers;

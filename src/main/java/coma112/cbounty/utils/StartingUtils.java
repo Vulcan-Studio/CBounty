@@ -57,7 +57,19 @@ public class StartingUtils {
         }
 
         try {
-            int midVersion = Integer.parseInt((Bukkit.getServer().getClass().getName().split("\\.")[3]).split("_")[1]);
+            String[] classParts = Bukkit.getServer().getClass().getName().split("\\.");
+            if (classParts.length < 4) {
+                BountyLogger.error("Unexpected server class name format: " + Bukkit.getServer().getClass().getName());
+                isSupported = false;
+                return;
+            }
+            String[] versionParts = classParts[3].split("_");
+            if (versionParts.length < 2) {
+                BountyLogger.error("Unexpected version format in class name: " + classParts[3]);
+                isSupported = false;
+                return;
+            }
+            int midVersion = Integer.parseInt(versionParts[1]);
 
             if (midVersion <= 12) {
                 isSupported = false;

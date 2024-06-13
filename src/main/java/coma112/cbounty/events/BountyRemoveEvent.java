@@ -18,6 +18,11 @@ public class BountyRemoveEvent extends Event {
         this.target = target;
     }
 
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+
     @Override
     public @NotNull HandlerList getHandlers() {
         return handlers;

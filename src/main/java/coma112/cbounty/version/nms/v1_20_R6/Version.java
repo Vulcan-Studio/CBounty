@@ -1,4 +1,4 @@
-package coma112.cbounty.version.nms.v1_20_R4;
+package coma112.cbounty.version.nms.v1_20_R6;
 
 import coma112.cbounty.utils.BountyLogger;
 import coma112.cbounty.version.ServerVersionSupport;
@@ -16,7 +16,7 @@ public class Version implements ServerVersionSupport {
 
     @Override
     public String getName() {
-        return "1.20_R4";
+        return "1.20_R6";
     }
 
     @Override
