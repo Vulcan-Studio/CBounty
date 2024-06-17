@@ -336,7 +336,7 @@ public class MySQL extends AbstractDatabase {
     }
 
     @Override
-    public void reconnect(@NotNull ConfigurationSection section) {
+    public void reconnect() {
         try {
             if (getConnection() != null && !getConnection().isClosed()) getConnection().close();
             new MySQL(Objects.requireNonNull(CBounty.getInstance().getConfiguration().getSection("database.mysql")));

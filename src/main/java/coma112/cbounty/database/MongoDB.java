@@ -223,7 +223,7 @@ public class MongoDB extends AbstractDatabase {
     }
 
     @Override
-    public void reconnect(@NotNull ConfigurationSection section) {
+    public void reconnect() {
         disconnect();
         new MongoDB(Objects.requireNonNull(CBounty.getInstance().getConfiguration().getSection("database.mongodb")));
         initializeCounter();

@@ -1,7 +1,7 @@
 name: CBounty
-version: '3.5'
+version: '3.7.1'
 main: coma112.cbounty.CBounty
-api-version: '1.19'
+api-version: '1.18'
 folia-supported: true
 author: Coma112
 softdepend:

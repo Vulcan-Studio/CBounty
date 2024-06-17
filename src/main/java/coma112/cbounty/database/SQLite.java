@@ -304,10 +304,10 @@ public class SQLite extends AbstractDatabase {
     }
 
     @Override
-    public void reconnect(@NotNull ConfigurationSection section) {
+    public void reconnect() {
         try {
             if (getConnection() != null && !getConnection().isClosed()) getConnection().close();
-            new MySQL(Objects.requireNonNull(CBounty.getInstance().getConfiguration().getSection("database.mysql")));
+            new SQLite();
         } catch (SQLException | ClassNotFoundException exception) {
             BountyLogger.error(exception.getMessage());
         }

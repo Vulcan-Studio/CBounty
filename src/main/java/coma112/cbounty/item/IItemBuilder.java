@@ -40,8 +40,6 @@ public interface IItemBuilder {
 
     IItemBuilder setName(@NotNull String name);
 
-    ItemBuilder setLocalizedName(@NotNull String name);
-
     void addEnchantment(@NotNull Enchantment enchantment, int level);
 
     default IItemBuilder addEnchantments(Map<Enchantment, Integer> enchantments) {

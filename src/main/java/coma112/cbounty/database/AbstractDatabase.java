@@ -31,7 +31,7 @@ public abstract class AbstractDatabase {
     public abstract RewardType getRewardType(@NotNull Player player);
 
     // Connection Management
-    public abstract void reconnect(@NotNull ConfigurationSection section);
+    public abstract void reconnect();
     public abstract boolean isConnected();
     public abstract void disconnect();
 

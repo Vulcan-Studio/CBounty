@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'coma112'
-version = '3.5'
+version = '3.7.1'
 
 repositories {
     mavenCentral()
@@ -57,12 +57,10 @@ compileJava {
 
 shadowJar {
     relocate 'org.bstats', 'coma112.cbounty'
-    relocate 'com.github.Anon8281.universalScheduler', 'coma112.cbounty.universalScheduler'
+    relocate 'com.github.Anon8281.universalScheduler', 'coma112.cbounty'
     minimize()
 }
 
 tasks.build {
     dependsOn shadowJar
 }
-
-

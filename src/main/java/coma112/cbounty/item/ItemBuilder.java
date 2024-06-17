@@ -61,12 +61,6 @@ public class ItemBuilder implements IItemBuilder {
     }
 
     @Override
-    public ItemBuilder setLocalizedName(@NotNull String name) {
-        meta.setLocalizedName(name);
-        return this;
-    }
-
-    @Override
     public void addEnchantment(@NotNull Enchantment enchantment, int level) {
         meta.addEnchant(enchantment, level, true);
     }
