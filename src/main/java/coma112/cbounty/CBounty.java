@@ -22,8 +22,8 @@ import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.sql.SQLException;
 import java.util.Objects;
-import static coma112.cbounty.utils.StartingUtils.registerHooks;
-import static coma112.cbounty.utils.StartingUtils.registerListenersAndCommands;
+
+import static coma112.cbounty.utils.StartingUtils.*;
 
 public final class CBounty extends JavaPlugin {
     @Getter public static TokenManager tokenManager;
@@ -84,9 +84,9 @@ public final class CBounty extends JavaPlugin {
         config = new Config();
         token = new Token();
 
-        saveResource("locales/messages_en.yml", false);
-        saveResource("locales/messages_hu.yml", false);
-        saveResource("locales/messages_de.yml", false);
+        saveResourceIfNotExists("locales/messages_en.yml");
+        saveResourceIfNotExists("locales/messages_hu.yml");
+        saveResourceIfNotExists("locales/messages_de.yml");
 
         language = new Language("messages_" + LanguageType.valueOf(ConfigKeys.LANGUAGE.getString()));
     }

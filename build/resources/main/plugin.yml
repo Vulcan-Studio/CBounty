@@ -1,5 +1,5 @@
 name: CBounty
-version: '3.7.1'
+version: '3.7.4'
 main: coma112.cbounty.CBounty
 api-version: '1.18'
 folia-supported: true
@@ -7,3 +7,4 @@ author: Coma112
 softdepend:
   - TokenManager
   - PlayerPoints
+  - Vault

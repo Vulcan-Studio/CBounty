@@ -8,6 +8,7 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("deprecation")
 public class Placeholder extends PlaceholderExpansion {
     @Override
     public @NotNull String getIdentifier() {
@@ -21,7 +22,7 @@ public class Placeholder extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getVersion() {
-        return "1.0";
+        return CBounty.getInstance().getDescription().getVersion();
     }
 
     @Override

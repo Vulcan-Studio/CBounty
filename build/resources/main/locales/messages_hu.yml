@@ -1,7 +1,5 @@
 messages:
-  no-permission: "&6&lBOUNTY &8| &cNincs jogosultságod ehhez!"
   reload: "&6&lBOUNTY &8| &aA fájlok sikeresen újratöltve!"
-  player-required: "&6&lBOUNTY &8| &cJátékos megadása szükséges!"
   first-page: "&6&lBOUNTY &8| &cMár az első oldalon vagy!"
   last-page: "&6&lBOUNTY &8| &cMár az utolsó oldalon vagy!"
   setbounty-usage: "&6&lBOUNTY &8| &cHasználat: /setbounty [célpont] [token | pénz] [jutalom]"

@@ -1,7 +1,5 @@
 messages:
-  no-permission: "&6&lBOUNTY &8| &cYou do not have permission to do this!"
   reload: "&6&lBOUNTY &8| &aI have successfully reloaded the files!"
-  player-required: "&6&lBOUNTY &8| &cPlayer is required!"
   first-page: "&6&lBOUNTY &8| &cYou are already on the first page!"
   last-page: "&6&lBOUNTY &8| &cYou are already on the last page!"
   setbounty-usage: "&6&lBOUNTY &8| &cUsage: /setbounty [target] [token | money] [reward]"

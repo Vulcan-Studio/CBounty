@@ -11,7 +11,9 @@ import coma112.cbounty.version.MinecraftVersion;
 import coma112.cbounty.version.ServerVersionSupport;
 import coma112.cbounty.version.VersionSupport;
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +25,6 @@ public class StartingUtils {
 
     public static void registerHooks() {
         Placeholder.registerHook();
-        Vault.register();
         Token.register();
         PlayerPoints.register();
     }
@@ -92,6 +93,10 @@ public class StartingUtils {
         new UpdateChecker(116501).getVersion(version -> {
             BountyLogger.info(CBounty.getInstance().getDescription().getVersion().equals(version) ? "Everything is up to date" : "You are using an outdated version! Please download the new version so that your server is always fresh! The newest version: " + version);
         });
+    }
+
+    public static void saveResourceIfNotExists(@NotNull String resourcePath) {
+        if (!new File(CBounty.getInstance().getDataFolder(), resourcePath).exists()) CBounty.getInstance().saveResource(resourcePath, false);
     }
 
     static int getVMVersion() {
