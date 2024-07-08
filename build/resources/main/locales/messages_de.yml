@@ -17,6 +17,7 @@ messages:
   not-enough-money: "&6&lBOUNTY &8| &cDu hast nicht genügend Geld!"
   not-enough-playerpoints: "&6&lBOUNTY &8| &cDu hast nicht genügend Spielerpunkte!"
   not-enough-level: "&6&lBOUNTY &8| &cDu hast nicht genügend XP-Level!"
+  not-enough-coinsengine: "&6&lBOUNTY &8| &cDu hast nicht genügend coinsengine!"
   maximum-top: "&6&lBOUNTY &8| &cKann nicht größer als {top} sein"
   top:
     header: '\n&6Top {value} Serien:&f\n\n'

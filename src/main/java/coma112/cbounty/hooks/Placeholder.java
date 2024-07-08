@@ -17,7 +17,7 @@ public class Placeholder extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getAuthor() {
-        return "Coma112";
+        return "Coma112 & B3rcyy (Vulcan Studio)";
     }
 
     @Override

@@ -4,5 +4,6 @@ public enum RewardType {
     TOKEN,
     MONEY,
     LEVEL,
-    PLAYERPOINTS
+    PLAYERPOINTS,
+    COINSENGINE
 }

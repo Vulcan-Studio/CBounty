@@ -34,6 +34,9 @@ dependency:
   tokenmanager: false
   playerpoints: false
   level: true
+  coinsengine:
+    enabled: false
+    currency: "coins"
 
 # This is the bounty item in the GUI.
 bounty-item:

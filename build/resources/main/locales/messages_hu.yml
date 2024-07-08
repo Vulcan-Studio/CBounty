@@ -16,6 +16,7 @@ messages:
   not-enough-token: "&6&lBOUNTY &8| &cNincs elég tokened!"
   not-enough-money: "&6&lBOUNTY &8| &cNincs elég pénzed!"
   not-enough-playerpoints: "&6&lBOUNTY &8| &cNincs elég játékospontod!"
+  not-enough-coinsengine: "&6&lBOUNTY &8| &cNincsen elég coinsengine-d!"
   not-enough-level: "&6&lBOUNTY &8| &cNincs elég XP szinted!"
   maximum-top: "&6&lBOUNTY &8| &cNem lehet nagyobb, mint {top}"
   top:

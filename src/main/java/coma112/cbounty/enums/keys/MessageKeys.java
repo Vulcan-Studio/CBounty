@@ -24,6 +24,7 @@ public enum MessageKeys {
         NOT_ENOUGH_TOKEN("messages.not-enough-token"),
         NOT_ENOUGH_MONEY("messages.not-enough-money"),
         NOT_ENOUGH_PLAYERPOINTS("messages.not-enough-playerpoints"),
+        NOT_ENOUGH_COINSENGINE("messages.not-enough-coinsengine"),
         NOT_ENOUGH_LEVEL("messages.not-enough-level"),
         MAX_TOP("messages.maximum-top"),
         TOP_HEADER("messages.top.header"),

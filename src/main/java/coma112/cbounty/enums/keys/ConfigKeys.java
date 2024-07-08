@@ -18,6 +18,8 @@ public enum ConfigKeys {
     NO("placeholder.no"),
     DEPENDENCY_TOKENMANAGER("dependency.tokenmanager"),
     DEPENDENCY_PLAYERPOINTS("dependency.playerpoints"),
+    DEPENDENCY_COINSENGINE("dependency.coinsengine.enabled"),
+    DEPENDENCY_COINSENGINE_CURRENCY("dependency.coinsengine.currency"),
     DEPENDENCY_LEVEL("dependency.level"),
     GLOWING_ENABLED("feature.glowing.enabled"),
     WEBHOOK_ENABLED("webhook.enabled"),

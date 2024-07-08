@@ -1,10 +1,14 @@
 name: CBounty
-version: '3.7.4'
+version: '3.7.5'
 main: coma112.cbounty.CBounty
 api-version: '1.18'
 folia-supported: true
-author: Coma112
+authors:
+  - Coma112
+  - B3rcyy
+  - Vulcan Studio
 softdepend:
   - TokenManager
   - PlayerPoints
   - Vault
+  - CoinsEngine

@@ -20,6 +20,8 @@ import me.realized.tokenmanager.api.TokenManager;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
+import su.nightexpress.coinsengine.api.CoinsEngineAPI;
+
 import java.sql.SQLException;
 import java.util.Objects;
 

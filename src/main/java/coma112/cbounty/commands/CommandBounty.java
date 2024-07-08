@@ -6,6 +6,7 @@ import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.events.BountyRemoveEvent;
+import coma112.cbounty.hooks.CoinsEngine;
 import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.item.IItemBuilder;
 import coma112.cbounty.managers.Top;
@@ -20,6 +21,7 @@ import revxrsal.commands.annotation.Command;
 import revxrsal.commands.annotation.Default;
 import revxrsal.commands.annotation.Subcommand;
 import revxrsal.commands.bukkit.annotation.CommandPermission;
+import su.nightexpress.coinsengine.api.CoinsEngineAPI;
 
 import java.util.UUID;
 
@@ -102,6 +104,7 @@ public class CommandBounty {
             case MONEY -> success = handleMoneyReward(player, reward);
             case PLAYERPOINTS -> success = handlePlayerPointsReward(player, reward);
             case LEVEL -> success = handleLevelReward(player, reward);
+            case COINSENGINE -> success = handleCoinsEngineReward(player, reward);
         }
 
         if (success) {
@@ -189,9 +192,9 @@ public class CommandBounty {
         switch (CBounty.getDatabaseManager().getRewardType(target)) {
             case TOKEN -> CBounty.getTokenManager().addTokens(player, CBounty.getDatabaseManager().getReward(target));
             case MONEY -> Vault.getEconomy().depositPlayer(player, CBounty.getDatabaseManager().getReward(target));
-            case PLAYERPOINTS ->
-                    CBounty.getPlayerPointsManager().give(player.getUniqueId(), CBounty.getDatabaseManager().getReward(target));
+            case PLAYERPOINTS -> CBounty.getPlayerPointsManager().give(player.getUniqueId(), CBounty.getDatabaseManager().getReward(target));
             case LEVEL -> player.setLevel(player.getLevel() + CBounty.getDatabaseManager().getReward(target));
+            case COINSENGINE -> CoinsEngineAPI.addBalance(player, CoinsEngine.getCurrency(), CBounty.getDatabaseManager().getReward(target));
         }
 
         player.sendMessage(MessageKeys.SUCCESSFUL_TAKEOFF_PLAYER
@@ -250,6 +253,16 @@ public class CommandBounty {
             return false;
         } else {
             api.take(uuid, reward);
+            return true;
+        }
+    }
+
+    private boolean handleCoinsEngineReward(@NotNull Player player, int reward) {
+        if (CoinsEngineAPI.getBalance(player, CoinsEngine.getCurrency()) < reward) {
+            player.sendMessage(MessageKeys.NOT_ENOUGH_COINSENGINE.getMessage());
+            return false;
+        } else {
+            CoinsEngineAPI.removeBalance(player, CoinsEngine.getCurrency(), reward);
             return true;
         }
     }
