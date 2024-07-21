@@ -84,4 +84,8 @@ public enum ConfigKeys {
     public boolean getBoolean() {
         return CBounty.getInstance().getConfiguration().getBoolean(path);
     }
+
+
+
+
 }

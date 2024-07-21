@@ -35,9 +35,9 @@ public enum MinecraftVersion {
 
         if (matcher.find()) {
             try {
-                int major = 1; // Mivel a major verzió mindig 1
+                int major = 1;
                 int minor = Integer.parseInt(matcher.group(1));
-                int patch = matcher.group(2) != null ? Integer.parseInt(matcher.group(2)) : 0; // Default to 0 if patch is not present
+                int patch = matcher.group(2) != null ? Integer.parseInt(matcher.group(2)) : 0;
 
                 serverVersion = determineVersion(major, minor, patch);
             } catch (NumberFormatException e) {
@@ -76,14 +76,7 @@ public enum MinecraftVersion {
         return UNKNOWN;
     }
 
-    private static MinecraftVersion getVersionFromPath(String pathPart) {
-        for (MinecraftVersion version : values()) {
-            if (pathPart.startsWith(version.name().substring(1).replace("_", "."))) {
-                return version;
-            }
-        }
-        return UNKNOWN;
-    }
+
 
     public static MinecraftVersion getCurrentVersion() {
         BountyLogger.info("Current Minecraft version: " + serverVersion);

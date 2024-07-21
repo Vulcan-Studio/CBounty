@@ -26,7 +26,5 @@ public class VersionSupport {
             BountyLogger.warn("version to a newer version. (like 1.19_R2)");
             BountyLogger.warn("---   PLEASE READ THIS MESSAGE!   ---");
         }
-
-        BountyLogger.info("Version support for {} loaded!", version);
     }
 }

@@ -1,4 +1,15 @@
 messages:
+  help:
+    - "§a--- CBounty Hilfe ---"
+    - "§a/bounty help - Zeigt das Hilfemenü an."
+    - "§a/bounty reload - Lädt die Plugin-Konfigurations- und Sprachdateien neu."
+    - "§a/bounty streaktop [wert] - Zeigt die besten Bounty-Streaks an."
+    - "§a/bounty menu - Öffnet das Bounty-Menü."
+    - "§a/bounty set <ziel> <belohnungstyp> <belohnung> - Setzt ein Bounty auf einen Spieler."
+    - "§a/bounty remove <ziel> - Entfernt ein Bounty von einem Spieler."
+    - "§a/bounty raise <ziel> <neueBelohnung> - Erhöht das Bounty eines Spielers."
+    - "§a/bounty takeoff <ziel> - Entfernt ein Bounty von einem Spieler."
+    - "§a/bounty bountyfinder <ziel> - Gibt einem Spieler einen Bounty-Finder-Gegenstand."
   reload: "&6&lBOUNTY &8| &aIch habe die Dateien erfolgreich neu geladen!"
   first-page: "&6&lBOUNTY &8| &cDu bist bereits auf der ersten Seite!"
   last-page: "&6&lBOUNTY &8| &cDu bist bereits auf der letzten Seite!"
@@ -10,6 +21,8 @@ messages:
   already-bounty: "&6&lBOUNTY &8| &cDas Ziel ist bereits gesucht!"
   no-negative: "&6&lBOUNTY &8| &cDie Zahl sollte positiv sein!"
   successful-set: "&6&lBOUNTY &8| &aDu hast erfolgreich eine Belohnung gesetzt!"
+  bounty-set-broadcast: "&6&lBOUNTY &8| &6Eine Belohnung wurde festgelegt! &aZiel: {target}, &aBelohnung: {reward}, &aBelohnungs Typ: {rewardType}"
+  bounty-raise-broadcast: "&6&lBOUNTY &8| &6Die Belohnung wurde erhöht! &aZiel: {target}, &aAlte Belohnung: {oldReward}, &aNeue Belohnung: {newReward}"
   bounty-dead-everyone: "&6&lBOUNTY &8| &a{name} ist nicht mehr gesucht!"
   bounty-dead-target: "&6&lBOUNTY &8| &aDu warst gesucht, aber jemand hat dich getötet!"
   bounty-dead-killer: "&6&lBOUNTY &8| &aDu hast erfolgreich einen Gesuchten getötet!"
@@ -20,7 +33,7 @@ messages:
   not-enough-coinsengine: "&6&lBOUNTY &8| &cDu hast nicht genügend coinsengine!"
   maximum-top: "&6&lBOUNTY &8| &cKann nicht größer als {top} sein"
   top:
-    header: '\n&6Top {value} Serien:&f\n\n'
+    header: '&6Top {value} Serien:&f'
     message: '&f{place}. &6{name} &f- &7(&6{streak}&7)'
   max-bounty: "&6&lBOUNTY &8| &cDu kannst nicht mehr Belohnungen setzen!"
   feature-disabled: "&6&lBOUNTY &8| &cDiese Funktion ist derzeit deaktiviert!"
@@ -35,3 +48,7 @@ messages:
   successful-takeoff-player: "&6&lBOUNTY &8| &aDu hast erfolgreich die Belohnung von {target} entfernt!"
   successful-takeoff-target: "&6&lBOUNTY &8| &a{player} hat die Belohnung von dir entfernt!"
   full-inventory: "Das Inventar des Ziels ist voll!"
+  item-already-in-inventory: "&cDer Gegenstand ist bereits im Inventar des Zielspielers."
+  bounty-finder-given: "&aDu hast erfolgreich einen Belohnungssucher an &a{target}&7 übergeben."
+  bounty-finder-received: "&aDu hast einen Belohnungssucher erhalten!"
+  bounty-finder-cooldown-message: "&cDu musst noch {time} Sekunden warten, bevor du erneut einen Bounty Finder anfordern kannst."

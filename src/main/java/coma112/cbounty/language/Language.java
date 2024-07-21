@@ -6,11 +6,14 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.List;
 
 public class Language extends ConfigUtils {
     public Language(@NotNull String name) {
         super(CBounty.getInstance().getDataFolder().getPath() + File.separator + "locales", name);
         save();
     }
+
+
 }
 

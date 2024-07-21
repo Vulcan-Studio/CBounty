@@ -11,7 +11,6 @@ import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,7 +58,6 @@ public class StartingUtils {
         try {
             String bukkitVersion = Bukkit.getVersion();
 
-            // A Bukkit verzió formátuma: "1.21-91-3c8a7fe (MC: 1.21)" vagy "1.20.6-148-20f5165 (MC: 1.20.6)"
             Pattern pattern = Pattern.compile("\\(MC: (\\d+)\\.(\\d+)(?:\\.(\\d+))?\\)");
             Matcher matcher = pattern.matcher(bukkitVersion);
 

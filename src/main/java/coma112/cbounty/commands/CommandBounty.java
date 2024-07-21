@@ -11,35 +11,63 @@ import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.item.IItemBuilder;
 import coma112.cbounty.managers.Top;
 import coma112.cbounty.menu.menus.BountiesMenu;
+import coma112.cbounty.processor.MessageProcessor;
 import coma112.cbounty.utils.MenuUtils;
 import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import revxrsal.commands.annotation.Command;
 import revxrsal.commands.annotation.Default;
+import revxrsal.commands.annotation.DefaultFor;
 import revxrsal.commands.annotation.Subcommand;
 import revxrsal.commands.bukkit.annotation.CommandPermission;
+
 import su.nightexpress.coinsengine.api.CoinsEngineAPI;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
-@SuppressWarnings("deprecation")
+
 @Command({"bounty", "cbounty"})
 public class CommandBounty {
+    private final Map<UUID, Long> bountyFinderCooldowns = new HashMap<>();
+    private static final long COOLDOWN_TIME = 5 * 60 * 1000;
+
+
+
+    @DefaultFor({"bounty", "cbounty"})
+    public void defaultCommand(@NotNull CommandSender sender) {
+            help(sender);
+    }
+
+
+    @Subcommand("help")
+    public void help(@NotNull CommandSender sender) {
+        List<String> helpMessages = MessageKeys.HELP.getMessages();
+
+        for (String message : helpMessages) {
+            sender.sendMessage(message);
+        }
+    }
+
     @Subcommand("reload")
     @CommandPermission("cbounty.reload")
     public void reload(@NotNull CommandSender sender) {
         CBounty.getInstance().getLanguage().reload();
         CBounty.getInstance().getConfiguration().reload();
-        CBounty.getDatabaseManager().reconnect();
         sender.sendMessage(MessageKeys.RELOAD.getMessage());
     }
 
     @Subcommand("streaktop")
     @CommandPermission("cbounty.streaktop")
-    public void streaktop(@NotNull CommandSender sender, int value) {
+    public void streaktop(@NotNull CommandSender sender, @Default("5") int value) {
         if (value <= 0) {
             sender.sendMessage(MessageKeys.NO_NEGATIVE.getMessage());
             return;
@@ -52,6 +80,7 @@ public class CommandBounty {
             return;
         }
 
+        // Get the top streaks text
         sender.sendMessage(Top.getTopStreak(value).toPlainText());
     }
 
@@ -110,6 +139,11 @@ public class CommandBounty {
         if (success) {
             databaseManager.createBounty(player, target, rewardType, reward);
             player.sendMessage(MessageKeys.SUCCESSFUL_SET.getMessage());
+            String bountySetMessage = MessageKeys.BOUNTY_SET.getMessage()
+                    .replace("{target}", target.getName())
+                    .replace("{reward}", String.valueOf(reward))
+                    .replace("{rewardType}", rewardType.toString());
+            Bukkit.broadcastMessage(bountySetMessage);
         }
     }
 
@@ -167,7 +201,14 @@ public class CommandBounty {
         target.sendMessage(MessageKeys.TARGET_RAISE
                 .getMessage()
                 .replace("{old}", String.valueOf(oldReward))
-                .replace("{new}", String.valueOf(oldReward + newReward)));
+                .replace("{new}", String.valueOf(newReward)));
+
+        // Broadcast the bounty raise message
+        String raiseMessage = MessageKeys.BOUNTY_RAISE.getMessage()
+                .replace("{target}", target.getName())
+                .replace("{oldReward}", String.valueOf(oldReward))
+                .replace("{newReward}", String.valueOf(newReward));
+        Bukkit.broadcastMessage(raiseMessage);
     }
 
     @Subcommand("takeoff")
@@ -216,12 +257,59 @@ public class CommandBounty {
             return;
         }
 
+        if (target.equals(player)) {
+            if (target.getInventory().firstEmpty() == -1) {
+                player.sendMessage(MessageKeys.FULL_INVENTORY.getMessage());
+                return;
+            }
+
+            target.getInventory().addItem(IItemBuilder.createItemFromSection("bountyfinder-item"));
+            target.sendMessage(MessageKeys.BOUNTY_FINDER_RECEIVED.getMessage());
+            return;
+        }
+
+        if (!player.hasPermission("cbounty.bountyfinder.other")) {
+            long currentTime = System.currentTimeMillis();
+            UUID playerId = player.getUniqueId();
+
+            // Check cooldown
+            if (bountyFinderCooldowns.containsKey(playerId)) {
+                long lastRequestTime = bountyFinderCooldowns.get(playerId);
+                if (currentTime - lastRequestTime < COOLDOWN_TIME) {
+                    long timeLeft = (COOLDOWN_TIME - (currentTime - lastRequestTime)) / 1000;
+                    player.sendMessage(MessageKeys.BOUNTY_FINDER_COOLDOWN_MESSAGE.getMessage()
+                            .replace("{time}", String.valueOf(timeLeft)));
+                    return;
+                }
+            }
+
+            // Update the last request time
+            bountyFinderCooldowns.put(playerId, currentTime);
+        }
+
         if (target.getInventory().firstEmpty() == -1) {
             player.sendMessage(MessageKeys.FULL_INVENTORY.getMessage());
             return;
         }
 
-        target.getInventory().addItem(IItemBuilder.createItemFromSection("bountyfinder-item"));
+        ItemStack bountyFinderItem = IItemBuilder.createItemFromSection("bountyfinder-item");
+
+        if (hasItem(target.getInventory(), bountyFinderItem)) {
+            player.sendMessage(MessageKeys.ITEM_ALREADY_IN_INVENTORY.getMessage());
+            return;
+        }
+
+        target.getInventory().addItem(bountyFinderItem);
+        player.sendMessage(MessageKeys.BOUNTY_FINDER_GIVEN.getMessage().replace("{target}", target.getName()));
+        target.sendMessage(MessageKeys.BOUNTY_FINDER_RECEIVED.getMessage());
+    }
+    private boolean hasItem(Inventory inventory, ItemStack item) {
+        for (ItemStack stack : inventory.getContents()) {
+            if (stack != null && stack.isSimilar(item)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean handleTokenReward(@NotNull Player player, int reward) {
