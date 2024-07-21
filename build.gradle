@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'coma112'
-version = '3.7.7'
+version = '3.7.8'
 
 repositories {
     mavenCentral()

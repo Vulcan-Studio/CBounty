@@ -33,13 +33,14 @@ public class CommandBounty {
     public void reload(@NotNull CommandSender sender) {
         CBounty.getInstance().getLanguage().reload();
         CBounty.getInstance().getConfiguration().reload();
+        CBounty.getDatabaseManager().reconnect();
         sender.sendMessage(MessageKeys.RELOAD.getMessage());
     }
 
     @Subcommand("streaktop")
     @CommandPermission("cbounty.streaktop")
     public void streaktop(@NotNull CommandSender sender, int value) {
-        if (value < 0) {
+        if (value <= 0) {
             sender.sendMessage(MessageKeys.NO_NEGATIVE.getMessage());
             return;
         }
@@ -48,11 +49,6 @@ public class CommandBounty {
             sender.sendMessage(MessageKeys.MAX_TOP
                     .getMessage()
                     .replace("{top}", String.valueOf(ConfigKeys.MAXIMUM_TOP.getInt())));
-            return;
-        }
-
-        if (value == null) {
-            sender.sendMessage(Top.getTopStreak(5).toPlainText());
             return;
         }
 
