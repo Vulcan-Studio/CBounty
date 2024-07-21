@@ -1,7 +1,7 @@
 language: "en" # Supported languages -> hu, de, en
 
 database:
-  type: "sqlite" # Supported database types -> sqlite, mysql, mongodb
+  type: "sqlite" # Supported database types -> sqlite, mysql
   mysql:
     host: "localhost"
     port: 3306

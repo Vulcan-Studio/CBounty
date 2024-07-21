@@ -59,7 +59,6 @@ public class StartingUtils {
         try {
             String bukkitVersion = Bukkit.getVersion();
 
-            // A Bukkit verzió formátuma: "1.21-91-3c8a7fe (MC: 1.21)" vagy "1.20.6-148-20f5165 (MC: 1.20.6)"
             Pattern pattern = Pattern.compile("\\(MC: (\\d+)\\.(\\d+)(?:\\.(\\d+))?\\)");
             Matcher matcher = pattern.matcher(bukkitVersion);
 
@@ -94,16 +93,15 @@ public class StartingUtils {
     }
 
     public static void saveResourceIfNotExists(@NotNull String resourcePath) {
-        if (!new File(CBounty.getInstance().getDataFolder(), resourcePath).exists()) {
-            CBounty.getInstance().saveResource(resourcePath, false);
-        } else {
-        }
+        if (!new File(CBounty.getInstance().getDataFolder(), resourcePath).exists()) CBounty.getInstance().saveResource(resourcePath, false);
     }
 
     static int getVMVersion() {
         String javaVersion = System.getProperty("java.version");
         Matcher matcher = Pattern.compile("(?:1\\.)?(\\d+)").matcher(javaVersion);
+
         if (!matcher.find()) return -1;
+
         String version = matcher.group(1);
 
         try {

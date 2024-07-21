@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CBounty.main.iml" filepath="$PROJECT_DIR$/.idea/modules/CBounty.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/CBounty.test.iml" filepath="$PROJECT_DIR$/.idea/modules/CBounty.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/coma112.CBounty.test.iml" filepath="$PROJECT_DIR$/.idea/modules/coma112.CBounty.test.iml" />
     </modules>
   </component>
 </project>

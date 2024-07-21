@@ -4,7 +4,6 @@ import com.github.Anon8281.universalScheduler.UniversalScheduler;
 import com.github.Anon8281.universalScheduler.scheduling.schedulers.TaskScheduler;
 import coma112.cbounty.config.Config;
 import coma112.cbounty.database.AbstractDatabase;
-import coma112.cbounty.database.MongoDB;
 import coma112.cbounty.database.MySQL;
 import coma112.cbounty.database.SQLite;
 import coma112.cbounty.enums.DatabaseType;
@@ -19,9 +18,7 @@ import lombok.Getter;
 import me.realized.tokenmanager.api.TokenManager;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
 import org.bstats.bukkit.Metrics;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import su.nightexpress.coinsengine.api.CoinsEngineAPI;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -100,14 +97,6 @@ public final class CBounty extends JavaPlugin {
                     databaseManager = new MySQL(Objects.requireNonNull(getConfiguration().getSection("database.mysql")));
                     MySQL mysql = (MySQL) databaseManager;
                     mysql.createTable();
-                }
-
-
-                case MONGODB, mongodb -> {
-                    databaseManager = new MongoDB(Objects.requireNonNull(getConfiguration().getSection("database.mongodb")));
-                    MongoDB mongodb = (MongoDB) databaseManager;
-                    mongodb.createCollection();
-                    mongodb.initializeCounter();
                 }
 
                 case SQLITE, sqlite -> {

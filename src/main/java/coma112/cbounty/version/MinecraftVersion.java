@@ -23,9 +23,6 @@ public enum MinecraftVersion {
     v1_20_R6,
     v1_21_R1;
 
-
-
-
     private static MinecraftVersion serverVersion;
 
     static {
@@ -35,12 +32,12 @@ public enum MinecraftVersion {
 
         if (matcher.find()) {
             try {
-                int major = 1; // Mivel a major verzió mindig 1
+                int major = 1;
                 int minor = Integer.parseInt(matcher.group(1));
-                int patch = matcher.group(2) != null ? Integer.parseInt(matcher.group(2)) : 0; // Default to 0 if patch is not present
+                int patch = matcher.group(2) != null ? Integer.parseInt(matcher.group(2)) : 0;
 
                 serverVersion = determineVersion(major, minor, patch);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException exception) {
                 serverVersion = UNKNOWN;
             }
         }
@@ -49,36 +46,37 @@ public enum MinecraftVersion {
 
     public static MinecraftVersion determineVersion(int major, int minor, int patch) {
         if (major == 1) {
-            switch (minor) {
-                case 18:
-                    return (patch == 1) ? v1_18_R1 : (patch == 2) ? v1_18_R2 : UNKNOWN;
-                case 19:
-                    switch (patch) {
-                        case 1: return v1_19_R1;
-                        case 2: return v1_19_R2;
-                        case 3: return v1_19_R3;
-                        case 4: return v1_19_R4;
-                        default: return UNKNOWN;
-                    }
-                case 20:
-                    switch (patch) {
-                        case 1: return v1_20_R1;
-                        case 2: return v1_20_R2;
-                        case 3: return v1_20_R3;
-                        case 6: return v1_20_R6;
-                        default: return UNKNOWN;
-                    }
-                case 21:
-                    return v1_21_R1;
-                default: return UNKNOWN;
-            }
+            return switch (minor) {
+                case 18 -> (patch == 1) ? v1_18_R1 : (patch == 2) ? v1_18_R2 : UNKNOWN;
+                case 19 -> switch (patch) {
+                    case 1 -> v1_19_R1;
+                    case 2 -> v1_19_R2;
+                    case 3 -> v1_19_R3;
+                    case 4 -> v1_19_R4;
+                    default -> UNKNOWN;
+                };
+
+                case 20 -> switch (patch) {
+                    case 1 -> v1_20_R1;
+                    case 2 -> v1_20_R2;
+                    case 3 -> v1_20_R3;
+                    case 6 -> v1_20_R6;
+                    default -> UNKNOWN;
+                };
+
+                case 21 -> v1_21_R1;
+                default -> UNKNOWN;
+            };
         }
         return UNKNOWN;
     }
 
-    private static MinecraftVersion getVersionFromPath(String pathPart) {
+    private static MinecraftVersion getVersionFromPath(@NotNull String pathPart) {
         for (MinecraftVersion version : values()) {
-            if (pathPart.startsWith(version.name().substring(1).replace("_", "."))) {
+            if (pathPart.startsWith(version
+                    .name()
+                    .substring(1)
+                    .replace("_", "."))) {
                 return version;
             }
         }

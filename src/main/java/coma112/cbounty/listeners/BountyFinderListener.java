@@ -1,11 +1,9 @@
 package coma112.cbounty.listeners;
 
-import com.github.Anon8281.universalScheduler.scheduling.tasks.MyScheduledTask;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.item.IItemBuilder;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import coma112.cbounty.utils.BountyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +12,6 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("deprecation")
 public class BountyFinderListener implements Listener {
     @EventHandler
     public void onPlayerItemHeld(final PlayerItemHeldEvent event) {
@@ -23,7 +20,7 @@ public class BountyFinderListener implements Listener {
 
         if (item != null && item.equals(IItemBuilder.createItemFromSection("bountyfinder-item"))) {
             CBounty.getInstance().getScheduler().runTaskTimer(() -> {
-                if (player.getInventory().getItemInMainHand().equals(item)) player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(getNearestBountyInfo(player)));
+                if (player.getInventory().getItemInMainHand().equals(item)) BountyUtils.sendActionBar(player, getNearestBountyInfo(player));
             }, 0, 10);
         }
     }
