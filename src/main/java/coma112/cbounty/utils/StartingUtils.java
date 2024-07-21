@@ -15,6 +15,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static coma112.cbounty.version.MinecraftVersion.determineVersion;
+
 @SuppressWarnings("deprecation")
 public class StartingUtils {
     public static final boolean isFolia = JavaUtil.classExists("io.papermc.paper.threadedregions.RegionizedServer");
@@ -33,7 +35,8 @@ public class StartingUtils {
     }
 
     public static void checkVM() {
-        if (getVMVersion() < 11) {
+        int vmVersion = getVMVersion();
+        if (vmVersion < 11) {
             Bukkit.getPluginManager().disablePlugin(CBounty.getInstance());
             return;
         }
@@ -46,8 +49,6 @@ public class StartingUtils {
     }
 
     public static void checkVersion() {
-        VersionSupport support;
-
         try {
             Class.forName("org.spigotmc.SpigotConfig");
         } catch (Exception ignored) {
@@ -56,36 +57,35 @@ public class StartingUtils {
         }
 
         try {
-            String[] classParts = Bukkit.getServer().getClass().getName().split("\\.");
-            if (classParts.length < 4) {
-                BountyLogger.error("Unexpected server class name format: " + Bukkit.getServer().getClass().getName());
-                isSupported = false;
-                return;
-            }
-            String[] versionParts = classParts[3].split("_");
-            if (versionParts.length < 2) {
-                BountyLogger.error("Unexpected version format in class name: " + classParts[3]);
-                isSupported = false;
-                return;
-            }
-            int midVersion = Integer.parseInt(versionParts[1]);
+            String bukkitVersion = Bukkit.getVersion();
 
-            if (midVersion <= 12) {
-                isSupported = false;
-                return;
-            }
+            // A Bukkit verzió formátuma: "1.21-91-3c8a7fe (MC: 1.21)" vagy "1.20.6-148-20f5165 (MC: 1.20.6)"
+            Pattern pattern = Pattern.compile("\\(MC: (\\d+)\\.(\\d+)(?:\\.(\\d+))?\\)");
+            Matcher matcher = pattern.matcher(bukkitVersion);
 
-            BountyLogger.info("Found everything moving onto VersionSupport...");
-            support = new VersionSupport(CBounty.getInstance(), MinecraftVersion.getCurrentVersion());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException exception) {
-            BountyLogger.error(exception.getMessage());
+            if (matcher.find()) {
+                int majorVersion = Integer.parseInt(matcher.group(1));
+                int minorVersion = Integer.parseInt(matcher.group(2));
+                int patchVersion = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 0;
+
+                MinecraftVersion version = determineVersion(majorVersion, minorVersion, patchVersion);
+                if (version == MinecraftVersion.UNKNOWN) {
+                    isSupported = false;
+                    return;
+                }
+
+                VersionSupport support = new VersionSupport(CBounty.getInstance(), version);
+                ServerVersionSupport nms = support.getVersionSupport();
+                isSupported = nms != null;
+
+            } else {
+                isSupported = false;
+            }
+        } catch (Exception exception) {
             isSupported = false;
-            return;
         }
-
-        ServerVersionSupport nms = support.getVersionSupport();
-        isSupported = true;
     }
+
 
     public static void checkUpdates() {
         new UpdateChecker(116501).getVersion(version -> {
@@ -94,7 +94,10 @@ public class StartingUtils {
     }
 
     public static void saveResourceIfNotExists(@NotNull String resourcePath) {
-        if (!new File(CBounty.getInstance().getDataFolder(), resourcePath).exists()) CBounty.getInstance().saveResource(resourcePath, false);
+        if (!new File(CBounty.getInstance().getDataFolder(), resourcePath).exists()) {
+            CBounty.getInstance().saveResource(resourcePath, false);
+        } else {
+        }
     }
 
     static int getVMVersion() {
