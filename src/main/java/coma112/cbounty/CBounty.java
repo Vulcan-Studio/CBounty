@@ -19,6 +19,7 @@ import lombok.Getter;
 import me.realized.tokenmanager.api.TokenManager;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import su.nightexpress.coinsengine.api.CoinsEngineAPI;
 
@@ -40,7 +41,6 @@ public final class CBounty extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
-
         StartingUtils.checkVersion();
     }
 

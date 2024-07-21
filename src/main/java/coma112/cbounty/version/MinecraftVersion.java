@@ -1,8 +1,13 @@
 package coma112.cbounty.version;
 
+import coma112.cbounty.utils.BountyLogger;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
+
+
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public enum MinecraftVersion {
     UNKNOWN,
@@ -15,17 +20,73 @@ public enum MinecraftVersion {
     v1_20_R1,
     v1_20_R2,
     v1_20_R3,
-    v1_20_R6;
+    v1_20_R6,
+    v1_21_R1;
 
-    private static final String packagePath = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-    private static final MinecraftVersion serverVersion = getVersion();
 
-    private static MinecraftVersion getVersion() {
-        for (MinecraftVersion version : values()) if (packagePath.startsWith(version.name())) return version;
+
+
+    private static MinecraftVersion serverVersion;
+
+    static {
+        String bukkitVersion = Bukkit.getVersion();
+        Pattern pattern = Pattern.compile("\\(MC: (\\d+)(?:\\.(\\d+))?\\)");
+        Matcher matcher = pattern.matcher(bukkitVersion);
+
+        if (matcher.find()) {
+            try {
+                int major = 1; // Mivel a major verzió mindig 1
+                int minor = Integer.parseInt(matcher.group(1));
+                int patch = matcher.group(2) != null ? Integer.parseInt(matcher.group(2)) : 0; // Default to 0 if patch is not present
+
+                serverVersion = determineVersion(major, minor, patch);
+            } catch (NumberFormatException e) {
+                serverVersion = UNKNOWN;
+            }
+        }
+
+    }
+
+    public static MinecraftVersion determineVersion(int major, int minor, int patch) {
+        if (major == 1) {
+            switch (minor) {
+                case 18:
+                    return (patch == 1) ? v1_18_R1 : (patch == 2) ? v1_18_R2 : UNKNOWN;
+                case 19:
+                    switch (patch) {
+                        case 1: return v1_19_R1;
+                        case 2: return v1_19_R2;
+                        case 3: return v1_19_R3;
+                        case 4: return v1_19_R4;
+                        default: return UNKNOWN;
+                    }
+                case 20:
+                    switch (patch) {
+                        case 1: return v1_20_R1;
+                        case 2: return v1_20_R2;
+                        case 3: return v1_20_R3;
+                        case 6: return v1_20_R6;
+                        default: return UNKNOWN;
+                    }
+                case 21:
+                    return v1_21_R1;
+                default: return UNKNOWN;
+            }
+        }
+        return UNKNOWN;
+    }
+
+    private static MinecraftVersion getVersionFromPath(String pathPart) {
+        for (MinecraftVersion version : values()) {
+            if (pathPart.startsWith(version.name().substring(1).replace("_", "."))) {
+                return version;
+            }
+        }
         return UNKNOWN;
     }
 
     public static MinecraftVersion getCurrentVersion() {
+        BountyLogger.info("Current Minecraft version: " + serverVersion);
         return serverVersion;
     }
 
