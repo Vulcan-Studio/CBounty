@@ -1,4 +1,15 @@
 messages:
+  help:
+    - "§a--- CBounty Súgó ---"
+    - "§a/bounty help - Megjeleníti a súgó menüt."
+    - "§a/bounty reload - Újratölti a plugin konfigurációs és nyelvi fájljait."
+    - "§a/bounty streaktop [érték] - Megjeleníti a legjobb bounty sorozatokat."
+    - "§a/bounty menu - Megnyitja a bounty menüt."
+    - "§a/bounty set <célpont> <jutalomTípus> <jutalom> - Beállít egy bounty-t egy játékosra."
+    - "§a/bounty remove <célpont> - Eltávolít egy bounty-t egy játékosról."
+    - "§a/bounty raise <célpont> <újJutalom> - Növeli egy játékos bounty-ját."
+    - "§a/bounty takeoff <célpont> - Elvesz egy bounty-t egy játékostól."
+    - "§a/bounty bountyfinder <célpont> - Ad egy bounty kereső tárgyat egy játékosnak."
   reload: "&6&lBOUNTY &8| &aA fájlok sikeresen újratöltve!"
   first-page: "&6&lBOUNTY &8| &cMár az első oldalon vagy!"
   last-page: "&6&lBOUNTY &8| &cMár az utolsó oldalon vagy!"
@@ -10,6 +21,8 @@ messages:
   already-bounty: "&6&lBOUNTY &8| &cA célpont már bűndíjas!"
   no-negative: "&6&lBOUNTY &8| &cA számnak pozitívnak kell lennie!"
   successful-set: "&6&lBOUNTY &8| &aSikeresen beállítottad a bűndíjat!"
+  bounty-set-broadcast: "&6&lBOUNTY &8| &6Egy vérdíjat állítottak be! &aCélpont: {target}, &aJutalom: {reward}, &aJutalom Típus: {rewardType}"
+  bounty-raise-broadcast: "&6&lBOUNTY &8| &6A vérdíjat megemelték! &aCélpont: {target}, &aRégi Jutalom: {oldReward}, &aÚj Jutalom: {newReward}"
   bounty-dead-everyone: "&6&lBOUNTY &8| &a{name} már nem bűndíjas!"
   bounty-dead-target: "&6&lBOUNTY &8| &aBűndíjas voltál, de valaki megölt!"
   bounty-dead-killer: "&6&lBOUNTY &8| &aSikeresen megöltél egy bűndíjast!"
@@ -20,7 +33,7 @@ messages:
   not-enough-level: "&6&lBOUNTY &8| &cNincs elég XP szinted!"
   maximum-top: "&6&lBOUNTY &8| &cNem lehet nagyobb, mint {top}"
   top:
-    header: '\n&6Top {value} Szériák:&f\n\n'
+    header: '&6Top {value} Szériák:&f'
     message: '&f{place}. &6{name} &f- &7(&6{streak}&7)'
   max-bounty: "&6&lBOUNTY &8| &cNem állíthatsz be több bűndíjat!"
   feature-disabled: "&6&lBOUNTY &8| &cEz a funkció jelenleg le van tiltva!"
@@ -35,3 +48,6 @@ messages:
   successful-takeoff-player: "&6&lBOUNTY &8| &aSikeresen eltávolítottad a bűndíjat {target}-ról!"
   successful-takeoff-target: "&6&lBOUNTY &8| &a{player} eltávolította a bűndíjat rólad!"
   full-inventory: "A megadott játékos eszköztára tele van!"
+  item-already-in-inventory: "A megadott játékos eszköztárjában van már egy kereső!"
+  bounty-finder-given: "&aSikeresen adtál egy keresét &a{target}-nak/nek&7."
+  bounty-finder-received: "&aKaptál egy keresőt!"

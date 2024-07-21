@@ -5,12 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="280be881-f07b-4195-8777-62cb9290a3b9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/coma112.CBounty.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/coma112.CBounty.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/CBounty$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/CBounty$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/CBounty.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/CBounty.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/hooks/Webhook.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/hooks/Webhook.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/StartingUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/utils/StartingUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/MinecraftVersion.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/MinecraftVersion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/VersionSupport.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/coma112/cbounty/version/VersionSupport.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/CBounty-3.7.5-dev-all.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/CBounty-3.7.5-dev-all.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/Placeholder.class.uniqueId0" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/StartingUtils.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/CBounty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/CBounty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/commands/CommandBounty.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/commands/CommandBounty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/keys/ConfigKeys.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/enums/keys/ConfigKeys.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/StartingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/utils/StartingUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/MinecraftVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/MinecraftVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/VersionSupport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coma112/cbounty/version/VersionSupport.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -44,23 +75,6 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="CBounty" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="other" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="CBounty" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="shadow" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="CBounty" type="f1a62948:ProjectNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
-              </path>
             </expand>
             <select />
           </tree_state>
@@ -93,34 +107,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.CBounty [build].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CBounty [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CBounty [compileJava].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CBounty [installCoinsEngineJar].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CBounty [jar].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CBounty [knows].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CBounty [shadowJar].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.CBounty [wrapper].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore_missing_gitignore&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kulas/Desktop/Projects/CBounty/libs&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.CBounty [build].executor": "Run",
+    "Gradle.CBounty [clean].executor": "Run",
+    "Gradle.CBounty [compileJava].executor": "Run",
+    "Gradle.CBounty [installCoinsEngineJar].executor": "Run",
+    "Gradle.CBounty [jar].executor": "Run",
+    "Gradle.CBounty [knows].executor": "Run",
+    "Gradle.CBounty [shadowJar].executor": "Run",
+    "Gradle.CBounty [wrapper].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore_missing_gitignore": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/kulas/Desktop/Projects/CBounty/libs",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kulas\Desktop\Projects\CBounty\libs" />
@@ -130,7 +145,7 @@
       <recent name="C:\Users\kulas\Desktop\Projects\CBounty\libs" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.CBounty [shadowJar]">
+  <component name="RunManager" selected="Gradle.CBounty [build]">
     <configuration name="CBounty [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -150,7 +165,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="CBounty [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -172,7 +187,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="CBounty [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -216,7 +231,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="CBounty [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -238,7 +253,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="CBounty [knows]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -260,7 +275,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="CBounty [knows]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -304,7 +319,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="CBounty [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -348,7 +363,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
-      <RunAsTest>false</RunAsTest>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="CBounty build" type="GradleRunConfiguration" factoryName="Gradle">
@@ -375,9 +390,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.CBounty [build]" />
         <item itemvalue="Gradle.CBounty [shadowJar]" />
         <item itemvalue="Gradle.CBounty [clean]" />
-        <item itemvalue="Gradle.CBounty [build]" />
         <item itemvalue="Gradle.CBounty [installCoinsEngineJar]" />
         <item itemvalue="Gradle.CBounty [knows]" />
       </list>
@@ -518,7 +533,7 @@
       <workItem from="1719596578836" duration="76000" />
       <workItem from="1719777274681" duration="49000" />
       <workItem from="1720470463373" duration="49000" />
-      <workItem from="1720470610838" duration="3553000" />
+      <workItem from="1720470610838" duration="3529000" />
     </task>
     <servers />
   </component>
