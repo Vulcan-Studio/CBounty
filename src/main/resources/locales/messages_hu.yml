@@ -13,7 +13,6 @@ messages:
   reload: "&6&lBOUNTY &8| &aA fájlok sikeresen újratöltve!"
   first-page: "&6&lBOUNTY &8| &cMár az első oldalon vagy!"
   last-page: "&6&lBOUNTY &8| &cMár az utolsó oldalon vagy!"
-  setbounty-usage: "&6&lBOUNTY &8| &cHasználat: /setbounty [célpont] [token | pénz] [jutalom]"
   invalid-rewardtype: "&6&lBOUNTY &8| &cÉrvénytelen jutalom típus!"
   invalid-number: "&6&lBOUNTY &8| &cKérlek, adj meg egy számot!"
   player-not-found: "&6&lBOUNTY &8| &cA célpont nincs online!"

@@ -13,7 +13,6 @@ messages:
   reload: "&6&lBOUNTY &8| &aIch habe die Dateien erfolgreich neu geladen!"
   first-page: "&6&lBOUNTY &8| &cDu bist bereits auf der ersten Seite!"
   last-page: "&6&lBOUNTY &8| &cDu bist bereits auf der letzten Seite!"
-  setbounty-usage: "&6&lBOUNTY &8| &cVerwendung: /setbounty [ziel] [token | geld] [belohnung]"
   invalid-rewardtype: "&6&lBOUNTY &8| &cUngültiger Belohnungstyp!"
   invalid-number: "&6&lBOUNTY &8| &cBitte gib eine Zahl ein!"
   player-not-found: "&6&lBOUNTY &8| &cDer Spieler ist nicht online!"
@@ -51,3 +50,4 @@ messages:
   item-already-in-inventory: "&cDer Gegenstand ist bereits im Inventar des Zielspielers."
   bounty-finder-given: "&aDu hast erfolgreich einen Belohnungssucher an &a{target}&7 übergeben."
   bounty-finder-received: "&aDu hast einen Belohnungssucher erhalten!"
+  bounty-finder-cooldown-message: "&cDu musst noch {time} Sekunden warten, bevor du erneut einen Bounty Finder anfordern kannst."

@@ -11,35 +11,48 @@ import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.item.IItemBuilder;
 import coma112.cbounty.managers.Top;
 import coma112.cbounty.menu.menus.BountiesMenu;
+import coma112.cbounty.utils.BountyUtils;
 import coma112.cbounty.utils.MenuUtils;
-import net.milkbowl.vault.economy.Economy;
-import org.black_ixx.playerpoints.PlayerPointsAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import revxrsal.commands.annotation.Command;
 import revxrsal.commands.annotation.Default;
+import revxrsal.commands.annotation.DefaultFor;
 import revxrsal.commands.annotation.Subcommand;
 import revxrsal.commands.bukkit.annotation.CommandPermission;
 import su.nightexpress.coinsengine.api.CoinsEngineAPI;
+import java.util.List;
 
-import java.util.UUID;
+import static coma112.cbounty.utils.BountyUtils.*;
 
 @SuppressWarnings("deprecation")
 @Command({"bounty", "cbounty"})
 public class CommandBounty {
+    @DefaultFor({"bounty", "cbounty"})
+    public void defaultCommand(@NotNull CommandSender sender) {
+        help(sender);
+    }
+
+    @Subcommand("help")
+    public void help(@NotNull CommandSender sender) {
+        List<String> helpMessages = MessageKeys.HELP.getMessages();
+        helpMessages.forEach(sender::sendMessage);
+    }
+
     @Subcommand("reload")
     @CommandPermission("cbounty.reload")
     public void reload(@NotNull CommandSender sender) {
         CBounty.getInstance().getLanguage().reload();
         CBounty.getInstance().getConfiguration().reload();
-        CBounty.getDatabaseManager().reconnect();
         sender.sendMessage(MessageKeys.RELOAD.getMessage());
     }
 
     @Subcommand("streaktop")
     @CommandPermission("cbounty.streaktop")
-    public void streaktop(@NotNull CommandSender sender, int value) {
+    public void streaktop(@NotNull CommandSender sender, @Default("5") int value) {
         if (value <= 0) {
             sender.sendMessage(MessageKeys.NO_NEGATIVE.getMessage());
             return;
@@ -110,6 +123,10 @@ public class CommandBounty {
         if (success) {
             databaseManager.createBounty(player, target, rewardType, reward);
             player.sendMessage(MessageKeys.SUCCESSFUL_SET.getMessage());
+            Bukkit.broadcastMessage(MessageKeys.BOUNTY_SET.getMessage()
+                    .replace("{target}", target.getName())
+                    .replace("{reward}", String.valueOf(reward))
+                    .replace("{rewardType}", rewardType.toString()));
         }
     }
 
@@ -167,7 +184,13 @@ public class CommandBounty {
         target.sendMessage(MessageKeys.TARGET_RAISE
                 .getMessage()
                 .replace("{old}", String.valueOf(oldReward))
-                .replace("{new}", String.valueOf(oldReward + newReward)));
+                .replace("{new}", String.valueOf(newReward)));
+
+        Bukkit.broadcastMessage(MessageKeys.BOUNTY_RAISE
+                .getMessage()
+                .replace("{target}", target.getName())
+                .replace("{oldReward}", String.valueOf(oldReward))
+                .replace("{newReward}", String.valueOf(newReward)));
     }
 
     @Subcommand("takeoff")
@@ -211,6 +234,8 @@ public class CommandBounty {
     @Subcommand("bountyfinder")
     @CommandPermission("cbounty.bountyfinder")
     public void giveBountyFinder(@NotNull Player player, @NotNull @Default("me") Player target) {
+        ItemStack bountyFinderItem = IItemBuilder.createItemFromSection("bountyfinder-item");
+
         if (!target.isOnline()) {
             player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
             return;
@@ -221,59 +246,13 @@ public class CommandBounty {
             return;
         }
 
-        target.getInventory().addItem(IItemBuilder.createItemFromSection("bountyfinder-item"));
-    }
-
-    private boolean handleTokenReward(@NotNull Player player, int reward) {
-        if (CBounty.getInstance().getToken().getTokens(player) < reward) {
-            player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
-            return false;
-        } else {
-            CBounty.getTokenManager().removeTokens(player, reward);
-            return true;
+        if (BountyUtils.hasItem(target.getInventory(), bountyFinderItem)) {
+            player.sendMessage(MessageKeys.ITEM_ALREADY_IN_INVENTORY.getMessage());
+            return;
         }
-    }
 
-    private boolean handleMoneyReward(@NotNull Player player, int reward) {
-        Economy economy = Vault.getEconomy();
-        if (economy.getBalance(player) < reward) {
-            player.sendMessage(MessageKeys.NOT_ENOUGH_MONEY.getMessage());
-            return false;
-        } else {
-            economy.withdrawPlayer(player, reward);
-            return true;
-        }
-    }
-
-    private boolean handlePlayerPointsReward(@NotNull Player player, int reward) {
-        PlayerPointsAPI api = CBounty.getPlayerPointsManager();
-        UUID uuid = player.getUniqueId();
-        if (api.look(uuid) < reward) {
-            player.sendMessage(MessageKeys.NOT_ENOUGH_PLAYERPOINTS.getMessage());
-            return false;
-        } else {
-            api.take(uuid, reward);
-            return true;
-        }
-    }
-
-    private boolean handleCoinsEngineReward(@NotNull Player player, int reward) {
-        if (CoinsEngineAPI.getBalance(player, CoinsEngine.getCurrency()) < reward) {
-            player.sendMessage(MessageKeys.NOT_ENOUGH_COINSENGINE.getMessage());
-            return false;
-        } else {
-            CoinsEngineAPI.removeBalance(player, CoinsEngine.getCurrency(), reward);
-            return true;
-        }
-    }
-
-    private boolean handleLevelReward(@NotNull Player player, int reward) {
-        if (player.getLevel() < reward) {
-            player.sendMessage(MessageKeys.NOT_ENOUGH_LEVEL.getMessage());
-            return false;
-        } else {
-            player.setLevel(player.getLevel() - reward);
-            return true;
-        }
+        target.getInventory().addItem(bountyFinderItem);
+        player.sendMessage(MessageKeys.BOUNTY_FINDER_GIVEN.getMessage().replace("{target}", target.getName()));
+        target.sendMessage(MessageKeys.BOUNTY_FINDER_RECEIVED.getMessage());
     }
 }
