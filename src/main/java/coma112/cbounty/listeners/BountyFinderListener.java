@@ -45,6 +45,9 @@ public class BountyFinderListener implements Listener {
 
         return nearestBountyName.isEmpty()
                 ? ConfigKeys.NO_BOUNTY_NEARBY.getString()
-                : ConfigKeys.NEAREST_BOUNTY.getString().replace("{bounty}", nearestBountyName).replace("{distance}", String.valueOf((int) nearestDistance));
+                : ConfigKeys.NEAREST_BOUNTY
+                .getString()
+                .replace("{bounty}", nearestBountyName)
+                .replace("{distance}", String.valueOf((int) nearestDistance));
     }
 }

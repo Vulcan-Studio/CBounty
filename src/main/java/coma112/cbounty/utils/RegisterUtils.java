@@ -28,11 +28,13 @@ public class RegisterUtils {
 
     public static void registerCommands() {
         BukkitCommandHandler handler = BukkitCommandHandler.create(CBounty.getInstance());
+
         handler.register(new CommandBounty());
     }
 
     private static Set<Class<? extends Listener>> getListenerClasses() {
         Set<Class<? extends Listener>> listenerClasses = new HashSet<>();
+
         listenerClasses.add(MenuListener.class);
         listenerClasses.add(BountyDeathListener.class);
         listenerClasses.add(GlowingListener.class);

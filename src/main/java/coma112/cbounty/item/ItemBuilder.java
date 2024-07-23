@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings("all")
 public class ItemBuilder implements IItemBuilder {
     private final ItemStack is;
     private final ItemMeta meta;

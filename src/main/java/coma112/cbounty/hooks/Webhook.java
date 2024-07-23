@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.awt.*;
+import java.awt.Color;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URL;

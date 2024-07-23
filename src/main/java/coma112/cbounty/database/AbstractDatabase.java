@@ -4,7 +4,6 @@ import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.managers.Top;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

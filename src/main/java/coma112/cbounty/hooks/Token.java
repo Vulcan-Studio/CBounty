@@ -2,9 +2,7 @@ package coma112.cbounty.hooks;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
-import coma112.cbounty.enums.keys.MessageKeys;
 import me.realized.tokenmanager.api.TokenManager;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 

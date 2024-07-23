@@ -2,11 +2,9 @@ package coma112.cbounty.language;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.utils.ConfigUtils;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.util.List;
 
 public class Language extends ConfigUtils {
     public Language(@NotNull String name) {

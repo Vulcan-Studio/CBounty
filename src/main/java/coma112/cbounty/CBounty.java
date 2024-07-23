@@ -86,6 +86,7 @@ public final class CBounty extends JavaPlugin {
         saveResourceIfNotExists("locales/messages_en.yml");
         saveResourceIfNotExists("locales/messages_hu.yml");
         saveResourceIfNotExists("locales/messages_de.yml");
+        saveResourceIfNotExists("locales/messages_tr.yml");
 
         language = new Language("messages_" + LanguageType.valueOf(ConfigKeys.LANGUAGE.getString()));
     }

@@ -24,7 +24,6 @@ import revxrsal.commands.annotation.DefaultFor;
 import revxrsal.commands.annotation.Subcommand;
 import revxrsal.commands.bukkit.annotation.CommandPermission;
 import su.nightexpress.coinsengine.api.CoinsEngineAPI;
-import java.util.List;
 
 import static coma112.cbounty.utils.BountyUtils.*;
 
@@ -38,8 +37,9 @@ public class CommandBounty {
 
     @Subcommand("help")
     public void help(@NotNull CommandSender sender) {
-        List<String> helpMessages = MessageKeys.HELP.getMessages();
-        helpMessages.forEach(sender::sendMessage);
+        MessageKeys.HELP
+                .getMessages()
+                .forEach(sender::sendMessage);
     }
 
     @Subcommand("reload")

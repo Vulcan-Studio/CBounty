@@ -2,7 +2,10 @@ package coma112.cbounty.utils;
 
 import com.github.Anon8281.universalScheduler.utils.JavaUtil;
 import coma112.cbounty.CBounty;
-import coma112.cbounty.hooks.*;
+import coma112.cbounty.hooks.Placeholder;
+import coma112.cbounty.hooks.Token;
+import coma112.cbounty.hooks.PlayerPoints;
+import coma112.cbounty.hooks.CoinsEngine;
 import coma112.cbounty.update.UpdateChecker;
 import coma112.cbounty.version.MinecraftVersion;
 import coma112.cbounty.version.ServerVersionSupport;

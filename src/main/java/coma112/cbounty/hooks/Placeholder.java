@@ -2,8 +2,6 @@ package coma112.cbounty.hooks;
 
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
-import coma112.cbounty.enums.keys.MessageKeys;
-import coma112.cbounty.utils.BountyLogger;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
