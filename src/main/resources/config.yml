@@ -1,4 +1,4 @@
-language: "en" # Supported languages -> hu, de, en, tr
+language: "en" # Supported languages -> hu, de, en, tr, es
 
 database:
   type: "sqlite" # Supported database types -> sqlite, mysql

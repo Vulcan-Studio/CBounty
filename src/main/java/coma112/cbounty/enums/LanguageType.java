@@ -4,5 +4,6 @@ public enum LanguageType {
     HU, hu,
     DE, de,
     EN, en,
-    TR, tr
+    TR, tr,
+    ES, es
 }
