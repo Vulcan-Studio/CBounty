@@ -5,6 +5,7 @@ import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.hooks.CoinsEngine;
 import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.processor.MessageProcessor;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
 import org.bukkit.entity.Player;
@@ -83,5 +84,27 @@ public class BountyUtils {
             player.setLevel(player.getLevel() - reward);
             return true;
         }
+    }
+
+    public static NamedTextColor getNamedTextColor(@NotNull String colorName) {
+        return switch (colorName) {
+            case "BLACK", "black" -> NamedTextColor.namedColor(0);
+            case "DARK_BLUE", "dark_blue" -> NamedTextColor.namedColor(170);
+            case "DARK_GREEN", "dark_green" -> NamedTextColor.namedColor(43520);
+            case "DARK_AQUA", "dark_aqua" -> NamedTextColor.namedColor(43690);
+            case "DARK_GRAY", "dark_gray" -> NamedTextColor.namedColor(5592405);
+            case "BLUE", "blue" -> NamedTextColor.namedColor(5592575);
+            case "GREEN", "green" -> NamedTextColor.namedColor(5635925);
+            case "AQUA", "aqua" -> NamedTextColor.namedColor(5636095);
+            case "DARK_RED", "dark_red" -> NamedTextColor.namedColor(11141120);
+            case "DARK_PURPLE", "dark_purple" -> NamedTextColor.namedColor(11141290);
+            case "GRAY", "gray" -> NamedTextColor.namedColor(11184810);
+            case "RED", "red" -> NamedTextColor.namedColor(16733525);
+            case "LIGHT_PURPLE", "light_purple" -> NamedTextColor.namedColor(16733695);
+            case "GOLD", "gold" -> NamedTextColor.namedColor(16755200);
+            case "YELLOW", "yellow" -> NamedTextColor.namedColor(16777045);
+            case "WHITE", "white" -> NamedTextColor.namedColor(16777215);
+            default -> null;
+        };
     }
 }

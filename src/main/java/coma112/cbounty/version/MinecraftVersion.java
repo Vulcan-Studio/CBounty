@@ -59,7 +59,7 @@ public enum MinecraftVersion {
                 case 20 -> switch (patch) {
                     case 1 -> v1_20_R1;
                     case 2 -> v1_20_R2;
-                    case 3 -> v1_20_R3;
+                    case 4 -> v1_20_R3;
                     case 6 -> v1_20_R6;
                     default -> UNKNOWN;
                 };

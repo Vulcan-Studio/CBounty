@@ -6,7 +6,10 @@ import coma112.cbounty.events.BountyCreateEvent;
 import coma112.cbounty.events.BountyDeathEvent;
 import coma112.cbounty.events.BountyRemoveEvent;
 import coma112.cbounty.hooks.Webhook;
+import coma112.cbounty.utils.BountyUtils;
 import coma112.cbounty.utils.StartingUtils;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -81,21 +84,26 @@ public class GlowingListener implements Listener {
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
 
         if (isEnabled() && CBounty.getDatabaseManager().isBounty(player) && !StartingUtils.isFolia) {
-            player.setGlowing(true);
-
-            Team team = scoreboard.getTeam(playerName);
+            Team team = scoreboard.getTeam("cbounty_" + playerName);
             if (team != null) team.unregister();
-            team = scoreboard.registerNewTeam(playerName);
-            team.setColor(ChatColor.valueOf(ConfigKeys.GLOWING_COLOR.getString()));
-            team.addEntry(playerName);
+            else {
+                player.setGlowing(true);
+
+                team = scoreboard.registerNewTeam("cbounty_" + playerName);
+
+                team.color(BountyUtils.getNamedTextColor(ConfigKeys.GLOWING_COLOR.getString()));
+                team.addPlayer(player);
+            }
         }
     }
 
     public void tryToRemoveGlowing(@NotNull Player player) {
-        Team team = Bukkit.getScoreboardManager().getMainScoreboard().getTeam(player.getName());
+        String playerName = player.getName();
+        Team team = Bukkit.getScoreboardManager().getMainScoreboard().getTeam("cbounty_" + playerName);
+        player.setGlowing(false);
 
         if (team != null && !StartingUtils.isFolia) {
-            team.removeEntry(player.getName());
+            team.removePlayer(player);
             team.unregister();
             player.setGlowing(false);
         }
