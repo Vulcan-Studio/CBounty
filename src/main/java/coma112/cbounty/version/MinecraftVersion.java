@@ -80,6 +80,7 @@ public enum MinecraftVersion {
                 return version;
             }
         }
+
         return UNKNOWN;
     }
 

@@ -4,6 +4,7 @@ import coma112.cbounty.CBounty;
 import coma112.cbounty.database.AbstractDatabase;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
+import coma112.cbounty.enums.keys.ItemKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.events.BountyRemoveEvent;
 import coma112.cbounty.hooks.CoinsEngine;
@@ -234,8 +235,6 @@ public class CommandBounty {
     @Subcommand("bountyfinder")
     @CommandPermission("cbounty.bountyfinder")
     public void giveBountyFinder(@NotNull Player player, @NotNull @Default("me") Player target) {
-        ItemStack bountyFinderItem = IItemBuilder.createItemFromSection("bountyfinder-item");
-
         if (!target.isOnline()) {
             player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
             return;
@@ -246,12 +245,12 @@ public class CommandBounty {
             return;
         }
 
-        if (BountyUtils.hasItem(target.getInventory(), bountyFinderItem)) {
+        if (BountyUtils.hasItem(target.getInventory(), ItemKeys.BOUNTYFINDER_ITEM.getItem())) {
             player.sendMessage(MessageKeys.ITEM_ALREADY_IN_INVENTORY.getMessage());
             return;
         }
 
-        target.getInventory().addItem(bountyFinderItem);
+        target.getInventory().addItem(ItemKeys.BOUNTYFINDER_ITEM.getItem());
         player.sendMessage(MessageKeys.BOUNTY_FINDER_GIVEN.getMessage().replace("{target}", target.getName()));
         target.sendMessage(MessageKeys.BOUNTY_FINDER_RECEIVED.getMessage());
     }

@@ -45,6 +45,7 @@ public class BountyUtils {
 
     public static boolean handleMoneyReward(@NotNull Player player, int reward) {
         Economy economy = Vault.getEconomy();
+
         if (economy.getBalance(player) < reward) {
             player.sendMessage(MessageKeys.NOT_ENOUGH_MONEY.getMessage());
             return false;
@@ -57,6 +58,7 @@ public class BountyUtils {
     public static boolean handlePlayerPointsReward(@NotNull Player player, int reward) {
         PlayerPointsAPI api = CBounty.getPlayerPointsManager();
         UUID uuid = player.getUniqueId();
+
         if (api.look(uuid) < reward) {
             player.sendMessage(MessageKeys.NOT_ENOUGH_PLAYERPOINTS.getMessage());
             return false;

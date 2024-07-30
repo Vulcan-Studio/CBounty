@@ -2,14 +2,14 @@ package coma112.cbounty.menu;
 
 import com.github.Anon8281.universalScheduler.scheduling.tasks.MyScheduledTask;
 import coma112.cbounty.CBounty;
+import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings("deprecation")
 public class MenuUpdater {
     private final Menu menu;
     private boolean running = true;
     private MyScheduledTask task;
 
-    public MenuUpdater(Menu menu) {
+    public MenuUpdater(@NotNull Menu menu) {
         this.menu = menu;
     }
 
@@ -24,8 +24,7 @@ public class MenuUpdater {
     }
 
     public void start(int intervalTicks) {
-        if (task == null) task = CBounty.getInstance().getScheduler().runTaskTimer(CBounty.getInstance(), this::run, intervalTicks, intervalTicks);
-
+        if (task == null) task = CBounty.getInstance().getScheduler().runTaskTimer(this::run, intervalTicks, intervalTicks);
     }
 
     public void stop() {

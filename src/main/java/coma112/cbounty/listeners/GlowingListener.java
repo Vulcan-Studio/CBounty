@@ -26,7 +26,6 @@ import java.io.IOException;
 import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyCreate;
 import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyRemove;
 
-@SuppressWarnings("deprecation")
 public class GlowingListener implements Listener {
     @EventHandler
     public void onJoin(final PlayerJoinEvent event) {
@@ -85,6 +84,7 @@ public class GlowingListener implements Listener {
 
         if (isEnabled() && CBounty.getDatabaseManager().isBounty(player) && !StartingUtils.isFolia) {
             Team team = scoreboard.getTeam("cbounty_" + playerName);
+
             if (team != null) team.unregister();
             else {
                 player.setGlowing(true);
@@ -100,6 +100,7 @@ public class GlowingListener implements Listener {
     public void tryToRemoveGlowing(@NotNull Player player) {
         String playerName = player.getName();
         Team team = Bukkit.getScoreboardManager().getMainScoreboard().getTeam("cbounty_" + playerName);
+
         player.setGlowing(false);
 
         if (team != null && !StartingUtils.isFolia) {

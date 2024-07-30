@@ -8,6 +8,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 @SuppressWarnings("deprecation")
 public record Top(@NotNull OfflinePlayer player, int streak) {
@@ -18,17 +19,19 @@ public record Top(@NotNull OfflinePlayer player, int streak) {
                 .getMessage()
                 .replace("{value}", String.valueOf(value)));
 
-        for (int i = 0; i < topStreaks.size(); i++) {
-            Top top = topStreaks.get(i);
+        IntStream
+                .range(0, topStreaks.size())
+                .forEach(index -> {
+            Top top = topStreaks.get(index);
 
             message.addExtra(MessageKeys.TOP_MESSAGE
                     .getMessage()
                     .replace("{streak}", String.valueOf(top.streak))
                     .replace("{name}", Objects.requireNonNull(top.player().getName()))
-                    .replace("{place}", String.valueOf(i + 1)));
+                    .replace("{place}", String.valueOf(index + 1)));
 
-            if (i < topStreaks.size() - 1) message.addExtra("\n");
-        }
+            if (index < topStreaks.size() - 1) message.addExtra("\n");
+        });
 
         return message;
     }

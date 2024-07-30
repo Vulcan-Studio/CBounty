@@ -53,16 +53,16 @@ public class Webhook {
         return ConfigKeys.WEBHOOK_ENABLED.getBoolean();
     }
 
-    public static void sendWebhook(String description,
-                                   String color,
-                                   String authorName,
-                                   String authorURL,
-                                   String authorIconURL,
-                                   String footerText,
-                                   String footerIconURL,
-                                   String thumbnailURL,
-                                   String title,
-                                   String imageURL) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public static void sendWebhook(@NotNull String description,
+                                   @NotNull String color,
+                                   @NotNull String authorName,
+                                   @NotNull String authorURL,
+                                   @NotNull String authorIconURL,
+                                   @NotNull String footerText,
+                                   @NotNull String footerIconURL,
+                                   @NotNull String thumbnailURL,
+                                   @NotNull String title,
+                                   @NotNull String imageURL) throws IOException, NoSuchFieldException, IllegalAccessException {
 
         if (isEnabled()) {
             Webhook webhook = new Webhook(ConfigKeys.WEBHOOK_URL.getString());

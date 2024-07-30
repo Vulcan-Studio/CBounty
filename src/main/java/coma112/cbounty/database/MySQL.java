@@ -134,6 +134,7 @@ public class MySQL extends AbstractDatabase {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()) {
                 int id = resultSet.getInt("ID");
                 int reward = resultSet.getInt("REWARD");

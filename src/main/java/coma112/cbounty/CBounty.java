@@ -26,14 +26,15 @@ import java.util.Objects;
 import static coma112.cbounty.utils.StartingUtils.*;
 
 public final class CBounty extends JavaPlugin {
-    @Getter public static TokenManager tokenManager;
-    @Getter public static PlayerPointsAPI playerPointsManager;
     @Getter private static CBounty instance;
     @Getter private static AbstractDatabase databaseManager;
-    private static Language language;
-    private static Config config;
-    private static Token token;
-    private static TaskScheduler scheduler;
+    @Getter private Language language;
+    @Getter private Token token;
+    @Getter private TaskScheduler scheduler;
+    private Config config;
+
+    @Getter public static TokenManager tokenManager;
+    @Getter public static PlayerPointsAPI playerPointsManager;
 
     @Override
     public void onLoad() {
@@ -63,20 +64,8 @@ public final class CBounty extends JavaPlugin {
         if (databaseManager != null) databaseManager.disconnect();
     }
 
-    public Language getLanguage() {
-        return language;
-    }
-
     public Config getConfiguration() {
         return config;
-    }
-
-    public Token getToken() {
-        return token;
-    }
-
-    public TaskScheduler getScheduler() {
-        return scheduler;
     }
 
     private void initializeComponents() {

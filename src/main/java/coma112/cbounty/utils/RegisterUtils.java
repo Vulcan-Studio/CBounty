@@ -15,15 +15,13 @@ import java.util.Set;
 @SuppressWarnings("deprecation")
 public class RegisterUtils {
     public static void registerEvents() {
-        Set<Class<? extends Listener>> listenerClasses = getListenerClasses();
-
-        for (Class<? extends Listener> clazz : listenerClasses) {
+        getListenerClasses().forEach(clazz -> {
             try {
                 CBounty.getInstance().getServer().getPluginManager().registerEvents(clazz.newInstance(), CBounty.getInstance());
             } catch (InstantiationException | IllegalAccessException exception) {
                 BountyLogger.error(exception.getMessage());
             }
-        }
+        });
     }
 
     public static void registerCommands() {

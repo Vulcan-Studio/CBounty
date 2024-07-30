@@ -32,36 +32,32 @@ public class BountyDeathListener implements Listener {
 
                 switch (CBounty.getDatabaseManager().getRewardType(target)) {
                     case TOKEN -> {
-                        if (CBounty.getInstance().getToken().isEnabled()) {
-                            CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
-                        } else {
+                        if (CBounty.getInstance().getToken().isEnabled()) CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
+                        else {
                             Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                             killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
                         }
                     }
 
                     case PLAYERPOINTS -> {
-                        if (PlayerPoints.isEnabled()) {
-                            CBounty.getPlayerPointsManager().give(killer.getUniqueId(), CBounty.getDatabaseManager().getReward(target));
-                        } else {
+                        if (PlayerPoints.isEnabled()) CBounty.getPlayerPointsManager().give(killer.getUniqueId(), CBounty.getDatabaseManager().getReward(target));
+                        else {
                             Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                             killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
                         }
                     }
 
                     case LEVEL -> {
-                        if (ConfigKeys.DEPENDENCY_LEVEL.getBoolean()) {
-                            killer.setLevel(killer.getLevel() + CBounty.getDatabaseManager().getReward(target));
-                        } else {
+                        if (ConfigKeys.DEPENDENCY_LEVEL.getBoolean()) killer.setLevel(killer.getLevel() + CBounty.getDatabaseManager().getReward(target));
+                        else {
                             Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                             killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
                         }
                     }
 
                     case COINSENGINE -> {
-                    if (ConfigKeys.DEPENDENCY_COINSENGINE.getBoolean()) {
-                        CoinsEngineAPI.addBalance(killer, CoinsEngine.getCurrency(), CBounty.getDatabaseManager().getReward(target));
-                    } else {
+                        if (ConfigKeys.DEPENDENCY_COINSENGINE.getBoolean()) CoinsEngineAPI.addBalance(killer, CoinsEngine.getCurrency(), CBounty.getDatabaseManager().getReward(target));
+                        else {
                         Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                         killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
                     }
@@ -71,9 +67,7 @@ public class BountyDeathListener implements Listener {
                     }
                 }
 
-                if (!CBounty.getDatabaseManager().isSenderIsRandom(target)) {
-                    killer.sendMessage(MessageKeys.BOUNTY_DEAD_KILLER.getMessage());
-                }
+                if (!CBounty.getDatabaseManager().isSenderIsRandom(target)) killer.sendMessage(MessageKeys.BOUNTY_DEAD_KILLER.getMessage());
 
                 Webhook.sendWebhook(
                         replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_DESCRIPTION.getString(), killer, target),

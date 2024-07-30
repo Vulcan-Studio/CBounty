@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @SuppressWarnings("deprecation")
 public class BountiesMenu extends PaginatedMenu implements Listener {
@@ -77,7 +78,9 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
         int startIndex = page * getMaxItemsPerPage();
         int endIndex = Math.min(startIndex + getMaxItemsPerPage(), bounties.size());
 
-        for (int i = startIndex; i < endIndex; i++) inventory.addItem(createBountyItem(bounties.get(i)));
+        IntStream
+                .range(startIndex, endIndex)
+                .forEach(index -> inventory.addItem(createBountyItem(bounties.get(index))));
     }
 
     @EventHandler
@@ -86,7 +89,7 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
     }
 
     private static ItemStack createBountyItem(@NotNull Bounty bounty) {
-        ItemStack itemStack = IItemBuilder.createItemFromSection("bounty-item");
+        ItemStack itemStack = IItemBuilder.createItemFromString("bounty-item");
         ItemMeta meta = itemStack.getItemMeta();
 
         if (meta != null) {
@@ -100,13 +103,14 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
             if (lore != null) {
                 List<String> replacedLore = new ArrayList<>();
 
-                for (String line : lore) {
+                lore.forEach(line -> {
                     replacedLore.add(line
                             .replace("{streak}", String.valueOf(CBounty.getDatabaseManager().getStreak(Bukkit.getOfflinePlayer(bounty.target()))))
                             .replace("{reward_type}", bounty.reward_type().name())
                             .replace("{reward}", String.valueOf(bounty.reward()))
                             .replace("{player}", bounty.player()));
-                }
+                });
+
                 meta.setLore(replacedLore);
             }
             itemStack.setItemMeta(meta);

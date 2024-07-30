@@ -71,7 +71,7 @@ public interface IItemBuilder {
 
     boolean isFinished();
 
-    static ItemStack createItemFromSection(@NotNull String path) {
+    static ItemStack createItemFromString(@NotNull String path) {
         ConfigurationSection section = CBounty.getInstance().getConfiguration().getSection(path);
 
         Material material = Material.valueOf(Objects.requireNonNull(section).getString("material"));
