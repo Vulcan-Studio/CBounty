@@ -65,7 +65,7 @@ public class BountyDeathListener implements Listener {
 
                         case MONEY -> Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                     }
-                }
+
 
                 if (!CBounty.getDatabaseManager().isSenderIsRandom(target)) killer.sendMessage(MessageKeys.BOUNTY_DEAD_KILLER.getMessage());
 
@@ -95,4 +95,5 @@ public class BountyDeathListener implements Listener {
                         CBounty.getDatabaseManager().getRewardType(target)));
             }
         }
+    }
 }

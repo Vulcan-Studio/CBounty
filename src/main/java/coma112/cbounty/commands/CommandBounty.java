@@ -112,6 +112,15 @@ public class CommandBounty {
             return;
         }
 
+        int minReward = BountyUtils.getMinimumReward(rewardType);
+        int maxReward = BountyUtils.getMaximumReward(rewardType);
+        if (reward < minReward || (maxReward != 0 && reward > maxReward)) {
+            player.sendMessage(MessageKeys.INVALID_REWARDLIMIT.getMessage()
+                    .replace("{min}", String.valueOf(minReward))
+                    .replace("{max}", maxReward == 0 ? "∞" : String.valueOf(maxReward)));
+            return;
+        }
+
         boolean success = false;
         switch (rewardType) {
             case TOKEN -> success = handleTokenReward(player, reward);
@@ -168,8 +177,13 @@ public class CommandBounty {
             return;
         }
 
-        if (newReward > ConfigKeys.MAX_REWARD_LIMIT.getInt()) {
-            player.sendMessage(MessageKeys.MAX_REWARD_LIMIT.getMessage());
+        RewardType rewardType = CBounty.getDatabaseManager().getRewardType(target);
+        int minReward = BountyUtils.getMinimumReward(rewardType);
+        int maxReward = BountyUtils.getMaximumReward(rewardType);
+        if (newReward < minReward || (maxReward != 0 && newReward > maxReward)) {
+            player.sendMessage(MessageKeys.INVALID_REWARDLIMIT.getMessage()
+                    .replace("{min}", String.valueOf(minReward))
+                    .replace("{max}", maxReward == 0 ? "∞" : String.valueOf(maxReward)));
             return;
         }
 

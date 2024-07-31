@@ -1,6 +1,8 @@
 package coma112.cbounty.utils;
 
 import coma112.cbounty.CBounty;
+import coma112.cbounty.enums.RewardType;
+import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.hooks.CoinsEngine;
 import coma112.cbounty.hooks.Vault;
@@ -8,6 +10,7 @@ import coma112.cbounty.processor.MessageProcessor;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -108,5 +111,40 @@ public class BountyUtils {
             case "WHITE", "white" -> NamedTextColor.namedColor(16777215);
             default -> null;
         };
+    }
+
+
+    public static int getMinimumReward(RewardType rewardType) {
+        switch (rewardType) {
+            case TOKEN:
+                return ConfigKeys.DEPENDENCY_TOKENMANAGER_MIN.getInt();
+            case MONEY:
+                return ConfigKeys.DEPENDENCY_MONEY_MIN.getInt();
+            case PLAYERPOINTS:
+                return ConfigKeys.DEPENDENCY_PLAYERPOINTS_MIN.getInt();
+            case LEVEL:
+                return ConfigKeys.DEPENDENCY_LEVEL_MIN.getInt();
+            case COINSENGINE:
+                return ConfigKeys.DEPENDENCY_COINSENGINE_MIN.getInt();
+            default:
+                return -1;
+        }
+    }
+
+    public static int getMaximumReward(RewardType rewardType) {
+        switch (rewardType) {
+            case TOKEN:
+                return ConfigKeys.DEPENDENCY_TOKENMANAGER_MAX.getInt();
+            case MONEY:
+                return ConfigKeys.DEPENDENCY_MONEY_MAX.getInt();
+            case PLAYERPOINTS:
+                return ConfigKeys.DEPENDENCY_PLAYERPOINTS_MAX.getInt();
+            case LEVEL:
+                return ConfigKeys.DEPENDENCY_LEVEL_MAX.getInt();
+            case COINSENGINE:
+                return ConfigKeys.DEPENDENCY_COINSENGINE_MAX.getInt();
+            default:
+                return -1;
+        }
     }
 }

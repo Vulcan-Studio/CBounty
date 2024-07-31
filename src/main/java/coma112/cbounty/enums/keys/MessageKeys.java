@@ -14,6 +14,7 @@ public enum MessageKeys {
         FIRST_PAGE("messages.first-page"),
         LAST_PAGE("messages.last-page"),
         INVALID_REWARDTYPE("messages.invalid-rewardtype"),
+        INVALID_REWARDLIMIT("messages.invalid-rewardlimit"),
         INVALID_NUMBER("messages.invalid-number"),
         PLAYER_NOT_FOUND("messages.player-not-found"),
         CANT_BE_YOURSELF("messages.cant-be-yourself"),
@@ -37,7 +38,7 @@ public enum MessageKeys {
         FEATURE_DISABLED("messages.feature-disabled"),
         NOT_BOUNTY("messages.not-a-bounty"),
         NOT_MATCHING_OWNERS("messages.not-matching-owners"),
-        MAX_REWARD_LIMIT("messages.max-reward-limit"),
+
         REMOVE_PLAYER("messages.successful-remove-player"),
         TARGET_RAISE("messages.target-raise"),
         PLAYER_RAISE("messages.player-raise"),

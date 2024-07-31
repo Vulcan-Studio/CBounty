@@ -45,11 +45,10 @@ messages:
   not-matching-owners: "&6&lBOUNTY &8| &cNem te állítottad be a bűndíjat erre a játékosra!"
   target-raise: "&6&lBOUNTY &8| &eA bűndíjad emelkedett {old}-ról {new}-ra!"
   player-raise: "&6&lBOUNTY &8| &aSikeresen megemelted a bűndíjat!"
-  max-reward-limit: "&6&lBOUNTY &8| &cNem adhatsz meg nagyobb számot, mint: &4{limit}"
   successful-takeoff-player: "&6&lBOUNTY &8| &aSikeresen eltávolítottad a bűndíjat {target}-ról!"
   successful-takeoff-target: "&6&lBOUNTY &8| &a{player} eltávolította a bűndíjat rólad!"
   full-inventory: "A megadott játékos eszköztára tele van!"
   item-already-in-inventory: "A megadott játékos eszköztárjában van már egy kereső!"
   bounty-finder-given: "&aSikeresen adtál egy keresét &a{target}-nak/nek&7."
   bounty-finder-received: "&aKaptál egy keresőt!"
-
+  invalid-rewardlimit: "&6&lBOUNTY &8| a minimum {min}, és a maximum {max}"

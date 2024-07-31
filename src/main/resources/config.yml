@@ -31,12 +31,26 @@ placeholder:
 
 # You can turn off and on dependencies.
 dependency:
-  tokenmanager: false
-  playerpoints: false
-  level: true
-  coinsengine:
+  tokenmanager:
     enabled: false
+    min: 0
+    max: 0
+  playerpoints:
+    enabled: false
+    min: 0
+    max: 0
+  level:
+    enabled: true
+    min: 0
+    max: 0
+  coinsengine:
+    enabled: true
+    min: 0
+    max: 0
     currency: "coins"
+  Money:
+    min: 0
+    max: 0
 
 # This is the bounty item in the GUI.
 bounty-item:
@@ -61,11 +75,9 @@ bountyfinder-item:
 
 # This shows maximum values for methods. Like: maximum toplist to get is 15 so you can only get the 15th toplist.
 # bounty-per-player -> Maximum bounty a player can set.
-# rewardlimit -> The maximum integer of reward a player can set.
 max:
   top-to-get: 15
   bounty-per-player: 5
-  rewardlimit: 9000
 
 # Menu Configuration
 menu:
