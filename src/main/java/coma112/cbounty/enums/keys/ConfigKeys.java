@@ -27,7 +27,7 @@ public enum ConfigKeys {
     DEPENDENCY_COINSENGINE_MAX("dependency.coinsengine.max"),
     DEPENDENCY_COINSENGINE_MIN("dependency.coinsengine.min"),
     DEPENDENCY_COINSENGINE_CURRENCY("dependency.coinsengine.currency"),
-    DEPENDENCY_LEVEL("dependency.level"),
+    DEPENDENCY_LEVEL("dependency.level.enabled"),
     DEPENDENCY_LEVEL_MAX("dependency.level.max"),
     DEPENDENCY_LEVEL_MIN("dependency.level.min"),
     DEPENDENCY_MONEY_MIN("dependency.money.min"),

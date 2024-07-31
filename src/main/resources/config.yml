@@ -30,6 +30,7 @@ placeholder:
   no: "&cNo"
 
 # You can turn off and on dependencies.
+# You can set the min and max value for each dependency.
 dependency:
   tokenmanager:
     enabled: false
@@ -48,6 +49,7 @@ dependency:
     min: 0
     max: 0
     currency: "coins"
+#Vault:
   Money:
     min: 0
     max: 0
