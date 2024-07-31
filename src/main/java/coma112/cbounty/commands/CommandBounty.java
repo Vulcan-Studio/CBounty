@@ -110,7 +110,7 @@ public class CommandBounty {
         int maxReward = BountyUtils.getMaximumReward(rewardType);
         if (reward < minReward || (maxReward != 0 && reward > maxReward)) {
             player.sendMessage(MessageKeys.INVALID_REWARDLIMIT.getMessage()
-                    .replace("{min}", String.valueOf(minReward))
+                    .replace("{min}", minReward < 0 ? "0" : String.valueOf(minReward))
                     .replace("{max}", maxReward == 0 ? "\\u221E" : String.valueOf(maxReward)));
             return;
         }
@@ -176,7 +176,7 @@ public class CommandBounty {
         int maxReward = BountyUtils.getMaximumReward(rewardType);
         if (newReward < minReward || (maxReward != 0 && newReward > maxReward)) {
             player.sendMessage(MessageKeys.INVALID_REWARDLIMIT.getMessage()
-                    .replace("{min}", String.valueOf(minReward))
+                    .replace("{min}", minReward < 0 ? "0" : String.valueOf(minReward))
                     .replace("{max}", maxReward == 0 ? "\\u221E" : String.valueOf(maxReward)));
             return;
         }
