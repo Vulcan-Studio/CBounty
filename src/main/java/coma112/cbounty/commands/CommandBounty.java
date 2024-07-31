@@ -100,12 +100,6 @@ public class CommandBounty {
             return;
         }
 
-        if (reward > ConfigKeys.MAX_REWARD_LIMIT.getInt()) {
-            player.sendMessage(MessageKeys.MAX_REWARD_LIMIT
-                    .getMessage()
-                    .replace("{limit}", String.valueOf(ConfigKeys.MAX_REWARD_LIMIT.getInt())));
-            return;
-        }
 
         if (databaseManager.reachedMaximumBounty(player)) {
             player.sendMessage(MessageKeys.MAX_BOUNTY.getMessage());
@@ -117,7 +111,7 @@ public class CommandBounty {
         if (reward < minReward || (maxReward != 0 && reward > maxReward)) {
             player.sendMessage(MessageKeys.INVALID_REWARDLIMIT.getMessage()
                     .replace("{min}", String.valueOf(minReward))
-                    .replace("{max}", maxReward == 0 ? "∞" : String.valueOf(maxReward)));
+                    .replace("{max}", maxReward == 0 ? "\\u221E" : String.valueOf(maxReward)));
             return;
         }
 
@@ -183,7 +177,7 @@ public class CommandBounty {
         if (newReward < minReward || (maxReward != 0 && newReward > maxReward)) {
             player.sendMessage(MessageKeys.INVALID_REWARDLIMIT.getMessage()
                     .replace("{min}", String.valueOf(minReward))
-                    .replace("{max}", maxReward == 0 ? "∞" : String.valueOf(maxReward)));
+                    .replace("{max}", maxReward == 0 ? "\\u221E" : String.valueOf(maxReward)));
             return;
         }
 
