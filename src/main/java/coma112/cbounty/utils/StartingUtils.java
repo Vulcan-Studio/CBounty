@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 import static coma112.cbounty.version.MinecraftVersion.determineVersion;
 
 @SuppressWarnings("deprecation")
-public class StartingUtils {
+public final class StartingUtils {
     public static final boolean isFolia = JavaUtil.classExists("io.papermc.paper.threadedregions.RegionizedServer");
     private static boolean isSupported;
 
@@ -32,12 +32,13 @@ public class StartingUtils {
     }
 
     public static void registerListenersAndCommands() {
-        RegisterUtils.registerEvents();
+        RegisterUtils.registerListeners();
         RegisterUtils.registerCommands();
     }
 
     public static void checkVM() {
         int vmVersion = getVMVersion();
+
         if (vmVersion < 11) {
             Bukkit.getPluginManager().disablePlugin(CBounty.getInstance());
             return;
@@ -70,6 +71,7 @@ public class StartingUtils {
                 int patchVersion = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 0;
 
                 MinecraftVersion version = determineVersion(majorVersion, minorVersion, patchVersion);
+
                 if (version == MinecraftVersion.UNKNOWN) {
                     isSupported = false;
                     return;

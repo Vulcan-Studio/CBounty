@@ -53,7 +53,7 @@ public final class CBounty extends JavaPlugin {
         initializeDatabaseManager();
         registerHooks();
 
-        if (ConfigKeys.RANDOM_BOUNTY_ENABLED.getBoolean()) new BountyScheduler().startScheduling();
+        new BountyScheduler().startScheduling();
 
         StartingUtils.checkUpdates();
         new Metrics(this, 22080);

@@ -16,13 +16,15 @@ import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyCreate;
 
 public class BountyScheduler {
     public void startScheduling() {
-        CBounty.getInstance().getScheduler().runTaskTimer(() -> {
-            try {
-                addRandomBounty();
-            } catch (IOException | NoSuchFieldException | IllegalAccessException exception) {
-                BountyLogger.error(exception.getMessage());
-            }
-        }, 0, ConfigKeys.RANDOM_BOUNTY_PER_SECOND.getInt() * 20L);
+        if (ConfigKeys.RANDOM_BOUNTY_ENABLED.getBoolean()) {
+            CBounty.getInstance().getScheduler().runTaskTimer(() -> {
+                try {
+                    addRandomBounty();
+                } catch (IOException | NoSuchFieldException | IllegalAccessException exception) {
+                    BountyLogger.error(exception.getMessage());
+                }
+            }, 0, ConfigKeys.RANDOM_BOUNTY_PER_SECOND.getInt() * 20L);
+        }
     }
 
     private void addRandomBounty() throws IOException, NoSuchFieldException, IllegalAccessException {

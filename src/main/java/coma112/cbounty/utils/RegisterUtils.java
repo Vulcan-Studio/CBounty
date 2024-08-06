@@ -13,8 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SuppressWarnings("deprecation")
-public class RegisterUtils {
-    public static void registerEvents() {
+public final class RegisterUtils {
+    public static void registerListeners() {
         getListenerClasses().forEach(clazz -> {
             try {
                 CBounty.getInstance().getServer().getPluginManager().registerEvents(clazz.newInstance(), CBounty.getInstance());

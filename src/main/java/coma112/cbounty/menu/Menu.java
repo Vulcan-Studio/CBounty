@@ -11,11 +11,10 @@ import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings("deprecation")
 public abstract class Menu implements InventoryHolder {
-
     protected MenuUtils menuUtils;
     protected Inventory inventory;
 
-    public Menu(MenuUtils menuUtils) {
+    public Menu(@NotNull MenuUtils menuUtils) {
         this.menuUtils = menuUtils;
     }
 
@@ -31,9 +30,10 @@ public abstract class Menu implements InventoryHolder {
         inventory = Bukkit.createInventory(this, getSlots(), MessageProcessor.process(getMenuName()));
 
         this.setMenuItems();
-
         menuUtils.getOwner().openInventory(inventory);
+
         MenuUpdater menuUpdater = new MenuUpdater(this);
+
         menuUpdater.start(ConfigKeys.MENU_TICK.getInt() * 20);
     }
 
@@ -46,7 +46,9 @@ public abstract class Menu implements InventoryHolder {
 
     public void close() {
         MenuUpdater menuUpdater = new MenuUpdater(this);
+
         menuUpdater.stop();
+
         inventory = null;
     }
 

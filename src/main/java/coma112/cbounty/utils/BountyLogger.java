@@ -8,7 +8,7 @@ import org.apache.logging.log4j.message.ParameterizedMessage;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
-public class BountyLogger {
+public final class BountyLogger {
     static final Logger logger = LogManager.getLogger("CBounty");
 
     public static void info(@NotNull String msg, @NotNull Object... objs) {

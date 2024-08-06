@@ -3,6 +3,8 @@ package coma112.cbounty.hooks;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,7 +61,35 @@ public class Placeholder extends PlaceholderExpansion {
             }
         }
 
-        return null;
+        if (params.startsWith("price_")) {
+            try {
+                Player selectedPlayer = Bukkit.getPlayerExact(String.valueOf(params.split("_")[1]));
+
+                if (selectedPlayer != null && CBounty.getDatabaseManager().isBounty(selectedPlayer)) return String.valueOf(CBounty.getDatabaseManager().getReward(selectedPlayer));
+                return "---";
+            } catch (Exception exception) {
+                return "";
+            }
+        }
+
+        return switch (params) {
+            case "price" -> {
+                if (!CBounty.getDatabaseManager().isBounty(player)) yield "";
+                else yield String.valueOf(CBounty.getDatabaseManager().getReward(player));
+            }
+
+            case "rewardtype" -> {
+                if (!CBounty.getDatabaseManager().isBounty(player)) yield "";
+                else yield String.valueOf(CBounty.getDatabaseManager().getRewardType(player));
+            }
+
+            case "sender" -> {
+                if (!CBounty.getDatabaseManager().isBounty(player)) yield "";
+                else yield CBounty.getDatabaseManager().getSender(player).getName();
+            }
+
+            default -> throw new IllegalStateException("Unexpected value: " + params);
+        };
     }
 
     public static void registerHook() {

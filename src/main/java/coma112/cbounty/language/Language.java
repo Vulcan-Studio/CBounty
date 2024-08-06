@@ -11,7 +11,5 @@ public class Language extends ConfigUtils {
         super(CBounty.getInstance().getDataFolder().getPath() + File.separator + "locales", name);
         save();
     }
-
-
 }
 

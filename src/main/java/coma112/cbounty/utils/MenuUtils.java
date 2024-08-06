@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 @Getter
-public class MenuUtils {
+public final class MenuUtils {
     private final Player owner;
     private static final HashMap<Player, MenuUtils> menuMap = new HashMap<>();
 

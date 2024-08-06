@@ -19,21 +19,20 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import su.nightexpress.coinsengine.api.CoinsEngineAPI;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.UUID;
 
 @SuppressWarnings("deprecation")
-public class BountyUtils {
+public final class BountyUtils {
     public static void sendActionBar(@NotNull Player player, @NotNull String message) {
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(MessageProcessor.process(message)));
     }
 
-
     public static boolean hasItem(@NotNull Inventory inventory, @NotNull ItemStack item) {
-        for (ItemStack stack : inventory.getContents()) {
-            if (stack != null && stack.isSimilar(item)) return true;
-        }
-
-        return false;
+        return Arrays.stream(inventory.getContents())
+                .filter(Objects::nonNull)
+                .anyMatch(stack -> stack.isSimilar(item));
     }
 
     public static boolean handleTokenReward(@NotNull Player player, int reward) {
@@ -115,36 +114,22 @@ public class BountyUtils {
 
 
     public static int getMinimumReward(RewardType rewardType) {
-        switch (rewardType) {
-            case TOKEN:
-                return ConfigKeys.DEPENDENCY_TOKENMANAGER_MIN.getInt();
-            case MONEY:
-                return ConfigKeys.DEPENDENCY_MONEY_MIN.getInt();
-            case PLAYERPOINTS:
-                return ConfigKeys.DEPENDENCY_PLAYERPOINTS_MIN.getInt();
-            case LEVEL:
-                return ConfigKeys.DEPENDENCY_LEVEL_MIN.getInt();
-            case COINSENGINE:
-                return ConfigKeys.DEPENDENCY_COINSENGINE_MIN.getInt();
-            default:
-                return -1;
-        }
+        return switch (rewardType) {
+            case TOKEN -> ConfigKeys.DEPENDENCY_TOKENMANAGER_MIN.getInt();
+            case MONEY -> ConfigKeys.DEPENDENCY_MONEY_MIN.getInt();
+            case PLAYERPOINTS -> ConfigKeys.DEPENDENCY_PLAYERPOINTS_MIN.getInt();
+            case LEVEL -> ConfigKeys.DEPENDENCY_LEVEL_MIN.getInt();
+            case COINSENGINE -> ConfigKeys.DEPENDENCY_COINSENGINE_MIN.getInt();
+        };
     }
 
     public static int getMaximumReward(RewardType rewardType) {
-        switch (rewardType) {
-            case TOKEN:
-                return ConfigKeys.DEPENDENCY_TOKENMANAGER_MAX.getInt();
-            case MONEY:
-                return ConfigKeys.DEPENDENCY_MONEY_MAX.getInt();
-            case PLAYERPOINTS:
-                return ConfigKeys.DEPENDENCY_PLAYERPOINTS_MAX.getInt();
-            case LEVEL:
-                return ConfigKeys.DEPENDENCY_LEVEL_MAX.getInt();
-            case COINSENGINE:
-                return ConfigKeys.DEPENDENCY_COINSENGINE_MAX.getInt();
-            default:
-                return -1;
-        }
+        return switch (rewardType) {
+            case TOKEN -> ConfigKeys.DEPENDENCY_TOKENMANAGER_MAX.getInt();
+            case MONEY -> ConfigKeys.DEPENDENCY_MONEY_MAX.getInt();
+            case PLAYERPOINTS -> ConfigKeys.DEPENDENCY_PLAYERPOINTS_MAX.getInt();
+            case LEVEL -> ConfigKeys.DEPENDENCY_LEVEL_MAX.getInt();
+            case COINSENGINE -> ConfigKeys.DEPENDENCY_COINSENGINE_MAX.getInt();
+        };
     }
 }

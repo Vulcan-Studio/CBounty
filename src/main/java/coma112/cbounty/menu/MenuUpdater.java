@@ -29,8 +29,10 @@ public class MenuUpdater {
 
     public void stop() {
         running = false;
+
         if (task != null) {
             task.cancel();
+
             task = null;
         }
     }
