@@ -1,6 +1,7 @@
 package coma112.cbounty.utils;
 
 import coma112.cbounty.CBounty;
+import coma112.cbounty.enums.FormatType;
 import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
@@ -19,6 +20,7 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import su.nightexpress.coinsengine.api.CoinsEngineAPI;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.UUID;
@@ -130,6 +132,22 @@ public final class BountyUtils {
             case PLAYERPOINTS -> ConfigKeys.DEPENDENCY_PLAYERPOINTS_MAX.getInt();
             case LEVEL -> ConfigKeys.DEPENDENCY_LEVEL_MAX.getInt();
             case COINSENGINE -> ConfigKeys.DEPENDENCY_COINSENGINE_MAX.getInt();
+        };
+    }
+
+    public static String formatPrice(int price) {
+        if (!ConfigKeys.FORMATTING_ENABLED.getBoolean()) return String.valueOf(price);
+
+        return switch (FormatType.valueOf(ConfigKeys.FORMATTING_TYPE.getString())) {
+            case DOT, dot -> String.format("%,d", price).replace(",", ".");
+            case COMMAS, commas -> String.format("%,d", price);
+            case BASIC, basic -> {
+                DecimalFormat formatter = new DecimalFormat("#.#");
+
+                if (price < 1000) yield String.valueOf(price);
+                else if (price < 1000000) yield formatter.format(price / 1000.0) + ConfigKeys.BASIC_FORMAT_M.getString();
+                else yield formatter.format(price / 1000000.0) + ConfigKeys.BASIC_FORMAT_K.getString();
+            }
         };
     }
 }

@@ -1,12 +1,16 @@
 package coma112.cbounty.hooks;
 
 import coma112.cbounty.CBounty;
+import coma112.cbounty.enums.FormatType;
 import coma112.cbounty.enums.keys.ConfigKeys;
+import coma112.cbounty.utils.BountyUtils;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.text.DecimalFormat;
 
 @SuppressWarnings("deprecation")
 public class Placeholder extends PlaceholderExpansion {
@@ -65,7 +69,7 @@ public class Placeholder extends PlaceholderExpansion {
             try {
                 Player selectedPlayer = Bukkit.getPlayerExact(String.valueOf(params.split("_")[1]));
 
-                if (selectedPlayer != null && CBounty.getDatabaseManager().isBounty(selectedPlayer)) return String.valueOf(CBounty.getDatabaseManager().getReward(selectedPlayer));
+                if (selectedPlayer != null && CBounty.getDatabaseManager().isBounty(selectedPlayer)) return BountyUtils.formatPrice(CBounty.getDatabaseManager().getReward(selectedPlayer));
                 return "---";
             } catch (Exception exception) {
                 return "";
@@ -75,7 +79,7 @@ public class Placeholder extends PlaceholderExpansion {
         return switch (params) {
             case "price" -> {
                 if (!CBounty.getDatabaseManager().isBounty(player)) yield "";
-                else yield String.valueOf(CBounty.getDatabaseManager().getReward(player));
+                else yield BountyUtils.formatPrice(CBounty.getDatabaseManager().getReward(player));
             }
 
             case "rewardtype" -> {
@@ -88,7 +92,7 @@ public class Placeholder extends PlaceholderExpansion {
                 else yield CBounty.getDatabaseManager().getSender(player).getName();
             }
 
-            default -> throw new IllegalStateException("Unexpected value: " + params);
+            default -> "";
         };
     }
 

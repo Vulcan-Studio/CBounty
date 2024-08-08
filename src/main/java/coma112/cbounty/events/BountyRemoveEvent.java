@@ -1,5 +1,6 @@
 package coma112.cbounty.events;
 
+import coma112.cbounty.interfaces.PlaceholderProvider;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -7,8 +8,12 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 @Getter
-public class BountyRemoveEvent extends Event {
+public class BountyRemoveEvent extends Event implements PlaceholderProvider {
     private static final HandlerList handlers = new HandlerList();
     private final Player sender;
     private final Player target;
@@ -26,5 +31,14 @@ public class BountyRemoveEvent extends Event {
     @Override
     public @NotNull HandlerList getHandlers() {
         return handlers;
+    }
+
+    @Override
+    public Map<String, String> getPlaceholders() {
+        Map<String, String> placeholders = new HashMap<>();
+
+        placeholders.put("{target}", Objects.requireNonNull(target.getName()));
+
+        return placeholders;
     }
 }

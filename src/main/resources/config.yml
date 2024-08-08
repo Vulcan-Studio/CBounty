@@ -1,3 +1,9 @@
+#####################################################################
+# +---------------------------------------------------------------+ #
+# |                       Basic Settings                          | #
+# +---------------------------------------------------------------+ #
+#####################################################################
+
 language: "en" # Supported languages -> hu, de, en, tr, es
 
 database:
@@ -29,8 +35,20 @@ placeholder:
   yes: "&aYes"
   no: "&cNo"
 
+# This shows maximum values for methods. Like: maximum top list to get is 15, so you can only get the 15th top list.
+# bounty-per-player -> Maximum bounty a player can set.
+max:
+  top-to-get: 15
+  bounty-per-player: 5
+
+##########################################################################
+# +--------------------------------------------------------------------+ #
+# |                       Dependency settings                          | #
+# +--------------------------------------------------------------------+ #
+##########################################################################
 # You can turn off and on dependencies.
 # You can set the min and max value for each dependency.
+
 dependency:
   tokenmanager:
     enabled: false
@@ -54,6 +72,12 @@ dependency:
     min: 0
     max: 0
 
+###################################################################
+# +-------------------------------------------------------------+ #
+# |                       Items & GUIs                          | #
+# +------------------------------------------------------------ + #
+###################################################################
+
 # This is the bounty item in the GUI.
 bounty-item:
   amount: 1
@@ -75,12 +99,6 @@ bountyfinder-item:
     - "&eHold this item in your hand,"
     - "&eto see which bounty is closest to you"
 
-# This shows maximum values for methods. Like: maximum toplist to get is 15 so you can only get the 15th toplist.
-# bounty-per-player -> Maximum bounty a player can set.
-max:
-  top-to-get: 15
-  bounty-per-player: 5
-
 # Menu Configuration
 menu:
   title: "&6&lBOUNTIES"
@@ -97,7 +115,30 @@ menu:
     name: "&aForward"
     slot: 53
 
-# Features
+##########################################################################
+# +--------------------------------------------------------------------+ #
+# |                       Formatting settings                          | #
+# +------------------------------------------------------------------- + #
+##########################################################################
+
+formatting:
+  enabled: true
+  type: dot
+  basic:
+    million: "M"
+    thousand: "K"
+
+# Types
+# dot = 1.000.000
+# commas = 1,000,000
+# basic = 1M
+
+###############################################################
+# +---------------------------------------------------------+ #
+# |                       FEATURES                          | #
+# +-------------------------------------------------------- + #
+###############################################################
+
 # glowing.enabled -> You can enable and disable the glowing feature for the bounties.
 # glowing.color -> If the glowing.enabled is true then you can set a custom glowing color.
 
@@ -124,15 +165,20 @@ feature:
     no-bounty-nearby: "&cNo bounties nearby"
     nearest-bounty: "&a{bounty} &8| &a{distance}m"
 
-# Webhook
+###############################################################
+# +---------------------------------------------------------+ #
+# |                       WEBHOOKS                          | #
+# +-------------------------------------------------------- + #
+###############################################################
+
 # webhook.enabled -> You can enable and disable the webhook feature
 # webhook.url -> Discord Webhook URL
 # webhook.random-sender -> The value if the bounty setter is random (by the random bounty feature)
 
 webhook:
-  enabled: false
-  url: "WEBHOOK URL HERE!!!"
   bounty-death-embed:
+    url: "WEBHOOK URL HERE!!!"
+    enabled: false
     title: "BOUNTY TARGET DEATH"
     description: "{killer} killed {target} for {reward} {rewardType}"
     color: "ORANGE"
@@ -144,6 +190,8 @@ webhook:
     thumbnail: ""
     image: ""
   bounty-create-embed:
+    url: "WEBHOOK URL HERE!!!"
+    enabled: false
     title: "NEW BOUNTY"
     description: "{sender} has put a bounty on {target}'s head ({reward} {rewardType})"
     color: "ORANGE"
@@ -155,6 +203,8 @@ webhook:
     thumbnail: ""
     image: ""
   bounty-remove-embed:
+    url: "WEBHOOK URL HERE!!!"
+    enabled: false
     title: "REMOVED BOUNTY"
     description: "{target}'s bounty has been removed!"
     color: "ORANGE"

@@ -16,13 +16,12 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import su.nightexpress.coinsengine.api.CoinsEngineAPI;
 
 import java.io.IOException;
-
-import static coma112.cbounty.hooks.Webhook.replacePlaceholdersTargetDeath;
+import java.net.URISyntaxException;
 
 public class BountyDeathListener implements Listener {
 
     @EventHandler
-    public void onDeath(final PlayerDeathEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public void onDeath(final PlayerDeathEvent event) {
         Player target = event.getEntity();
         Player killer = target.getKiller();
 
@@ -69,19 +68,6 @@ public class BountyDeathListener implements Listener {
 
                 if (!CBounty.getDatabaseManager().isSenderIsRandom(target)) killer.sendMessage(MessageKeys.BOUNTY_DEAD_KILLER.getMessage());
 
-                Webhook.sendWebhook(
-                        replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_DESCRIPTION.getString(), killer, target),
-                        ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_COLOR.getString(),
-                        replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_AUTHOR_NAME.getString(), killer, target),
-                        replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_AUTHOR_URL.getString(), killer, target),
-                        replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_AUTHOR_ICON.getString(), killer, target),
-                        replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_FOOTER_TEXT.getString(), killer, target),
-                        replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_FOOTER_ICON.getString(), killer, target),
-                        replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_THUMBNAIL.getString(), killer, target),
-                        replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_TITLE.getString(), killer, target),
-                        replacePlaceholdersTargetDeath(ConfigKeys.WEBHOOK_BOUNTY_DEATH_EMBED_IMAGE.getString(), killer, target)
-                );
-
                 target.sendMessage(MessageKeys.BOUNTY_DEAD_TARGET.getMessage());
 
                 Bukkit.getOnlinePlayers().forEach(player -> player.sendMessage(MessageKeys.BOUNTY_DEAD_EVERYONE
@@ -92,8 +78,13 @@ public class BountyDeathListener implements Listener {
 
                 CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyDeathEvent(killer, target,
                         CBounty.getDatabaseManager().getReward(target),
-                        CBounty.getDatabaseManager().getRewardType(target)));
+                        CBounty.getDatabaseManager().getRewardType(target), killer));
             }
         }
+    }
+
+    @EventHandler
+    public void onDeath(final BountyDeathEvent event) throws IOException, URISyntaxException {
+        Webhook.sendWebhookFromString("webhook.bounty-death-embed", event);
     }
 }

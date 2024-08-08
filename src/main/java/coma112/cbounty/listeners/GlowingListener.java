@@ -8,10 +8,7 @@ import coma112.cbounty.events.BountyRemoveEvent;
 import coma112.cbounty.hooks.Webhook;
 import coma112.cbounty.utils.BountyUtils;
 import coma112.cbounty.utils.StartingUtils;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,9 +19,7 @@ import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-
-import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyCreate;
-import static coma112.cbounty.hooks.Webhook.replacePlaceholdersBountyRemove;
+import java.net.URISyntaxException;
 
 public class GlowingListener implements Listener {
     @EventHandler
@@ -43,39 +38,17 @@ public class GlowingListener implements Listener {
     }
 
     @EventHandler
-    public void onRemove(final BountyRemoveEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public void onRemove(final BountyRemoveEvent event) throws IOException, URISyntaxException {
         tryToRemoveGlowing(event.getTarget());
 
-        Webhook.sendWebhook(
-                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_DESCRIPTION.getString(), event),
-                ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_COLOR.getString(),
-                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_AUTHOR_NAME.getString(), event),
-                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_AUTHOR_URL.getString(), event),
-                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_AUTHOR_ICON.getString(), event),
-                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_FOOTER_TEXT.getString(), event),
-                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_FOOTER_ICON.getString(), event),
-                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_THUMBNAIL.getString(), event),
-                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_TITLE.getString(), event),
-                replacePlaceholdersBountyRemove(ConfigKeys.WEBHOOK_BOUNTY_REMOVE_EMBED_IMAGE.getString(), event)
-        );
+        Webhook.sendWebhookFromString("webhook.bounty-remove-embed", event);
     }
 
     @EventHandler
-    public void onCreate(final BountyCreateEvent event) throws IOException, NoSuchFieldException, IllegalAccessException {
+    public void onCreate(final BountyCreateEvent event) throws IOException, URISyntaxException {
         if (!StartingUtils.isFolia) tryToSetGlowing(event.getTarget());
 
-        Webhook.sendWebhook(
-                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_DESCRIPTION.getString(), event),
-                ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_COLOR.getString(),
-                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_NAME.getString(), event),
-                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_URL.getString(), event),
-                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_AUTHOR_ICON.getString(), event),
-                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_FOOTER_TEXT.getString(), event),
-                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_FOOTER_ICON.getString(), event),
-                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_THUMBNAIL.getString(), event),
-                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_TITLE.getString(), event),
-                replacePlaceholdersBountyCreate(ConfigKeys.WEBHOOK_BOUNTY_CREATE_EMBED_IMAGE.getString(), event)
-        );
+        Webhook.sendWebhookFromString("webhook.bounty-create-embed", event);
     }
 
     public void tryToSetGlowing(@NotNull Player player) {
