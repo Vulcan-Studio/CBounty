@@ -52,6 +52,7 @@ public final class CBounty extends JavaPlugin {
         registerListenersAndCommands();
         initializeDatabaseManager();
         registerHooks();
+        loadBasicFormatOverrides();
 
         new BountyScheduler().startScheduling();
 

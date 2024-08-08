@@ -125,8 +125,10 @@ formatting:
   enabled: true
   type: dot
   basic:
-    million: "M"
-    thousand: "K"
+    '1000': K
+    '1000000': M
+    '1000000000': B
+    '1000000000000': T
 
 # Types
 # dot = 1.000.000
@@ -153,7 +155,7 @@ formatting:
 
 feature:
   glowing:
-    enabled: true
+    enabled: false
     color: "RED"
   random-bounty:
     enabled: false

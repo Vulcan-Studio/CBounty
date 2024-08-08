@@ -9,21 +9,18 @@ import coma112.cbounty.hooks.CoinsEngine;
 import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.processor.MessageProcessor;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.milkbowl.vault.economy.Economy;
 import org.black_ixx.playerpoints.PlayerPointsAPI;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import su.nightexpress.coinsengine.api.CoinsEngineAPI;
 
 import java.text.DecimalFormat;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @SuppressWarnings("deprecation")
 public final class BountyUtils {
@@ -142,12 +139,19 @@ public final class BountyUtils {
             case DOT, dot -> String.format("%,d", price).replace(",", ".");
             case COMMAS, commas -> String.format("%,d", price);
             case BASIC, basic -> {
-                DecimalFormat formatter = new DecimalFormat("#.#");
+                List<Map.Entry<Integer, String>> sortedEntries = new ArrayList<>(StartingUtils.getBasicFormatOverrides().entrySet());
+                sortedEntries.sort(Collections.reverseOrder(Map.Entry.comparingByKey()));
 
-                if (price < 1000) yield String.valueOf(price);
-                else if (price < 1000000) yield formatter.format(price / 1000.0) + ConfigKeys.BASIC_FORMAT_M.getString();
-                else yield formatter.format(price / 1000000.0) + ConfigKeys.BASIC_FORMAT_K.getString();
+                for (Map.Entry<Integer, String> entry : sortedEntries) {
+                    if (price >= entry.getKey()) {
+                        double formattedPrice = (double) price / entry.getKey();
+                        yield new DecimalFormat("#.#").format(formattedPrice) + entry.getValue();
+                    }
+                }
+
+                yield String.valueOf(price);
             }
         };
     }
+
 }

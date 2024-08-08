@@ -2,18 +2,22 @@ package coma112.cbounty.utils;
 
 import com.github.Anon8281.universalScheduler.utils.JavaUtil;
 import coma112.cbounty.CBounty;
-import coma112.cbounty.hooks.Placeholder;
-import coma112.cbounty.hooks.Token;
-import coma112.cbounty.hooks.PlayerPoints;
 import coma112.cbounty.hooks.CoinsEngine;
+import coma112.cbounty.hooks.Placeholder;
+import coma112.cbounty.hooks.PlayerPoints;
+import coma112.cbounty.hooks.Token;
 import coma112.cbounty.update.UpdateChecker;
 import coma112.cbounty.version.MinecraftVersion;
 import coma112.cbounty.version.ServerVersionSupport;
 import coma112.cbounty.version.VersionSupport;
+import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,6 +27,8 @@ import static coma112.cbounty.version.MinecraftVersion.determineVersion;
 public final class StartingUtils {
     public static final boolean isFolia = JavaUtil.classExists("io.papermc.paper.threadedregions.RegionizedServer");
     private static boolean isSupported;
+    @Getter
+    public static final Map<Integer, String> basicFormatOverrides = new ConcurrentHashMap<>();
 
     public static void registerHooks() {
         Placeholder.registerHook();
@@ -98,6 +104,23 @@ public final class StartingUtils {
 
     public static void saveResourceIfNotExists(@NotNull String resourcePath) {
         if (!new File(CBounty.getInstance().getDataFolder(), resourcePath).exists()) CBounty.getInstance().saveResource(resourcePath, false);
+    }
+
+    public static void loadBasicFormatOverrides() {
+        ConfigurationSection section = CBounty.getInstance().getConfiguration().getSection("formatting.basic");
+
+        if (section != null) {
+            section.getKeys(false).forEach(key -> {
+                try {
+                    int value = Integer.parseInt(key);
+                    String format = section.getString(key);
+
+                    basicFormatOverrides.put(value, format);
+                } catch (NumberFormatException exception) {
+                    BountyLogger.error("Invalid formatting key: " + key);
+                }
+            });
+        }
     }
 
     static int getVMVersion() {
