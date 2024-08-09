@@ -28,7 +28,7 @@ public final class StartingUtils {
     public static final boolean isFolia = JavaUtil.classExists("io.papermc.paper.threadedregions.RegionizedServer");
     private static boolean isSupported;
     @Getter
-    public static final Map<Integer, String> basicFormatOverrides = new ConcurrentHashMap<>();
+    public static final Map<Long, String> basicFormatOverrides = new ConcurrentHashMap<>();
 
     public static void registerHooks() {
         Placeholder.registerHook();
@@ -112,10 +112,10 @@ public final class StartingUtils {
         if (section != null) {
             section.getKeys(false).forEach(key -> {
                 try {
-                    int value = Integer.parseInt(key);
+                    long value = Long.parseLong(key);  // Change to long
                     String format = section.getString(key);
 
-                    basicFormatOverrides.put(value, format);
+                    basicFormatOverrides.put(value, format);  // Map should also be long to String
                 } catch (NumberFormatException exception) {
                     BountyLogger.error("Invalid formatting key: " + key);
                 }

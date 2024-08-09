@@ -139,10 +139,10 @@ public final class BountyUtils {
             case DOT, dot -> String.format("%,d", price).replace(",", ".");
             case COMMAS, commas -> String.format("%,d", price);
             case BASIC, basic -> {
-                List<Map.Entry<Integer, String>> sortedEntries = new ArrayList<>(StartingUtils.getBasicFormatOverrides().entrySet());
+                List<Map.Entry<Long, String>> sortedEntries = new ArrayList<>(StartingUtils.getBasicFormatOverrides().entrySet());
                 sortedEntries.sort(Collections.reverseOrder(Map.Entry.comparingByKey()));
 
-                for (Map.Entry<Integer, String> entry : sortedEntries) {
+                for (Map.Entry<Long, String> entry : sortedEntries) {
                     if (price >= entry.getKey()) {
                         double formattedPrice = (double) price / entry.getKey();
                         yield new DecimalFormat("#.#").format(formattedPrice) + entry.getValue();
