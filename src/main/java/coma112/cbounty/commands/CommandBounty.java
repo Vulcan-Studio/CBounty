@@ -242,6 +242,11 @@ public class CommandBounty {
     @Subcommand("bountyfinder")
     @CommandPermission("cbounty.bountyfinder")
     public void giveBountyFinder(@NotNull Player player, @NotNull @Default("me") Player target) {
+        if (!ConfigKeys.BOUNTYFINDER_ENABLED.getBoolean()) {
+            player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage());
+            return;
+        }
+
         if (!target.isOnline()) {
             player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
             return;

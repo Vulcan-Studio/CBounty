@@ -22,16 +22,19 @@ public class BountyFinderListener implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItem(event.getNewSlot());
 
-        if (item != null && item.equals(ItemKeys.BOUNTYFINDER_ITEM.getItem())) {
-            CBounty.getInstance().getScheduler().runTaskTimer(() -> {
-                if (player.getInventory().getItemInMainHand().equals(item)) BountyUtils.sendActionBar(player, getNearestBountyInfo(player));
+        if (!ConfigKeys.BOUNTYFINDER_ENABLED.getBoolean()) return;
+        if (item == null) return;
+        if (!item.equals(ItemKeys.BOUNTYFINDER_ITEM.getItem())) return;
+
+        CBounty.getInstance().getScheduler().runTaskTimer(() -> {
+            if (player.getInventory().getItemInMainHand().equals(item)) BountyUtils.sendActionBar(player, getNearestBountyInfo(player));
             }, 0, 10);
-        }
     }
 
 
     private String getNearestBountyInfo(@NotNull Player player) {
-        Optional<Player> nearestBounty = Bukkit.getOnlinePlayers().stream()
+        Optional<Player> nearestBounty = Bukkit.getOnlinePlayers()
+                .stream()
                 .filter(otherPlayer -> !otherPlayer.equals(player))
                 .filter(CBounty.getDatabaseManager()::isBounty)
                 .min(Comparator.comparingDouble(otherPlayer -> player.getLocation().distance(otherPlayer.getLocation())))

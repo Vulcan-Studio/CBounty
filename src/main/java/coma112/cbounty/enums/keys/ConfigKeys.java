@@ -23,6 +23,7 @@ public enum ConfigKeys {
     DEPENDENCY_TOKENMANAGER("dependency.tokenmanager.enabled"),
     DEPENDENCY_TOKENMANAGER_MAX("dependency.tokenmanager.max"),
     DEPENDENCY_TOKENMANAGER_MIN("dependency.tokenmanager.min"),
+    BOUNTYFINDER_ENABLED("bountyfinder-item.enabled"),
 
     DEPENDENCY_PLAYERPOINTS("dependency.playerpoints.enabled"),
     DEPENDENCY_PLAYERPOINTS_MAX("dependency.playerpoints.max"),
