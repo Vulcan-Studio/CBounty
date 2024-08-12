@@ -106,6 +106,7 @@ public class CommandBounty {
 
         int minReward = BountyUtils.getMinimumReward(rewardType);
         int maxReward = BountyUtils.getMaximumReward(rewardType);
+
         if (reward < minReward || (maxReward != 0 && reward > maxReward)) {
             player.sendMessage(MessageKeys.INVALID_REWARDLIMIT.getMessage()
                     .replace("{min}", minReward < 0 ? "0" : String.valueOf(minReward))

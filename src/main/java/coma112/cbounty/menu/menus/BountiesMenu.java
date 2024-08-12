@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
 
 @SuppressWarnings("deprecation")
 public class BountiesMenu extends PaginatedMenu implements Listener {
-    public BountiesMenu(@NotNull MenuUtils menuUtils) {
+    public BountiesMenu(MenuUtils menuUtils) {
         super(menuUtils);
     }
 
@@ -38,11 +38,6 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
     }
 
     @Override
-    public List<Bounty> getList() {
-        return CBounty.getDatabaseManager().getBounties();
-    }
-
-    @Override
     public void handleMenu(final InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player player)) return;
         if (!event.getInventory().equals(inventory)) return;
@@ -50,7 +45,10 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
         event.setCancelled(true);
 
         if (event.getSlot() == ConfigKeys.FORWARD_SLOT.getInt()) {
-            if (nextPage >= totalPages) {
+            int nextPageIndex = page + 1;
+            int totalPages = (int) Math.ceil((double) CBounty.getDatabaseManager().getBounties().size() / getMaxItemsPerPage());
+
+            if (nextPageIndex >= totalPages) {
                 player.sendMessage(MessageKeys.LAST_PAGE.getMessage());
                 return;
             } else {
@@ -71,12 +69,17 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
 
     @Override
     public void setMenuItems() {
+        List<Bounty> bounties = CBounty.getDatabaseManager().getBounties();
+
         inventory.clear();
         addMenuBorder();
 
+        int startIndex = page * getMaxItemsPerPage();
+        int endIndex = Math.min(startIndex + getMaxItemsPerPage(), bounties.size());
+
         IntStream
                 .range(startIndex, endIndex)
-                .forEach(index -> inventory.addItem(createBountyItem(getList().get(index))));
+                .forEach(index -> inventory.addItem(createBountyItem(bounties.get(index))));
     }
 
     @EventHandler
