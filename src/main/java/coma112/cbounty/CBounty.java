@@ -39,6 +39,8 @@ public final class CBounty extends JavaPlugin {
     @Override
     public void onLoad() {
         instance = this;
+        scheduler = UniversalScheduler.getScheduler(this);
+
         StartingUtils.checkVersion();
     }
 
@@ -48,7 +50,6 @@ public final class CBounty extends JavaPlugin {
         saveDefaultConfig();
 
         initializeComponents();
-        scheduler = UniversalScheduler.getScheduler(this);
         registerListenersAndCommands();
         initializeDatabaseManager();
         registerHooks();

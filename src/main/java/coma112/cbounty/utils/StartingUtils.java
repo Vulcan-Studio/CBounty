@@ -8,7 +8,6 @@ import coma112.cbounty.hooks.PlayerPoints;
 import coma112.cbounty.hooks.Token;
 import coma112.cbounty.update.UpdateChecker;
 import coma112.cbounty.version.MinecraftVersion;
-import coma112.cbounty.version.ServerVersionSupport;
 import coma112.cbounty.version.VersionSupport;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -32,6 +31,7 @@ public final class StartingUtils {
 
     public static void registerHooks() {
         Placeholder.registerHook();
+        Placeholder.registerHook();
         Token.register();
         PlayerPoints.register();
         CoinsEngine.register();
@@ -43,9 +43,7 @@ public final class StartingUtils {
     }
 
     public static void checkVM() {
-        int vmVersion = getVMVersion();
-
-        if (vmVersion < 11) {
+        if (getVMVersion() < 11) {
             Bukkit.getPluginManager().disablePlugin(CBounty.getInstance());
             return;
         }
@@ -66,30 +64,19 @@ public final class StartingUtils {
         }
 
         try {
-            String bukkitVersion = Bukkit.getVersion();
-
             Pattern pattern = Pattern.compile("\\(MC: (\\d+)\\.(\\d+)(?:\\.(\\d+))?\\)");
-            Matcher matcher = pattern.matcher(bukkitVersion);
+            Matcher matcher = pattern.matcher(Bukkit.getVersion());
 
             if (matcher.find()) {
-                int majorVersion = Integer.parseInt(matcher.group(1));
-                int minorVersion = Integer.parseInt(matcher.group(2));
-                int patchVersion = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 0;
-
-                MinecraftVersion version = determineVersion(majorVersion, minorVersion, patchVersion);
+                MinecraftVersion version = determineVersion(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)), matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 0);
 
                 if (version == MinecraftVersion.UNKNOWN) {
                     isSupported = false;
                     return;
                 }
 
-                VersionSupport support = new VersionSupport(CBounty.getInstance(), version);
-                ServerVersionSupport nms = support.getVersionSupport();
-                isSupported = nms != null;
-
-            } else {
-                isSupported = false;
-            }
+                isSupported = new VersionSupport(CBounty.getInstance(), version).getVersionSupport() != null;
+            } else isSupported = false;
         } catch (Exception exception) {
             isSupported = false;
         }
@@ -109,23 +96,19 @@ public final class StartingUtils {
     public static void loadBasicFormatOverrides() {
         ConfigurationSection section = CBounty.getInstance().getConfiguration().getSection("formatting.basic");
 
-        if (section != null) {
-            section.getKeys(false).forEach(key -> {
-                try {
-                    long value = Long.parseLong(key);  // Change to long
-                    String format = section.getString(key);
+        if (section == null) return;
 
-                    basicFormatOverrides.put(value, format);  // Map should also be long to String
-                } catch (NumberFormatException exception) {
-                    BountyLogger.error("Invalid formatting key: " + key);
-                }
-            });
-        }
+        section.getKeys(false).forEach(key -> {
+            try {
+                basicFormatOverrides.put(Long.parseLong(key), section.getString(key));
+            } catch (NumberFormatException exception) {
+                BountyLogger.error(exception.getMessage());
+            }
+        });
     }
 
     static int getVMVersion() {
-        String javaVersion = System.getProperty("java.version");
-        Matcher matcher = Pattern.compile("(?:1\\.)?(\\d+)").matcher(javaVersion);
+        Matcher matcher = Pattern.compile("(?:1\\.)?(\\d+)").matcher(System.getProperty("java.version"));
 
         if (!matcher.find()) return -1;
 

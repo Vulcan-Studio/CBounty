@@ -37,6 +37,7 @@ public enum ConfigKeys {
     DEPENDENCY_LEVEL_MIN("dependency.level.min"),
     DEPENDENCY_MONEY_MIN("dependency.money.min"),
     DEPENDENCY_MONEY_MAX("dependency.money.max"),
+    SET_BOUNTY_ON_DEATH("set-bounty-on-death"),
 
     GLOWING_ENABLED("feature.glowing.enabled"),
     WEBHOOK_ENABLED("webhook.enabled"),

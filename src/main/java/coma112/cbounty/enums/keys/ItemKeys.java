@@ -1,6 +1,6 @@
 package coma112.cbounty.enums.keys;
 
-import coma112.cbounty.item.IItemBuilder;
+import coma112.cbounty.item.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,6 +16,6 @@ public enum ItemKeys {
     }
 
     public ItemStack getItem() {
-        return IItemBuilder.createItemFromString(path);
+        return ItemFactory.createItemFromString(path);
     };
 }

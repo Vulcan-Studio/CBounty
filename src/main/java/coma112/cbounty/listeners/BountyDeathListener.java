@@ -4,10 +4,8 @@ import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.events.BountyDeathEvent;
-import coma112.cbounty.hooks.CoinsEngine;
-import coma112.cbounty.hooks.PlayerPoints;
-import coma112.cbounty.hooks.Vault;
-import coma112.cbounty.hooks.Webhook;
+import coma112.cbounty.hooks.*;
+import coma112.cbounty.utils.BountyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,7 +29,7 @@ public class BountyDeathListener implements Listener {
 
                 switch (CBounty.getDatabaseManager().getRewardType(target)) {
                     case TOKEN -> {
-                        if (CBounty.getInstance().getToken().isEnabled()) CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
+                        if (Token.isEnabled()) CBounty.getTokenManager().addTokens(killer, CBounty.getDatabaseManager().getReward(target));
                         else {
                             Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
                             killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
@@ -57,13 +55,13 @@ public class BountyDeathListener implements Listener {
                     case COINSENGINE -> {
                         if (ConfigKeys.DEPENDENCY_COINSENGINE.getBoolean()) CoinsEngineAPI.addBalance(killer, CoinsEngine.getCurrency(), CBounty.getDatabaseManager().getReward(target));
                         else {
-                        Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
-                        killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
+                            Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
+                            killer.sendMessage(MessageKeys.FEATURE_DISABLED_EVENT.getMessage());
+                        }
                     }
-                }
 
-                        case MONEY -> Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
-                    }
+                    case MONEY -> Vault.getEconomy().depositPlayer(killer, CBounty.getDatabaseManager().getReward(target));
+                }
 
 
                 if (!CBounty.getDatabaseManager().isSenderIsRandom(target)) killer.sendMessage(MessageKeys.BOUNTY_DEAD_KILLER.getMessage());
@@ -74,6 +72,7 @@ public class BountyDeathListener implements Listener {
                         .getMessage()
                         .replace("{name}", target.getName())));
 
+                BountyUtils.setBountyOnDeath(killer, target);
                 CBounty.getDatabaseManager().removeBounty(target);
 
                 CBounty.getInstance().getServer().getPluginManager().callEvent(new BountyDeathEvent(killer, target,

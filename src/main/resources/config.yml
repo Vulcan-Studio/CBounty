@@ -5,6 +5,7 @@
 #####################################################################
 
 language: "en" # Supported languages -> hu, de, en, tr, es
+set-bounty-on-death: false # If someone kills the bounty then the killer is the bounty.
 
 database:
   type: "sqlite" # Supported database types -> sqlite, mysql

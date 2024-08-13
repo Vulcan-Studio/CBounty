@@ -1,31 +1,28 @@
 package coma112.cbounty.hooks;
 
 import coma112.cbounty.CBounty;
-import coma112.cbounty.enums.keys.ConfigKeys;
-import coma112.cbounty.events.BountyCreateEvent;
-import coma112.cbounty.events.BountyRemoveEvent;
 import coma112.cbounty.interfaces.PlaceholderProvider;
 import coma112.cbounty.utils.BountyLogger;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.json.simple.JSONArray;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.awt.Color;
+import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.List;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Webhook {
-    private String url;
+    private final String url;
     private final List<EmbedObject> embeds = new ArrayList<>();
     @Setter
     private String content;

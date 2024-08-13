@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @SuppressWarnings("all")
-public class ItemBuilder implements IItemBuilder {
+public class ItemBuilder implements ItemFactory {
     private final ItemStack is;
     private final ItemMeta meta;
     private boolean finished = false;

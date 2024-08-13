@@ -6,6 +6,8 @@ import coma112.cbounty.enums.RewardType;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
 import coma112.cbounty.hooks.CoinsEngine;
+import coma112.cbounty.hooks.PlayerPoints;
+import coma112.cbounty.hooks.Token;
 import coma112.cbounty.hooks.Vault;
 import coma112.cbounty.processor.MessageProcessor;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -35,6 +37,11 @@ public final class BountyUtils {
     }
 
     public static boolean handleTokenReward(@NotNull Player player, int reward) {
+        if (!Token.isEnabled()) {
+            player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage());
+            return false;
+        }
+
         if (CBounty.getInstance().getToken().getTokens(player) < reward) {
             player.sendMessage(MessageKeys.NOT_ENOUGH_TOKEN.getMessage());
             return false;
@@ -57,6 +64,11 @@ public final class BountyUtils {
     }
 
     public static boolean handlePlayerPointsReward(@NotNull Player player, int reward) {
+        if (!PlayerPoints.isEnabled()) {
+            player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage());
+            return false;
+        }
+
         PlayerPointsAPI api = CBounty.getPlayerPointsManager();
         UUID uuid = player.getUniqueId();
 
@@ -70,6 +82,11 @@ public final class BountyUtils {
     }
 
     public static boolean handleCoinsEngineReward(@NotNull Player player, int reward) {
+        if (!CoinsEngine.isEnabled()) {
+            player.sendMessage(MessageKeys.FEATURE_DISABLED.getMessage());
+            return false;
+        }
+
         if (CoinsEngineAPI.getBalance(player, CoinsEngine.getCurrency()) < reward) {
             player.sendMessage(MessageKeys.NOT_ENOUGH_COINSENGINE.getMessage());
             return false;
@@ -154,4 +171,9 @@ public final class BountyUtils {
         };
     }
 
+    public static void setBountyOnDeath(@NotNull Player killer, @NotNull Player victim) {
+        if (!ConfigKeys.SET_BOUNTY_ON_DEATH.getBoolean()) return;
+
+        CBounty.getDatabaseManager().createBounty(victim, killer, CBounty.getDatabaseManager().getRewardType(victim), CBounty.getDatabaseManager().getReward(victim));
+    }
 }

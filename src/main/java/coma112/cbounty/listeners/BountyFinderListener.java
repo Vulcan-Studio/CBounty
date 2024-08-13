@@ -3,7 +3,6 @@ package coma112.cbounty.listeners;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.ItemKeys;
-import coma112.cbounty.item.IItemBuilder;
 import coma112.cbounty.utils.BountyUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

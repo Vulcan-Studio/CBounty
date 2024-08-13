@@ -3,7 +3,7 @@ package coma112.cbounty.menu.menus;
 import coma112.cbounty.CBounty;
 import coma112.cbounty.enums.keys.ConfigKeys;
 import coma112.cbounty.enums.keys.MessageKeys;
-import coma112.cbounty.item.IItemBuilder;
+import coma112.cbounty.item.ItemFactory;
 import coma112.cbounty.managers.Bounty;
 import coma112.cbounty.menu.PaginatedMenu;
 import coma112.cbounty.utils.MenuUtils;
@@ -88,7 +88,7 @@ public class BountiesMenu extends PaginatedMenu implements Listener {
     }
 
     private static ItemStack createBountyItem(@NotNull Bounty bounty) {
-        ItemStack itemStack = IItemBuilder.createItemFromString("bounty-item");
+        ItemStack itemStack = ItemFactory.createItemFromString("bounty-item");
         ItemMeta meta = itemStack.getItemMeta();
 
         if (meta != null) {
