@@ -186,6 +186,18 @@ public class CommandBounty {
         }
 
         int oldReward = CBounty.getDatabaseManager().getReward(target);
+        int difference = newReward - oldReward;
+        boolean success = false;
+
+        switch (rewardType) {
+            case TOKEN -> success = handleTokenReward(player, difference);
+            case MONEY -> success = handleMoneyReward(player, difference);
+            case PLAYERPOINTS -> success = handlePlayerPointsReward(player, difference);
+            case LEVEL -> success = handleLevelReward(player, difference);
+            case COINSENGINE -> success = handleCoinsEngineReward(player, difference);
+        }
+
+
 
         CBounty.getDatabaseManager().changeReward(target, newReward);
         player.sendMessage(MessageKeys.PLAYER_RAISE.getMessage());
