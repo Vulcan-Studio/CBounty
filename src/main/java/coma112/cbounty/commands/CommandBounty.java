@@ -171,6 +171,7 @@ public class CommandBounty {
         }
 
         RewardType rewardType = CBounty.getDatabaseManager().getRewardType(target);
+
         int minReward = BountyUtils.getMinimumReward(rewardType);
         int maxReward = BountyUtils.getMaximumReward(rewardType);
         if (newReward < minReward || (maxReward != 0 && newReward > maxReward)) {
@@ -196,8 +197,6 @@ public class CommandBounty {
             case LEVEL -> success = handleLevelReward(player, difference);
             case COINSENGINE -> success = handleCoinsEngineReward(player, difference);
         }
-
-
 
         CBounty.getDatabaseManager().changeReward(target, newReward);
         player.sendMessage(MessageKeys.PLAYER_RAISE.getMessage());
