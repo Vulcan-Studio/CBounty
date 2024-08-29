@@ -70,7 +70,7 @@ public enum ConfigKeys {
         return CBounty.getInstance().getConfiguration().getBoolean(path);
     }
 
-
-
-
+    public long getLong() {
+        return CBounty.getInstance().getConfiguration().getYml().getLong(path);
+    }
 }

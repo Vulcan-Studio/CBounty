@@ -58,4 +58,3 @@ public class BountyCreateEvent extends Event implements PlaceholderProvider {
         return placeholders;
     }
 }
-
