@@ -154,7 +154,7 @@ public class CommandBounty {
 
     @Subcommand("raise")
     @CommandPermission("cbounty.raise")
-    public void raise(@NotNull Player player, @NotNull Player target, int newReward) {
+    public void raise(@NotNull Player player, @NotNull Player target, int increaseAmount) { // Raise means "raise", not "update". Fixed how the raise feature works.
         if (!target.isOnline()) {
             player.sendMessage(MessageKeys.PLAYER_NOT_FOUND.getMessage());
             return;
@@ -165,8 +165,13 @@ public class CommandBounty {
             return;
         }
 
-        if (newReward <= 0) {
+        if (increaseAmount <= 0) {
             player.sendMessage(MessageKeys.NO_NEGATIVE.getMessage());
+            return;
+        }
+
+        if (CBounty.getDatabaseManager().getSender(target) != player) { // Let's verify that this is the player who set the bounty first.
+            player.sendMessage(MessageKeys.NOT_MATCHING_OWNERS.getMessage());
             return;
         }
 
@@ -174,42 +179,41 @@ public class CommandBounty {
 
         int minReward = BountyUtils.getMinimumReward(rewardType);
         int maxReward = BountyUtils.getMaximumReward(rewardType);
-        if (newReward < minReward || (maxReward != 0 && newReward > maxReward)) {
+
+        int oldReward = CBounty.getDatabaseManager().getReward(target);
+        int newReward = oldReward + increaseAmount;
+
+        if (maxReward != 0 && newReward > maxReward) { // I'm not even sure how newReward < minReward could possibly be true. Removed.
             player.sendMessage(MessageKeys.INVALID_REWARDLIMIT.getMessage()
                     .replace("{min}", minReward < 0 ? "0" : String.valueOf(minReward))
                     .replace("{max}", maxReward == 0 ? "\\u221E" : String.valueOf(maxReward)));
             return;
         }
 
-        if (CBounty.getDatabaseManager().getSender(target) != player) {
-            player.sendMessage(MessageKeys.NOT_MATCHING_OWNERS.getMessage());
-            return;
-        }
-
-        int oldReward = CBounty.getDatabaseManager().getReward(target);
-        int difference = newReward - oldReward;
         boolean success = false;
 
         switch (rewardType) {
-            case TOKEN -> success = handleTokenReward(player, difference);
-            case MONEY -> success = handleMoneyReward(player, difference);
-            case PLAYERPOINTS -> success = handlePlayerPointsReward(player, difference);
-            case LEVEL -> success = handleLevelReward(player, difference);
-            case COINSENGINE -> success = handleCoinsEngineReward(player, difference);
+            case TOKEN -> success = handleTokenReward(player, increaseAmount);
+            case MONEY -> success = handleMoneyReward(player, increaseAmount);
+            case PLAYERPOINTS -> success = handlePlayerPointsReward(player, increaseAmount);
+            case LEVEL -> success = handleLevelReward(player, increaseAmount);
+            case COINSENGINE -> success = handleCoinsEngineReward(player, increaseAmount);
         }
 
-        CBounty.getDatabaseManager().changeReward(target, newReward);
-        player.sendMessage(MessageKeys.PLAYER_RAISE.getMessage());
-        target.sendMessage(MessageKeys.TARGET_RAISE
-                .getMessage()
-                .replace("{old}", String.valueOf(oldReward))
-                .replace("{new}", String.valueOf(newReward)));
+        if (success) {
+            CBounty.getDatabaseManager().changeReward(target, newReward);
+            player.sendMessage(MessageKeys.PLAYER_RAISE.getMessage());
+            target.sendMessage(MessageKeys.TARGET_RAISE
+                    .getMessage()
+                    .replace("{old}", String.valueOf(oldReward))
+                    .replace("{new}", String.valueOf(newReward)));
 
-        Bukkit.broadcastMessage(MessageKeys.BOUNTY_RAISE
-                .getMessage()
-                .replace("{target}", target.getName())
-                .replace("{oldReward}", String.valueOf(oldReward))
-                .replace("{newReward}", String.valueOf(newReward)));
+            Bukkit.broadcastMessage(MessageKeys.BOUNTY_RAISE
+                    .getMessage()
+                    .replace("{target}", target.getName())
+                    .replace("{oldReward}", String.valueOf(oldReward))
+                    .replace("{newReward}", String.valueOf(newReward)));
+        }
     }
 
     @Subcommand("takeoff")
