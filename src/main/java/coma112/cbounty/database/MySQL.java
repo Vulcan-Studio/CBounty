@@ -193,7 +193,7 @@ public class MySQL extends AbstractDatabase {
 
         try {
             try (PreparedStatement updateStatement = getConnection().prepareStatement(query)) {
-                updateStatement.setInt(1, getReward(player) + newReward);
+                updateStatement.setInt(1, newReward);
                 updateStatement.setString(2, player.getName());
                 updateStatement.executeUpdate();
             }
