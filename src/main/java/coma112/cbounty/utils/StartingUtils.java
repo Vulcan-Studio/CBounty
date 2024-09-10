@@ -2,12 +2,9 @@ package coma112.cbounty.utils;
 
 import com.github.Anon8281.universalScheduler.utils.JavaUtil;
 import coma112.cbounty.CBounty;
-import coma112.cbounty.hooks.CoinsEngine;
-import coma112.cbounty.hooks.Placeholder;
-import coma112.cbounty.hooks.PlayerPoints;
-import coma112.cbounty.hooks.Token;
+import coma112.cbounty.hooks.*;
 import coma112.cbounty.update.UpdateChecker;
-import coma112.cbounty.version.MinecraftVersion;
+import coma112.cbounty.enums.VersionType;
 import coma112.cbounty.version.VersionSupport;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -20,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static coma112.cbounty.version.MinecraftVersion.determineVersion;
+import static coma112.cbounty.enums.VersionType.determineVersion;
 
 @SuppressWarnings("deprecation")
 public final class StartingUtils {
@@ -35,6 +32,7 @@ public final class StartingUtils {
         Token.register();
         PlayerPoints.register();
         CoinsEngine.register();
+        Towny.register();
     }
 
     public static void registerListenersAndCommands() {
@@ -43,7 +41,7 @@ public final class StartingUtils {
     }
 
     public static void checkVM() {
-        if (getVMVersion() < 11) {
+        if (getVMVersion() < 18) {
             Bukkit.getPluginManager().disablePlugin(CBounty.getInstance());
             return;
         }
@@ -60,28 +58,43 @@ public final class StartingUtils {
             Class.forName("org.spigotmc.SpigotConfig");
         } catch (Exception ignored) {
             isSupported = false;
+            BountyLogger.error("### SpigotConfig class not found. This might indicate an unsupported server. ###");
             return;
         }
 
         try {
-            Pattern pattern = Pattern.compile("\\(MC: (\\d+)\\.(\\d+)(?:\\.(\\d+))?\\)");
+            BountyLogger.info("### Detected Bukkit version string: {} ###", Bukkit.getVersion());
+
+            Pattern pattern = Pattern.compile("\\(MC: (\\d{1,2})\\.(\\d{1,2})(?:\\.(\\d{1,2}))?\\)");
             Matcher matcher = pattern.matcher(Bukkit.getVersion());
 
             if (matcher.find()) {
-                MinecraftVersion version = determineVersion(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)), matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 0);
+                int majorVersion = Integer.parseInt(matcher.group(1));
+                int minorVersion = Integer.parseInt(matcher.group(2));
+                int patchVersion = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 0;
+                VersionType version = determineVersion(majorVersion, minorVersion, patchVersion);
 
-                if (version == MinecraftVersion.UNKNOWN) {
+                if (version == VersionType.UNKNOWN) {
                     isSupported = false;
+
+                    BountyLogger.error("### Unknown Minecraft version: {}.{}.{} ###", majorVersion, minorVersion, patchVersion);
                     return;
                 }
 
-                isSupported = new VersionSupport(CBounty.getInstance(), version).getVersionSupport() != null;
-            } else isSupported = false;
+                isSupported = new VersionSupport(version).getVersionSupport() != null;
+            }
         } catch (Exception exception) {
             isSupported = false;
+
+            BountyLogger.error("### Exception occurred during version check: {} ###", exception.getMessage());
+        }
+
+        if (!isSupported) {
+            BountyLogger.error("### This version of CBounty is not supported on this server version. ###");
+            BountyLogger.error("### Please consider updating your server version to a newer version. ###");
+            Bukkit.getPluginManager().disablePlugin(CBounty.getInstance());
         }
     }
-
 
     public static void checkUpdates() {
         new UpdateChecker(116501).getVersion(version -> {
@@ -108,7 +121,8 @@ public final class StartingUtils {
     }
 
     static int getVMVersion() {
-        Matcher matcher = Pattern.compile("(?:1\\.)?(\\d+)").matcher(System.getProperty("java.version"));
+        String javaVersion = System.getProperty("java.version");
+        Matcher matcher = Pattern.compile("(?:1\\.)?(\\d+)").matcher(javaVersion);
 
         if (!matcher.find()) return -1;
 

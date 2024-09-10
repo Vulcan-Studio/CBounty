@@ -1,4 +1,4 @@
-package coma112.cbounty.version;
+package coma112.cbounty.interfaces;
 
 public interface ServerVersionSupport {
     boolean isSupported();

@@ -1,7 +1,7 @@
 package coma112.cbounty.version.nms.v1_19_R2;
 
 import coma112.cbounty.utils.BountyLogger;
-import coma112.cbounty.version.ServerVersionSupport;
+import coma112.cbounty.interfaces.ServerVersionSupport;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

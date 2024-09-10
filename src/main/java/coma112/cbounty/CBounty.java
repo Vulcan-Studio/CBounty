@@ -2,6 +2,7 @@ package coma112.cbounty;
 
 import com.github.Anon8281.universalScheduler.UniversalScheduler;
 import com.github.Anon8281.universalScheduler.scheduling.schedulers.TaskScheduler;
+import com.palmergames.bukkit.towny.TownyAPI;
 import coma112.cbounty.config.Config;
 import coma112.cbounty.database.AbstractDatabase;
 import coma112.cbounty.database.MySQL;
@@ -35,6 +36,7 @@ public final class CBounty extends JavaPlugin {
 
     @Getter public static TokenManager tokenManager;
     @Getter public static PlayerPointsAPI playerPointsManager;
+    @Getter public static TownyAPI townyAPI;
 
     @Override
     public void onLoad() {

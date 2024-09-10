@@ -1,5 +1,8 @@
 package coma112.cbounty.version;
 
+import coma112.cbounty.CBounty;
+import coma112.cbounty.enums.VersionType;
+import coma112.cbounty.interfaces.ServerVersionSupport;
 import coma112.cbounty.utils.BountyLogger;
 import lombok.Getter;
 import org.bukkit.plugin.Plugin;
@@ -11,12 +14,12 @@ import java.lang.reflect.InvocationTargetException;
 public class VersionSupport {
     private final ServerVersionSupport versionSupport;
 
-    public VersionSupport(@NotNull Plugin plugin, @NotNull MinecraftVersion version) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        if (version == MinecraftVersion.UNKNOWN) throw new IllegalArgumentException("VERSION NOT FOUND!!! ");
+    public VersionSupport(@NotNull VersionType version) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+        if (version == VersionType.UNKNOWN) throw new IllegalArgumentException("VERSION NOT FOUND!!! ");
 
 
         Class<?> clazz = Class.forName("coma112.cbounty.version.nms." + version.name() + ".Version");
-        versionSupport = (ServerVersionSupport) clazz.getConstructor(Plugin.class).newInstance(plugin);
+        versionSupport = (ServerVersionSupport) clazz.getConstructor(Plugin.class).newInstance(CBounty.getInstance());
 
         if (!versionSupport.isSupported()) {
             BountyLogger.warn("---   VERSION IS SUPPORTED BUT,   ---");

@@ -64,10 +64,12 @@ dependency:
     min: 0
     max: 0
   coinsengine:
-    enabled: true
+    enabled: false
     min: 0
     max: 0
     currency: "coins"
+  towny:
+    enabled: false
 #Vault:
   Money:
     min: 0

@@ -1,4 +1,4 @@
-package coma112.cbounty.version;
+package coma112.cbounty.enums;
 
 import coma112.cbounty.utils.BountyLogger;
 import org.apache.commons.lang.ArrayUtils;
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public enum MinecraftVersion {
+public enum VersionType {
     UNKNOWN,
     v1_18_R1,
     v1_18_R2,
@@ -21,33 +21,41 @@ public enum MinecraftVersion {
     v1_20_R2,
     v1_20_R3,
     v1_20_R6,
-    v1_21_R1;
+    v1_21_R1,
+    v1_21_R2;
 
-    private static MinecraftVersion serverVersion;
+    private static VersionType serverVersion;
 
     static {
         String bukkitVersion = Bukkit.getVersion();
-        Pattern pattern = Pattern.compile("\\(MC: (\\d+)(?:\\.(\\d+))?\\)");
+        Pattern pattern = Pattern.compile("\\(MC: (\\d+)\\.(\\d+)(?:\\.(\\d+))?\\)");
         Matcher matcher = pattern.matcher(bukkitVersion);
 
         if (matcher.find()) {
             try {
-                int major = 1;
-                int minor = Integer.parseInt(matcher.group(1));
-                int patch = matcher.group(2) != null ? Integer.parseInt(matcher.group(2)) : 0;
+                int major = Integer.parseInt(matcher.group(1));
+                int minor = Integer.parseInt(matcher.group(2));
+                int patch = matcher.group(3) != null ? Integer.parseInt(matcher.group(3)) : 0;
 
                 serverVersion = determineVersion(major, minor, patch);
             } catch (NumberFormatException exception) {
                 serverVersion = UNKNOWN;
             }
+        } else {
+            serverVersion = UNKNOWN;
+            BountyLogger.error("### Could not determine the server version from Bukkit version string: {} ###", bukkitVersion);
         }
-
     }
 
-    public static MinecraftVersion determineVersion(int major, int minor, int patch) {
+    public static VersionType determineVersion(int major, int minor, int patch) {
         if (major == 1) {
             return switch (minor) {
-                case 18 -> (patch == 1) ? v1_18_R1 : (patch == 2) ? v1_18_R2 : UNKNOWN;
+                case 18 -> switch (patch) {
+                    case 1 -> v1_18_R1;
+                    case 2 -> v1_18_R2;
+                    default -> UNKNOWN;
+                };
+
                 case 19 -> switch (patch) {
                     case 1 -> v1_19_R1;
                     case 2 -> v1_19_R2;
@@ -64,68 +72,60 @@ public enum MinecraftVersion {
                     default -> UNKNOWN;
                 };
 
-                case 21 -> v1_21_R1;
+                case 21 -> switch (patch) {
+                    case 1 -> v1_21_R1;
+                    case 2 -> v1_21_R2;
+                    default -> UNKNOWN;
+                };
+
                 default -> UNKNOWN;
             };
         }
         return UNKNOWN;
     }
 
-    private static MinecraftVersion getVersionFromPath(@NotNull String pathPart) {
-        for (MinecraftVersion version : values()) {
-            if (pathPart.startsWith(version
-                    .name()
-                    .substring(1)
-                    .replace("_", "."))) {
-                return version;
-            }
-        }
-
-        return UNKNOWN;
-    }
-
-    public static MinecraftVersion getCurrentVersion() {
+    public static VersionType getCurrentVersion() {
         BountyLogger.info("Current Minecraft version: " + serverVersion);
         return serverVersion;
     }
 
-    public static boolean isServerVersion(@NotNull MinecraftVersion version) {
+    public static boolean isServerVersion(@NotNull VersionType version) {
         return serverVersion == version;
     }
 
-    public static boolean isServerVersion(@NotNull MinecraftVersion... versions) {
+    public static boolean isServerVersion(@NotNull VersionType... versions) {
         return ArrayUtils.contains(versions, serverVersion);
     }
 
-    public static boolean isServerVersionAbove(@NotNull MinecraftVersion version) {
+    public static boolean isServerVersionAbove(@NotNull VersionType version) {
         return serverVersion.ordinal() > version.ordinal();
     }
 
-    public static boolean isServerVersionAtLeast(@NotNull MinecraftVersion version) {
+    public static boolean isServerVersionAtLeast(@NotNull VersionType version) {
         return serverVersion.ordinal() >= version.ordinal();
     }
 
-    public static boolean isServerVersionAtOrBelow(@NotNull MinecraftVersion version) {
+    public static boolean isServerVersionAtOrBelow(@NotNull VersionType version) {
         return serverVersion.ordinal() <= version.ordinal();
     }
 
-    public static boolean isServerVersionBelow(@NotNull MinecraftVersion version) {
+    public static boolean isServerVersionBelow(@NotNull VersionType version) {
         return serverVersion.ordinal() < version.ordinal();
     }
 
-    public boolean isLessThan(@NotNull MinecraftVersion other) {
+    public boolean isLessThan(@NotNull VersionType other) {
         return this.ordinal() < other.ordinal();
     }
 
-    public boolean isAtOrBelow(@NotNull MinecraftVersion other) {
+    public boolean isAtOrBelow(@NotNull VersionType other) {
         return this.ordinal() <= other.ordinal();
     }
 
-    public boolean isGreaterThan(@NotNull MinecraftVersion other) {
+    public boolean isGreaterThan(@NotNull VersionType other) {
         return this.ordinal() > other.ordinal();
     }
 
-    public boolean isAtLeast(@NotNull MinecraftVersion other) {
+    public boolean isAtLeast(@NotNull VersionType other) {
         return this.ordinal() >= other.ordinal();
     }
 }
