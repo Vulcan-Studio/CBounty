@@ -73,8 +73,9 @@ public enum VersionType {
                 };
 
                 case 21 -> switch (patch) {
-                    case 1 -> v1_21_R1;
-                    case 2 -> v1_21_R2;
+                    case 0 -> v1_21_R1;
+                    case 1 -> v1_21_R2;
+                    case 3 -> v1_21_R2;
                     default -> UNKNOWN;
                 };
 
